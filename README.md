@@ -3,6 +3,7 @@
 ![made_by](https://img.shields.io/badge/made_by-IDEV-0d9488.svg?style=flat-square)
 
 ## Parts
+- [root](https://github.com/idev-present/skillometer)
 - [API](https://github.com/idev-present/skillometer-api)
 - [WEB admin](https://github.com/idev-present/skillometer-web-admin)
 - [TWA client](https://github.com/idev-present/skillometer-app-client)
