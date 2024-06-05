@@ -1,13 +1,18 @@
 [tool.poetry]
 name = "skillometer-api"
 version = "1.0.0"
-description = ""
+description = "Service for recruiters and applicants"
 authors = ["Ilya Zhuravlev <ichirozcom@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.111.0"
+pydantic = {extras = ["email"], version = "^2.7.3"}
+uvicorn = {extras = ["standard"], version = "^0.30.1"}
+pydantic-settings = "^2.3.1"
+alembic = "^1.13.1"
+sqlalchemy = "^2.0.30"
 
 
 [build-system]
