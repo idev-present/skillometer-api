@@ -1,0 +1,18 @@
+services:
+  db:
+    image: bitnami/postgresql:16
+    container_name: skillometer_db
+    restart: unless-stopped
+    volumes:
+      - pg_data:/bitnami/postgresql
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      - POSTGRESQL_USERNAME=${DATABASE_USERNAME?Variable not set}
+      - POSTGRESQL_PASSWORD=${DATABASE_PASSWORD?Variable not set}
+      - POSTGRESQL_DATABASE=${DATABASE_DBNAME?Variable not set}
+
+volumes:
+  pg_data:
