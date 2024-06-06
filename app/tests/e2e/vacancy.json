@@ -1,0 +1,94 @@
+{
+  "id": 'vcn_GJKasd',
+  "habr_id": 1000138635,
+  "hh_id": null,
+  // Алиас компании пользователя, в которой будет размещена вакансия
+  "company": {
+    "alias_name": "yandex",
+    "href": "https://career.habr.com/companies/yandex",
+    "title": "Яндекс",
+    "accredited": true,
+    "logo": {
+      "src": "https://habrastorage.org/getpro/moikrug/uploads/company/548/669/435/logo/medium_586e9aeb81f9123e31337c951432b4ba.png"
+    },
+    "rating": {
+      "title": "Средняя оценка компании в 2023 году",
+      "value": "4.26",
+      "href": "https://career.habr.com/companies/yandex/scores/2023"
+    }
+  },
+  // vacancy[title] * Название вакансии (макс. 80 символов)
+  "title": "Разработчик фронтенда в Конструктор лендингов",
+  // Вилка зарплат
+  // vacancy[salary_from] *
+  // vacancy[salary_to]
+  // vacancy[currency] * Валюта (rur|usd|eur|uah|kzt)
+  "salary": {
+    "from": 220000,
+    "to": 350000,
+    "currency": "rur",
+    "formatted": "от 220 000 до 350 000 ₽"
+  },
+  // vacancy[city_id] ID города
+  "locations": [
+    {
+      "title": "Екатеринбург",
+      "href": "/vacancies?city_id=693"
+    },
+  ],
+  // vacancy[remote] Удаленная работа (0 - работа в офисе | 1 - удаленная работа)
+  "remoteWork": false,
+  // vacancy[employment_type] Тип занятости (full_time - полная занятость | part_time - частичная занятость)
+  "employment": "full_time",
+  // vacancy[description] * Описание вакансии (текст или HTML)
+  "description": "\u003cul\u003e\u003cli\u003eДружная команда\u003c/li\u003e\u003cli\u003eСовременный технологический стек\u003c/li\u003e\u003cli\u003eИнтересные разноплановые задачи\u003c/li\u003e\u003cli\u003eБольшие планы и быстрое развитие проекта\u003c/li\u003e\u003cli\u003eЗарплата на уровне рынка и выше\u003c/li\u003e\u003cli\u003eПремии каждые полгода за эффективную работу\u003c/li\u003e\u003cli\u003eРасширенная программа ДМС, оплата 80% стоимости ДМС для супругов и детей\u003c/li\u003e\u003cli\u003eГибкий график\u003c/li\u003e\u003c/ul\u003e",
+  // vacancy[team] * О компании и команде
+  "team": "\u003cp\u003eКонструктор лендингов — внутренний инструмент компании, который позволяет всем сотрудникам Яндекса самостоятельно создавать лендинги. За годы работы проекта опубликованы десятки тысяч страниц, их посещают миллионы пользователей. Конструктор получает хорошие отзывы от пользователей и экономит ресурсы компании.\u003c/p\u003e\n\u003cp\u003eМы ищем опытного и открытого к новому фронтенд-разработчика. У нас собрана отличная, профессиональная команда, и мы предлагаем вам стать её частью.\u003c/p\u003e\n",
+  // vacancy[candidate] * Ожидания от кандидата (текст или HTML)
+  "candidate": "\u003ch3\u003eМы ждём, что вы\u003c/h3\u003e\n\u003cul\u003e\u003cli\u003eОтлично знаете JavaScript и TypeScript\u003c/li\u003e\u003cli\u003eРазрабатывали на Node.js, в том числе с использованием фреймворка Express\u003c/li\u003e\u003cli\u003eУмеете создавать веб-приложения на React + Redux\u003c/li\u003e\u003cli\u003eЗнаете HTML и CSS, а также особенности их отображения в различных браузерах\u003c/li\u003e\u003cli\u003eЗнакомы с системой контроля версий (SVN или Git)\u003c/li\u003e\u003cli\u003eУмеете работать в команде по принципам Agile\u003c/li\u003e\u003c/ul\u003e\n\u003ch3\u003eБудет плюсом, если вы\u003c/h3\u003e\n\u003cul\u003e\u003cli\u003eУчаствовали в разработке высоконагруженных проектов\u003c/li\u003e\u003cli\u003eПисали интеграционные, модульные, функциональные или браузерные тесты\u003c/li\u003e\u003cli\u003eЗнаете современные практики DevOps (развёртывание и администрирование веб-сервисов: сборка Docker-образов, настройка мониторингов, выкладка в облачные системы, отладка в продакшене)\u003c/li\u003e\u003cli\u003eРаботали с реляционными базами данных (PostgreSQL)\u003c/li\u003e\u003cli\u003eВладеете Unix shell и скриптовыми языками\u003c/li\u003e\u003cli\u003eИмеете собственные oпенсорсные разработки\u003c/li\u003e\u003c/ul\u003e",
+  // vacancy[bonuses] Бонусы вакансии (текст или HTML)
+  "bonuses": "",
+  // vacancy[instructions] Дополнительные инструкции
+  "instructions": "",
+  // vacancy[salary_qualification_id] ID квалификации
+  "salaryQualification": {
+    "title": "Средний (Middle)",
+    "href": "/vacancies?qid=4"
+  },
+  // vacancy[skills] * Навыки (от 1 до 10, список алиасов через запятую)
+  "skills": [
+    {
+      "title": "JavaScript",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=264"
+    },
+    {
+      "title": "TypeScript",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=245"
+    },
+    {
+      "title": "React",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=1070"
+    },
+    {
+      "title": "HTML",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=1017"
+    },
+    {
+      "title": "CSS",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=32"
+    },
+    {
+      "title": "Node.js",
+      "href": "/vacancies?rel=nofollow\u0026skills%5B%5D=12"
+    }
+  ],
+  // vacancy[specialization_ids] * ID специализации (не более 1)
+  "divisions": [
+    {
+      "title": "Фронтенд разработчик",
+      "href": "/vacancies?s%5B%5D=3"
+    }
+  ],
+  "published_at": "2024-06-05T20:50:41+03:00",
+  "url": "https://career.habr.com/vacancies/1000138635"
+}

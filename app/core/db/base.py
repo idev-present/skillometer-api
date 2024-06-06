@@ -1,7 +1,12 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import declarative_base
 
-Base = declarative_base()
+
+class Base:
+    __allow_unmapped__ = True
+
+
+BaseDBModel = declarative_base(cls=Base)
 
 
 class Database:
@@ -22,6 +27,3 @@ class Database:
     async def get_db(self):
         async with self.__session() as session:
             yield session
-
-
-db = Database()

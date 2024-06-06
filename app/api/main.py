@@ -1,15 +1,15 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy import text
+from fastapi import APIRouter, HTTPException
 
-from app.core.db import db
+from app.core.config import settings
+from app.services.dict.api import router as dict_router
 
 api = APIRouter()
+api.include_router(dict_router, prefix="/dict", tags=["dict"])
 
 
-@api.get("/")
-async def test(db_session=Depends(db.get_db)):
+@api.get("/config")
+async def show_settings():
     try:
-        await db_session.execute(text("SELECT 1"))
-        return {"data": "ok"}
+        return settings
     except Exception as e:
         return HTTPException(status_code=500, detail=str(e))

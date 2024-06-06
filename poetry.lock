@@ -977,6 +977,23 @@ anyio = ">=3.4.0,<5"
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.7)", "pyyaml"]
 
 [[package]]
+name = "structlog"
+version = "24.2.0"
+description = "Structured Logging for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "structlog-24.2.0-py3-none-any.whl", hash = "sha256:983bd49f70725c5e1e3867096c0c09665918936b3db27341b41d294283d7a48a"},
+    {file = "structlog-24.2.0.tar.gz", hash = "sha256:0e3fe74924a6d8857d3f612739efb94c72a7417d7c7c008d12276bca3b5bf13b"},
+]
+
+[package.extras]
+dev = ["freezegun (>=0.2.8)", "mypy (>=1.4)", "pretend", "pytest (>=6.0)", "pytest-asyncio (>=0.17)", "rich", "simplejson", "twisted"]
+docs = ["furo", "myst-parser", "sphinx", "sphinx-notfound-page", "sphinxcontrib-mermaid", "sphinxext-opengraph", "twisted"]
+tests = ["freezegun (>=0.2.8)", "pretend", "pytest (>=6.0)", "pytest-asyncio (>=0.17)", "simplejson"]
+typing = ["mypy (>=1.4)", "rich", "twisted"]
+
+[[package]]
 name = "typer"
 version = "0.12.3"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
@@ -1331,4 +1348,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9080a59285de09b9b18e23420d508d8160011c68b480b349cc5738372de3b86e"
+content-hash = "d1908f74857755da1afa9a8cc5236fd72d768ebc3301f4214fe4a6d2e61a7a58"

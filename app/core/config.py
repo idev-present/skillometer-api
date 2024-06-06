@@ -14,7 +14,8 @@ class Settings(BaseSettings):
     DOMAIN: str = "localhost"
     API_PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
-    PROJECT_NAME: str
+    LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    LOG_DIR: str = "runtime/logs"
 
     # Database
     DATABASE_SERVER: str

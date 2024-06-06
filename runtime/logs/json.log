@@ -1,0 +1,128 @@
+{"event": "Started server process [13215]", "level": "info", "timestamp": "2024-06-06T12:20:35.036535Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T12:20:35.036670Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T12:20:35.056095Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T12:20:35.056766Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T12:22:03.147739Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T12:22:03.249481Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T12:22:03.251455Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13215]", "level": "info", "timestamp": "2024-06-06T12:22:03.251627Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13264]", "level": "info", "timestamp": "2024-06-06T12:22:24.176077Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T12:22:24.176219Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T12:22:24.176368Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T12:22:24.197477Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T12:22:24.198242Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:59216 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:23:46.463381Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59216 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:23:46.570081Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59216 - \"GET / HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:23:50.916367Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59412 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:19.759963Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59412 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:19.810301Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59412 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:22.832762Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59412 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:22.879944Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T12:30:25.295731Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T12:30:25.397348Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T12:30:25.397632Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T12:30:25.399200Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13264]", "level": "info", "timestamp": "2024-06-06T12:30:25.399371Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13378]", "level": "info", "timestamp": "2024-06-06T12:30:25.951911Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T12:30:25.952039Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T12:30:25.952191Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T12:30:25.972670Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T12:30:25.973418Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:59418 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:27.474824Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59418 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:27.530069Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59418 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:28.833782Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59418 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:28.877489Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:59418 - \"GET /config HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T12:30:31.750512Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52407 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:06.779102Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52407 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:06.816917Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52407 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:07.655261Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52407 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:07.702023Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T13:11:10.463029Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T13:11:10.564363Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T13:11:10.564555Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T13:11:10.565561Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13378]", "level": "info", "timestamp": "2024-06-06T13:11:10.565677Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13814]", "level": "info", "timestamp": "2024-06-06T13:11:11.044589Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T13:11:11.044723Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T13:11:11.044864Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T13:11:11.066074Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T13:11:11.066770Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:52444 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:13.900934Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52444 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:13.966262Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52444 - \"GET /dict/currency HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:17.577791Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52445 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:50.948925Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:52445 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:11:51.425986Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T13:11:54.327830Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T13:11:54.429255Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T13:11:54.429431Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T13:11:54.430480Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13814]", "level": "info", "timestamp": "2024-06-06T13:11:54.430612Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13902]", "level": "info", "timestamp": "2024-06-06T13:24:11.546965Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T13:24:11.547094Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T13:24:11.547230Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T13:24:11.567805Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T13:24:11.568685Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:56029 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:24:13.150191Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:56029 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:24:13.234862Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:56029 - \"GET /dict/currency HTTP/1.1\" 500", "level": "info", "timestamp": "2024-06-06T13:24:16.076294Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Exception in ASGI application\n", "exc_info": ["<class 'ValueError'>", "ValueError('not enough values to unpack (expected 2, got 1)')", "<traceback object at 0x11866c140>"], "level": "error", "timestamp": "2024-06-06T13:24:16.541480Z", "logger": "uvicorn.error", "func_name": "run_asgi", "lineno": 404}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T13:24:54.840980Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T13:24:54.942637Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T13:24:54.942943Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T13:24:54.944538Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13902]", "level": "info", "timestamp": "2024-06-06T13:24:54.944696Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13944]", "level": "info", "timestamp": "2024-06-06T13:25:21.140036Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T13:25:21.140175Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T13:25:21.140312Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T13:25:21.159075Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T13:25:21.159733Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:56380 - \"GET /dict/currency HTTP/1.1\" 500", "level": "info", "timestamp": "2024-06-06T13:25:31.002828Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Exception in ASGI application\n", "exc_info": ["<class 'TypeError'>", "TypeError('cannot unpack non-iterable CURRENCY object')", "<traceback object at 0x109962080>"], "level": "error", "timestamp": "2024-06-06T13:25:31.519276Z", "logger": "uvicorn.error", "func_name": "run_asgi", "lineno": 404}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T13:26:08.201706Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T13:26:08.303125Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T13:26:08.303380Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T13:26:08.304758Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13944]", "level": "info", "timestamp": "2024-06-06T13:26:08.304903Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [13962]", "level": "info", "timestamp": "2024-06-06T13:26:08.792240Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T13:26:08.792354Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T13:26:08.792502Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T13:26:08.811283Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T13:26:08.811948Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:56558 - \"GET /dict/currency HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:26:10.346578Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:64246 - \"GET /config HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T13:54:41.612600Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:64344 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T14:56:34.746123Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:64344 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T14:56:34.813567Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T15:03:38.766506Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T15:03:38.867284Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T15:03:38.867600Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T15:03:38.869159Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [13962]", "level": "info", "timestamp": "2024-06-06T15:03:38.869313Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [16349]", "level": "info", "timestamp": "2024-06-06T15:44:34.640249Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T15:44:34.640617Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T15:44:34.640759Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T15:44:34.667659Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)", "level": "info", "timestamp": "2024-06-06T15:44:34.669039Z", "logger": "uvicorn.error", "func_name": "_log_started_message", "lineno": 214}
+{"event": "127.0.0.1:61061 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T15:44:38.127320Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:61061 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T15:44:38.197317Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:61061 - \"GET /dict/city HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T15:44:43.008689Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50281 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:05:44.426293Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50281 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:05:44.509529Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T16:05:51.307071Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T16:05:51.408499Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T16:05:51.408649Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T16:05:51.410780Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [16349]", "level": "info", "timestamp": "2024-06-06T16:05:51.410928Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
+{"event": "Started server process [16581]", "level": "info", "timestamp": "2024-06-06T16:06:06.833458Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 82}
+{"event": "Waiting for application startup.", "level": "info", "timestamp": "2024-06-06T16:06:06.833591Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 48}
+{"event": "startup event", "level": "info", "timestamp": "2024-06-06T16:06:06.833755Z", "logger": "app.main", "func_name": "startup", "lineno": 25}
+{"event": "Application startup complete.", "level": "info", "timestamp": "2024-06-06T16:06:06.858809Z", "logger": "uvicorn.error", "func_name": "startup", "lineno": 62}
+{"event": "127.0.0.1:50390 - \"GET /docs HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:06:08.603301Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50390 - \"GET /openapi.json HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:06:08.669524Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50390 - \"GET /dict/employment_type HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:06:12.608116Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50391 - \"GET /dict/division HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:06:19.855409Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "127.0.0.1:50474 - \"GET /dict/qualification HTTP/1.1\" 200", "level": "info", "timestamp": "2024-06-06T16:06:25.627307Z", "logger": "uvicorn.access", "func_name": "send", "lineno": 466}
+{"event": "Shutting down", "level": "info", "timestamp": "2024-06-06T16:06:32.225025Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 258}
+{"event": "Waiting for application shutdown.", "level": "info", "timestamp": "2024-06-06T16:06:32.326294Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 67}
+{"event": "shutdown event", "level": "info", "timestamp": "2024-06-06T16:06:32.326500Z", "logger": "app.main", "func_name": "shutdown", "lineno": 30}
+{"event": "Application shutdown complete.", "level": "info", "timestamp": "2024-06-06T16:06:32.327655Z", "logger": "uvicorn.error", "func_name": "shutdown", "lineno": 76}
+{"event": "Finished server process [16581]", "level": "info", "timestamp": "2024-06-06T16:06:32.327813Z", "logger": "uvicorn.error", "func_name": "_serve", "lineno": 92}
