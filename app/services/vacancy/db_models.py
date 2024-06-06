@@ -1,6 +1,8 @@
 import datetime
+from typing import List
 
 from sqlalchemy import Column, String, Integer, Boolean, DateTime
+from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 
@@ -26,7 +28,7 @@ class VacancyDBModel(BaseDBModel):
     # Ожидания от кандидата (текст или HTML)
     todo = Column(String, nullable=False)
     # * Dict
-    city_id = Column(Integer, nullable=True)
+    city_id = Column(String, nullable=True)
     # Тип занятости
     employment_type_id = Column(String, nullable=True)
     # специализация
@@ -41,3 +43,11 @@ class VacancyDBModel(BaseDBModel):
     # * Relationships
     owner_id = Column(String, nullable=True)
     company_id = Column(String, nullable=True)
+
+    @classmethod
+    async def get_list(cls, db) -> List["VacancyDBModel"]:
+        query = sql.select(cls)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res

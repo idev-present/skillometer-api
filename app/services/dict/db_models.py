@@ -9,6 +9,7 @@ from sqlalchemy.sql import expression as sql
 class CityDBModel(BaseDBModel):
     __tablename__ = 'dict_city'
     id = Column(String(50), primary_key=True)
+    name = Column(String(50), nullable=True)
     fias_id = Column(String(50), nullable=True)
     habr_id = Column(Integer, nullable=True)
     habr_alias = Column(String(50), nullable=True)

@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     LOG_DIR: str = "runtime/logs"
+    API_BASE_URL: str = "http://localhost:8000"
 
     # Database
     DATABASE_SERVER: str

@@ -11,6 +11,7 @@ class City(BaseModel):
     fias_id: Optional[str]
     habr_id: Optional[int]
     habr_alias: Optional[str]
+    name: Optional[str]
     country_name: Optional[str]
     region_name: Optional[str]
 

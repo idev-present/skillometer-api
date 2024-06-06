@@ -126,3 +126,141 @@ timestamp='2024-06-06T16:06:32.326379Z' level='info' event='Waiting for applicat
 timestamp='2024-06-06T16:06:32.326500Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=30
 timestamp='2024-06-06T16:06:32.327690Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
 timestamp='2024-06-06T16:06:32.327857Z' level='info' event='Finished server process [16581]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:17:40.078637Z' level='info' event='Started server process [17002]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:17:40.078735Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:17:40.078880Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=25
+timestamp='2024-06-06T16:17:40.097499Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:18:39.850083Z' level='warning' event='Invalid HTTP request received.' logger='uvicorn.error' func_name='data_received' lineno=165
+timestamp='2024-06-06T16:18:39.851291Z' level='warning' event='Invalid HTTP request received.' logger='uvicorn.error' func_name='data_received' lineno=165
+timestamp='2024-06-06T16:18:43.343737Z' level='warning' event='Invalid HTTP request received.' logger='uvicorn.error' func_name='data_received' lineno=165
+timestamp='2024-06-06T16:18:43.344879Z' level='warning' event='Invalid HTTP request received.' logger='uvicorn.error' func_name='data_received' lineno=165
+timestamp='2024-06-06T16:18:45.411356Z' level='info' event='192.168.1.116:53815 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:18:46.061485Z' level='info' event='192.168.1.116:53815 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:19:11.571401Z' level='info' event='192.168.1.116:53816 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:19:11.703602Z' level='info' event='192.168.1.116:53816 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:19:20.937553Z' level='info' event='192.168.1.244:46350 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:19:47.408463Z' level='info' event='192.168.1.244:58176 - "GET / HTTP/1.1" 404' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:19:47.994509Z' level='info' event='192.168.1.244:58176 - "GET /favicon.ico HTTP/1.1" 404' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:20:51.054532Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:20:51.156075Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:20:51.156195Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=30
+timestamp='2024-06-06T16:20:51.157564Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:20:51.157697Z' level='info' event='Finished server process [17002]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:22:47.229822Z' level='info' event='Started server process [17697]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:22:47.229919Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:22:47.230039Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:22:47.250204Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:22:51.319399Z' level='info' event='192.168.1.116:54956 - "GET / HTTP/1.1" 404' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:22:51.390957Z' level='info' event='192.168.1.116:54956 - "GET /favicon.ico HTTP/1.1" 404' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:22:51.981351Z' level='info' event='192.168.1.244:53374 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:22:54.340838Z' level='info' event='192.168.1.244:53374 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:22:55.096252Z' level='info' event='192.168.1.116:54956 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:22:55.166363Z' level='info' event='192.168.1.116:54956 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:00.460769Z' level='info' event='192.168.1.116:54957 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:00.498179Z' level='info' event='192.168.1.116:54957 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:00.996328Z' level='info' event='192.168.1.116:54957 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:01.026033Z' level='info' event='192.168.1.116:54957 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:01.196805Z' level='info' event='192.168.1.116:54957 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:01.231348Z' level='info' event='192.168.1.116:54957 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:01.391848Z' level='info' event='192.168.1.116:54957 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:01.426469Z' level='info' event='192.168.1.116:54957 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:03.208591Z' level='info' event='192.168.1.244:43526 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:23:37.882452Z' level='info' event='192.168.1.244:42670 - "GET /dict/city HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:24:14.080886Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:24:14.181349Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:24:14.181538Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:24:14.182838Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:24:14.182944Z' level='info' event='Finished server process [17697]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:24:14.610485Z' level='info' event='Started server process [17723]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:24:14.610580Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:24:14.610746Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:24:14.632470Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:24:32.616871Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:24:32.718276Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:24:32.718401Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:24:32.720092Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:24:32.720187Z' level='info' event='Finished server process [17723]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:24:33.114978Z' level='info' event='Started server process [17740]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:24:33.115074Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:24:33.115196Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:24:33.134170Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:26:10.419155Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:26:10.520601Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:26:10.520801Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:26:10.522855Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:26:10.522961Z' level='info' event='Finished server process [17740]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:26:10.922938Z' level='info' event='Started server process [17776]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:26:10.923031Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:26:10.923189Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:26:10.943204Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:26:22.265848Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:26:22.367253Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:26:22.367340Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:26:22.368776Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:26:22.368868Z' level='info' event='Finished server process [17776]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:26:22.769738Z' level='info' event='Started server process [17785]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:26:22.769839Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:26:22.769960Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:26:22.788568Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:27:46.866776Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:27:46.968203Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:27:46.968568Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:27:46.971460Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:27:46.971585Z' level='info' event='Finished server process [17785]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:27:47.365452Z' level='info' event='Started server process [17806]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:27:47.365555Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:27:47.365672Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:27:47.385517Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:27:51.930008Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:27:52.031337Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:27:52.031512Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:27:52.034283Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:27:52.034427Z' level='info' event='Finished server process [17806]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:27:52.444045Z' level='info' event='Started server process [17811]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:27:52.444153Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:27:52.444278Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:27:52.464225Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:28:11.868540Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:28:11.969826Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:28:11.969929Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:28:11.971648Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:28:11.971734Z' level='info' event='Finished server process [17811]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:28:12.359027Z' level='info' event='Started server process [17832]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:28:12.359121Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:28:12.359286Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:28:12.380207Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:28:18.444959Z' level='info' event='192.168.1.116:56432 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:28:18.517157Z' level='info' event='192.168.1.116:56432 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:28:29.346949Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:28:29.448494Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:28:29.448627Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:28:29.449736Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:28:29.449847Z' level='info' event='Finished server process [17832]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:28:30.015497Z' level='info' event='Started server process [17847]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:28:30.015586Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:28:30.015731Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:28:30.036894Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:28:31.258658Z' level='info' event='192.168.1.116:56492 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:28:31.321849Z' level='info' event='192.168.1.116:56492 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:29:14.391330Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:29:14.491781Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:29:14.491997Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:29:14.493162Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:29:14.493280Z' level='info' event='Finished server process [17847]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:29:14.886144Z' level='info' event='Started server process [17865]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:29:14.886250Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:29:14.886367Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:29:14.905879Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:29:16.397586Z' level='info' event='192.168.1.116:56694 - "GET /docs HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:29:16.483585Z' level='info' event='192.168.1.116:56694 - "GET /openapi.json HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:29:19.253037Z' level='info' event='Shutting down' logger='uvicorn.error' func_name='shutdown' lineno=258
+timestamp='2024-06-06T16:29:19.354461Z' level='info' event='Waiting for application shutdown.' logger='uvicorn.error' func_name='shutdown' lineno=67
+timestamp='2024-06-06T16:29:19.354574Z' level='info' event='shutdown event' logger='app.main' func_name='shutdown' lineno=31
+timestamp='2024-06-06T16:29:19.355352Z' level='info' event='Application shutdown complete.' logger='uvicorn.error' func_name='shutdown' lineno=76
+timestamp='2024-06-06T16:29:19.355440Z' level='info' event='Finished server process [17865]' logger='uvicorn.error' func_name='_serve' lineno=92
+timestamp='2024-06-06T16:29:19.927824Z' level='info' event='Started server process [17889]' logger='uvicorn.error' func_name='_serve' lineno=82
+timestamp='2024-06-06T16:29:19.927932Z' level='info' event='Waiting for application startup.' logger='uvicorn.error' func_name='startup' lineno=48
+timestamp='2024-06-06T16:29:19.928090Z' level='info' event='startup event' logger='app.main' func_name='startup' lineno=26
+timestamp='2024-06-06T16:29:19.950529Z' level='info' event='Application startup complete.' logger='uvicorn.error' func_name='startup' lineno=62
+timestamp='2024-06-06T16:29:28.003742Z' level='info' event='192.168.1.116:56743 - "GET /vacancy/ HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466
+timestamp='2024-06-06T16:29:35.181433Z' level='info' event='192.168.1.116:56776 - "GET /company/ HTTP/1.1" 200' logger='uvicorn.access' func_name='send' lineno=466

@@ -18,6 +18,7 @@ def init_app():
             "name": "IDEV team",
             "email": "info@idev-present.com"
         },
+        root_path=settings.API_BASE_URL
     )
 
     @app.on_event("startup")
