@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: .
+    container_name: skillometer-api
+    image: cr.yandex/crp3ttpgik0udamho995/skillometer-api:0.1.0
+    env_file:
+      - .env.development
+    ports:
+      - "80:8080"

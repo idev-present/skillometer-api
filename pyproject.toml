@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Service for recruiters and applicants"
 authors = ["Ilya Zhuravlev <ichirozcom@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -17,6 +18,11 @@ asyncpg = "^0.29.0"
 greenlet = "^3.0.3"
 structlog = "^24.2.0"
 
+[tool.poetry.group.debug]
+optional = true
+
+[tool.poetry.group.debug.dependencies]
+debugpy = "^1.8.1"
 
 [build-system]
 requires = ["poetry-core"]
