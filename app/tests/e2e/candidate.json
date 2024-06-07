@@ -1,0 +1,824 @@
+{
+  "visitor": {
+    "company": null
+  },
+  "user": {
+    "id": "ichiro18",
+    "title": "Илья Журавлев",
+    "avatar": {
+      "image": {
+        "src": "https://habrastorage.org/getpro/moikrug/uploads/user/100/014/421/2/avatar/medium_e2bb4e6c0666df6f99d6a2a58463bc37.jpeg",
+        "src2x": "https://habrastorage.org/getpro/moikrug/uploads/user/100/014/421/2/avatar/medium_e2bb4e6c0666df6f99d6a2a58463bc37.jpeg",
+        "title": "Специалист Илья Журавлев (ichiro18)",
+        "alt": "Илья Журавлев (ichiro18), 29 лет, Россия, Киров"
+      },
+      "href": null
+    },
+    "personalHref": "/profile/personal/edit",
+    "site": null,
+    "lastVisited": "сегодня",
+    "availability": "Рассмотрю предложения",
+    "salary": "От 400 000 ₽",
+    "qualification": "Ведущий (Lead)",
+    "specialization": {
+      "edit": "/profile/specialization",
+      "title": "Team Lead"
+    },
+    "divisions": [
+      {
+        "title": "Архитектор программного обеспечения"
+      },
+      {
+        "title": "Технический директор"
+      }
+    ],
+    "conversation": null,
+    "friendship": null,
+    "arsenal": null,
+    "print": {
+      "html": "https://career.habr.com/ichiro18/print",
+      "pdf": "https://career.habr.com/ichiro18/print.pdf",
+      "doc": "https://career.habr.com/ichiro18/print.docx"
+    },
+    "skills": [
+      {
+        "title": "TypeScript",
+        "href": "/resumes?skills%5B%5D=245"
+      },
+      {
+        "title": "Webpack",
+        "href": "/resumes?skills%5B%5D=1094"
+      },
+      {
+        "title": "Vue.js",
+        "href": "/resumes?skills%5B%5D=1118"
+      },
+      {
+        "title": "Docker",
+        "href": "/resumes?skills%5B%5D=1067"
+      },
+      {
+        "title": "Python",
+        "href": "/resumes?skills%5B%5D=446"
+      },
+      {
+        "title": "Высоконагруженные системы",
+        "href": "/resumes?skills%5B%5D=645"
+      },
+      {
+        "title": "PostgreSQL",
+        "href": "/resumes?skills%5B%5D=537"
+      },
+      {
+        "title": "Kubernetes",
+        "href": "/resumes?skills%5B%5D=1207"
+      },
+      {
+        "title": "AWS",
+        "href": "/resumes?skills%5B%5D=197"
+      },
+      {
+        "title": "MongoDB",
+        "href": "/resumes?skills%5B%5D=229"
+      }
+    ],
+    "age": "29 лет",
+    "registeredAt": "08.09.2016",
+    "experience": "8 лет и 7 месяцев",
+    "location": "Россия, Киров",
+    "curatedCompanies": [],
+    "admin": null,
+    "report": null,
+    "contacts": {
+      "edit": "/profile/contact/edit",
+      "items": [
+        {
+          "title": "Телефон",
+          "value": {
+            "title": "+79536762399",
+            "href": null
+          }
+        },
+        {
+          "title": "Skype",
+          "value": {
+            "title": "chemax123",
+            "href": null
+          }
+        },
+        {
+          "title": "Telegram",
+          "value": {
+            "title": "@ichiro18",
+            "href": "https://telegram.me/ichiro18"
+          }
+        },
+        {
+          "title": "Вконтакте",
+          "value": {
+            "title": "idev_dir",
+            "href": "https://vk.com/idev_dir"
+          }
+        },
+        {
+          "title": "Почта",
+          "value": {
+            "title": "ichirozcom@gmail.com",
+            "href": "mailto:ichirozcom@gmail.com"
+          }
+        },
+        {
+          "title": "GitHub",
+          "value": {
+            "title": "ichiro18",
+            "href": "https://github.com/ichiro18"
+          }
+        }
+      ],
+      "placeholder": null,
+      "hint": {
+        "title": "Контакты видят ваши друзья и кураторы вакансий, на которые вы откликнулись",
+        "href": "/profile/contact/edit"
+      }
+    },
+    "friends": {
+      "href": "/ichiro18/friends",
+      "total": 35
+    },
+    "visibility": {
+      "title": "Профиль виден только авторизованным пользователям и роботам",
+      "href": "/preferences/privacy"
+    },
+    "recommendationLetters": {
+      "href": "/ichiro18/opinions",
+      "total": 0
+    },
+    "curatedPlatforms": [],
+    "href": "/ichiro18",
+    "relocation": "готов к удаленной работе",
+    "specializations": null,
+    "isExpert": false,
+    "isOwner": true,
+    "shouldDisplayInfo": true,
+    "achievements": [
+      {
+        "icon": "/images/achievements/twentyfive_responses.svg",
+        "code": "twentyfive_responses",
+        "title": "25 откликов",
+        "description": "За отклик на 25 вакансий",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/twentyfive_friends.svg",
+        "code": "twentyfive_friends",
+        "title": "Центр притяжения",
+        "description": "За добавление в друзья 25 пользователей",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/linked_services.svg",
+        "code": "linked_services",
+        "title": "Три в одном",
+        "description": "За привязку трех внешних сервисов",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/qualification.svg",
+        "code": "qualification",
+        "title": "Задает планку",
+        "description": "За указание квалификации в профиле",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/additional_course.svg",
+        "code": "additional_course",
+        "title": "Есть курс",
+        "description": "За указание дополнительного образования в профиле",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/experience.svg",
+        "code": "experience",
+        "title": "Есть опыт",
+        "description": "За добавление опыта работы в профиле",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/contact_info.svg",
+        "code": "contact_info",
+        "title": "Есть контакт!",
+        "description": "За добавление контактной информации в профиле",
+        "active": true
+      },
+      {
+        "icon": "/images/achievements/salary.svg",
+        "code": "salary",
+        "title": "Знает себе цену",
+        "description": "За добавление желаемого вознаграждения в профиле",
+        "active": true
+      }
+    ],
+    "achievementsPage": "/ichiro18/achievements",
+    "achievementsTotal": 14
+  },
+  "placeholder": null,
+  "resume": {
+    "about": {
+      "edit": "/profile/personal/edit",
+      "value": "\u003cp\u003e\u003cstrong\u003eОбо мне\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eСертифицирован Яндексом (управление командой).\u0026nbsp;Специализируюсь на интеграциях.\u0026nbsp;В\u0026nbsp;мире SAAS сервисов довольно востребовано.\u0026nbsp;Долгое время специализировался на фронтенде. Есть опыт и практические кейсы\u0026nbsp;на бэкенде (python,go),\u0026nbsp;devops (мониторинг, CI/CD). Люблю комфорт в работе, знаний в команде бывыет недостаточно, беру на себя.\u003cbr\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eЛичные качества\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eСтараюсь не перекладывать ответственность, стремлюсь выполнять работу качественно. В случае затыка попрошу помощи или совета. При спешке или моральном давлении работаю плохо.\u003cstrong\u003e\u003cbr\u003e\u003cbr\u003e\u003cstrong\u003eFrontend\u003c/strong\u003e\u003cbr\u003e\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eHTML5\u003c/strong\u003e. Понимаю и умею применять семантику и микроразметку, работаю с\u0026nbsp;IndexedDB. Когда не знаю, разбираюсь и решаю. .\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eCSS\u003c/strong\u003e. Верстаю хорошо, адаптивно, точно.\u0026nbsp;Придерживаюсь\u0026nbsp;БЭМ именования в крупных проектах. Люблю flexbox. Делаю кроссбраузерно, но желательно IE11+.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e\u003cstrong\u003eSCSS.\u0026nbsp; \u003c/strong\u003e\u003c/strong\u003eОчень люблю данный шедевр. В\u0026nbsp;комплексе с Webpack с плагинами творит просто невероятные вещи, упрощая работу с CSS (кроссбраузерность, БЭМ)\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eSVG\u0026nbsp;\u003c/strong\u003e- знаю как использовать и анимировать, знаю что находится внутри. При необходимости отредактирую (Adobe Illustrator или вручную) и оптимизирую\u0026nbsp;(svgo, иногда можно и\u0026nbsp;перерисовать).\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eRetina\u003c/strong\u003e. Слава svg!\u0026nbsp;Ну или srcset. Или просто\u0026nbsp;х2.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eSPA\u0026nbsp;\u003c/strong\u003e- хороший опыт, на фреймворках. Делал приложения на Vue.js и AngularJS\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eJavaScript\u003c/strong\u003e\u0026nbsp;(vanilla)\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eПонимаю лексические\u0026nbsp;области\u0026nbsp;видимости, замыкания.\u003c/li\u003e\u003cli\u003eПостоянно углубляю знания по\u0026nbsp;JS.\u003c/li\u003e\u003cli\u003eХорошо структурированный и задокументированный код.\u0026nbsp;\u003c/li\u003e\u003cli\u003eУмею работать с EventListener\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eJavaScript\u0026nbsp;\u003c/strong\u003e(ES6)\u003c/p\u003e\n\u003cul\u003e\u003cli\u003ePromises - использую, люблю.\u003c/li\u003e\u003cli\u003eПонимаю и использую стрелки, destructuring, rest/spread,\u0026nbsp;modules (обычно со сборщиком)\u003c/li\u003e\u003cli\u003eОстальное дремлет и может быть пущено в оборот при необходимости (async functions, generators, etc.)\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eTypeSctipt\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eЗнание паттернов и умение их применять\u003c/li\u003e\u003cli\u003eДекораторы\u003c/li\u003e\u003cli\u003eМодули, типизация\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eГде-то около\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eСборка - Webpack4. Работал с Gulp/Grunt. Даже портировал сборку для японцев\u003c/li\u003e\u003cli\u003eЛинтеры - использую почти всегда. EsLint, TsLint\u003c/li\u003e\u003cli\u003eТестирование - Karma/Mocha/Chai/Sinon. Трепетно отношусь к coverage.\u003c/li\u003e\u003c/ul\u003e\n\u003cul\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eБиблиотеки /\u0026nbsp;фреймворки\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\u003cli\u003ejQuery - стараюсь не использовать по мелочам. Обычно не нужен, потому что присутствует какой-нибудь фреймворк.\u003c/li\u003e\u003cli\u003eAngularJS - Личный кабинет юр. лица.\u003c/li\u003e\u003cli\u003eVue - два больших проекта.\u003c/li\u003e\u003cli\u003eLeafletJS - есть хороший проект.\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eBackend\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eДавным давно начинал с PHP. Но ушёл на фронт. Но чистого фронта в нашем городе мало, а интерес к знаниям велик, поэтому втянулся\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e\u003cbr\u003e\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eGolang\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eРазрабатывал личный кабинет для юр. лиц в платежной системе.\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eORM (gorm)\u003c/li\u003e\u003cli\u003eХорошее знание сетевых протоколов и транспорта HTTP\u003c/li\u003e\u003cli\u003eПодпись запросов сертификатами\u003c/li\u003e\u003cli\u003eРабота с REST, SOAP(с гос. сервисами)\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e\u003c/strong\u003e\u003cstrong\u003ePython\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eРазработка геодезического приложения.\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eПроектирование и разработка RESTFull API (+swagger для документации)\u003c/li\u003e\u003cli\u003eХранение и асинхронная обработка геодезических данных (точки, полигоны, векторы)\u003c/li\u003e\u003cli\u003eDjango\u003c/li\u003e\u003cli\u003eCelery\u003c/li\u003e\u003cli\u003ePostGIS\u003c/li\u003e\u003cli\u003eGDAL\u003c/li\u003e\u003cli\u003eGeoServer (векторный тайлинг)\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003eРазработка приложения family office (fintech)\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eServerless\u003c/li\u003e\u003cli\u003eТеория графов\u003c/li\u003e\u003cli\u003ePandas, numpy\u003c/li\u003e\u003cli\u003eAWS\u003cul\u003e\u003cli\u003eLambda\u003c/li\u003e\u003cli\u003eSQS\u003c/li\u003e\u003cli\u003eS3\u003c/li\u003e\u003cli\u003eRDS\u003c/li\u003e\u003cli\u003eCodepipeline\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003eРазработка микросервисной инфраструктуры Rabotut (CRM, CMS, integration-services)\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eFastAPI\u003c/li\u003e\u003cli\u003eMongoDB\u003c/li\u003e\u003cli\u003ePostgresSQL\u003c/li\u003e\u003cli\u003eCelery\u003c/li\u003e\u003cli\u003eEventDriven Development\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eГде-то около\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eDocker, k8. Умею очень многое, из интересного могу поднять свой докерхаб, завернуть в CI/CD и развернуть стенды на поддомене\u003c/li\u003e\u003cli\u003eЛинтеры - использую почти всегда. PyLint, flake8, black\u003c/li\u003e\u003cli\u003eТестирование - Pytest/Unittest/Testcontainers. Юниты всегда\u0026nbsp;(люблю TDD), интеграционные, performance, e2e. Могу не только мокнуть, но и развернуть рабочую инфру из кода на процесс выполнения тестирования\u003c/li\u003e\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003eРазработка \u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eПроцесс\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eОбычно работаю в командах, где используется спринты. Работал с Jira и другими инструментами agille\u003cbr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eРабочая среда.\u003c/strong\u003e\u0026nbsp;Mac/Linux.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eEnglish.\u003c/strong\u003e\u0026nbsp;Отлично понимаю письменную и устную речь (читаю документацию, смотрю обучающие видео). Говорю плохо.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eОбо мне.\u003c/strong\u003e\u0026nbsp;В\u0026nbsp;погоне за знаниями\u003c/p\u003e",
+      "placeholder": null
+    },
+    "companies": {
+      "edit": "/profile/experiences",
+      "items": [
+        {
+          "title": "EMCD - топ 7 майнинг пул в мире",
+          "href": "https://career.habr.com/companies/emcd-io",
+          "subtitle": "Качественный сервис для безопасных и рентабельных инвестиций в цифровые финансовые активы",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/company/100/007/440/6/logo/medium_b31683dd39f0dd205afff3219ec3525b.jpg",
+            "alt": "EMCD - топ 7 майнинг пул в мире"
+          },
+          "hint": "emcd-io",
+          "habrahabr_info": null,
+          "accredited": false,
+          "users": {
+            "title": "От 100 до 1000 сотрудников",
+            "href": "/companies?sz=3"
+          },
+          "rateHref": "/profile/company_ratings/new?company=emcd-io",
+          "positions": [
+            {
+              "title": "Frontend Team Lead",
+              "message": "\u003cul\u003e\u003cli\u003eОрганизация работы команды\u003c/li\u003e\u003cli\u003eУмение работать с мотивацией сотрудников и выявлять проблемы\u003c/li\u003e\u003cli\u003e Умение проектировать системы и применять архитектурные решения\u003c/li\u003e\u003cli\u003eЗнание подходов к организации эффективной работы команды\u003c/li\u003e\u003c/ul\u003e",
+              "duration": "Декабрь 2022 — По настоящее время  (1 год и 7 месяцев)"
+            }
+          ]
+        },
+        {
+          "title": "РАБОТУТ",
+          "href": "https://career.habr.com/companies/rabotut",
+          "subtitle": "RABOTUT — ЭТО ФЕДЕРАЛЬНЫЙ КАДРОВЫЙ ЦЕНТР!",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/company/100/007/229/1/logo/medium_ca3ec1ea09c678b3015d4c37807ddfab.jpeg",
+            "alt": "РАБОТУТ"
+          },
+          "hint": "rabotut",
+          "habrahabr_info": null,
+          "accredited": false,
+          "users": {
+            "title": "Более 5000 сотрудников",
+            "href": "/companies?sz=5"
+          },
+          "rateHref": null,
+          "positions": [
+            {
+              "title": "Team Lead",
+              "message": "\u003cp\u003eУправление командой полного цикла\u0026nbsp;(аналитик, фронт, бэк, QA)\u003cbr\u003eУчастие в формировании команды продуктов\u003cbr\u003e\u003cbr\u003eRabotut\u003c/p\u003e\n\u003col\u003e\u003cli\u003e\u0026nbsp;Job board (nuxtjs SSR, FastAPI, graphQL)\u003c/li\u003e\u003cli\u003eATS (CRM для HR) - react, FastAPI, graphQL\u003c/li\u003e\u003cli\u003eCMS - vue3, FastAPI, graphQL, Tilda\u003c/li\u003e\u003cli\u003eeCommerce бонусов - vue3, Golang, Tailwind\u003c/li\u003e\u003cli\u003eLeaderboards - react, golang, GraphQL\u003c/li\u003e\u003cli\u003eBots - React, Golang (Web, Telegram, Slack)\u003c/li\u003e\u003c/ol\u003e\n\u003cp\u003eHRBoard - React, Golang, GraphQL, MongoDB\u003c/p\u003e\n\u003cp\u003eСоздание и разработка инфраструктуры\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eLogger (Loki)\u003c/li\u003e\u003cli\u003eTracing (Jaeger)\u003c/li\u003e\u003cli\u003eMetrics (Prometheus) - Proxy,\u0026nbsp; DB, API\u003c/li\u003e\u003cli\u003eAlerts\u003c/li\u003e\u003c/ul\u003e",
+              "duration": "Сентябрь 2021 — Январь 2023  (1 год и 5 месяцев)",
+              "tags": [
+                {
+                  "title": "Git",
+                  "href": "/resumes?skills%5B%5D=947"
+                },
+                {
+                  "title": "PostgreSQL",
+                  "href": "/resumes?skills%5B%5D=537"
+                },
+                {
+                  "title": "Python",
+                  "href": "/resumes?skills%5B%5D=446"
+                },
+                {
+                  "title": "Docker",
+                  "href": "/resumes?skills%5B%5D=1067"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Allposit inc",
+          "href": null,
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "Allposit inc"
+          },
+          "positions": [
+            {
+              "title": "Lead backend",
+              "message": "\u003cp\u003e\u003c/p\u003e\u003cp\u003eРазработка приложения family office (fintech)\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eServerless\u003c/li\u003e\u003cli\u003eТеория графов\u003c/li\u003e\u003cli\u003ePandas, numpy\u003c/li\u003e\u003cli\u003eAWS\u003cul\u003e\u003cli\u003eLambda\u003c/li\u003e\u003cli\u003eSQS\u003c/li\u003e\u003cli\u003eS3\u003c/li\u003e\u003cli\u003eRDS\u003c/li\u003e\u003cli\u003eCodepipeline\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003c/p\u003e",
+              "duration": "Апрель 2021 — Февраль 2022  (11 месяцев)",
+              "tags": [
+                {
+                  "title": "Python",
+                  "href": "/resumes?skills%5B%5D=446"
+                },
+                {
+                  "title": "AWS",
+                  "href": "/resumes?skills%5B%5D=197"
+                },
+                {
+                  "title": "Высоконагруженные системы",
+                  "href": "/resumes?skills%5B%5D=645"
+                },
+                {
+                  "title": "PostgreSQL",
+                  "href": "/resumes?skills%5B%5D=537"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Hoff",
+          "href": "https://career.habr.com/companies/hoff",
+          "subtitle": "Сеть гипермаркетов мебели и товаров для дома",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/company/555/610/458/logo/medium_b381db0cd81fc5f4bb16d1e9ce564c6c.jpg",
+            "alt": "Hoff"
+          },
+          "hint": "hoff",
+          "habrahabr_info": null,
+          "accredited": false,
+          "location": "Москва",
+          "users": {
+            "title": "Более 5000 сотрудников",
+            "href": "/companies?sz=5"
+          },
+          "rateHref": null,
+          "positions": [
+            {
+              "title": "Lead frontend-developer",
+              "message": "\u003cul\u003e\u003cli\u003eОценивать сроки (как свои, так и чужие).\u003c/li\u003e\u003cli\u003eРаботать в тесной связке с продуктом и лидами других команд.\u003c/li\u003e\u003cli\u003eСоздавать и пересоздавать front-end часть системы (AngularJS + Vue JS).\u003c/li\u003e\u003cli\u003eВнедрять тестирование, ревью кода, написание документации.\u003c/li\u003e\u003cli\u003eФинальное код-ревью,\u0026nbsp;перенос задач в боевой сектор\u003c/li\u003e\u003c/ul\u003e",
+              "duration": "Июнь 2020 — Апрель 2021  (11 месяцев)",
+              "tags": [
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "Vue.js",
+                  "href": "/resumes?skills%5B%5D=1118"
+                },
+                {
+                  "title": "Angular",
+                  "href": "/resumes?skills%5B%5D=155"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "ELMA",
+          "href": "https://career.habr.com/companies/elma-bpm",
+          "subtitle": "Система управления бизнес-процессами и эффективностью",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/company/100/006/799/0/logo/medium_b0923a3c32c5c8afe7f63b4e8c4a2443.png",
+            "alt": "ELMA"
+          },
+          "hint": "elma-bpm",
+          "habrahabr_info": null,
+          "accredited": true,
+          "location": "Киров",
+          "users": {
+            "title": "От 100 до 1000 сотрудников",
+            "href": "/companies?sz=3"
+          },
+          "rateHref": null,
+          "positions": [
+            {
+              "title": "Front-end разработчик",
+              "message": "\u003cp\u003eРазработка frontend части RPA системы\u003cbr\u003e\u003cbr\u003eРазработка САПР BPMN бизнес-процессов в web и на клиенте CEF (Конструктор блок схем + админка).\u003cbr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eРелиз 23.04.2020\u003c/strong\u003e\u003cbr\u003e\u003cstrong\u003e\u003c/strong\u003e\u003ca href=\"https://elma-rpa.ai/ru/rpa/\" rel=\"nofollow\"\u003e\u003cbr\u003ehttps://elma-rpa.ai/ru/rpa/\u003c/a\u003e\u003cbr\u003e\u003c/p\u003e",
+              "duration": "Ноябрь 2019 — Июнь 2020  (8 месяцев)",
+              "tags": [
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "Vue.js",
+                  "href": "/resumes?skills%5B%5D=1118"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "VinewoodRP",
+          "href": null,
+          "location": "Минск",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "VinewoodRP"
+          },
+          "positions": [
+            {
+              "title": "Fullstack разработчик",
+              "message": "\u003cp\u003eRole play сервер для GTA5. CEF + VueJS + NodeJS\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003e\u003cbr\u003eРазработка RolePlay сервера на базе GTA5.\u003cbr\u003e\u003cbr\u003eFrontend - VueJS + CEF,\u003cbr\u003eBackend - NodeJS + RageMp.\u003cbr\u003e\u003cbr\u003eПришел на фронт, но после слива разработчика из команды в начале октябре стал брать и делать задачи на бэкенде (экспертная оценка тим-лида Middle). В результате разработчика не стали даже искать. Релиз проекта к Новому году\u003cbr\u003e\u003cbr\u003eРазработка игровых интерфейсов,\u003cbr\u003eHUD - компонентов, игровых экранов и легковесных переиспользуемых компонентов\u003cbr\u003eа в последствии разработка игровых механик:\u003cbr\u003e- Система фракций - back\u003cbr\u003e- Система вызовов такси, медиков и т.п. - back\u003cbr\u003e- Документы - front: динамический рендеринг\u003cbr\u003e- Функционал телефона, планшета - front: роутер между приложениями внутри планшета\u003cbr\u003e- Система крафта оружия (front + back)\u003cbr\u003e- Система банкоматов (front)\u003cbr\u003e- Диалоговые меню (вертикальное, горизонтальные, радиальные, контекстные)\u003cbr\u003e- Кодогенерация Markdown - Html\u003cbr\u003eИ еще большое множество интересного функционала, позволяющего раскрываться как разработчик\u003cbr\u003e\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eРелиз 25.12.2019\u003c/strong\u003e\u003c/p\u003e",
+              "duration": "Август 2019 — Январь 2020  (6 месяцев)",
+              "tags": [
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "Node.js",
+                  "href": "/resumes?skills%5B%5D=12"
+                },
+                {
+                  "title": "Vue.js",
+                  "href": "/resumes?skills%5B%5D=1118"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Gisware Integro",
+          "href": null,
+          "location": "Москва",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "Gisware Integro"
+          },
+          "positions": [
+            {
+              "title": "Front-end разработчик",
+              "message": "\u003cp\u003eПоддержка проекта и рефакторинг кода географической веб-системы\u003c/p\u003e",
+              "duration": "Август 2019 — Ноябрь 2019  (4 месяца)",
+              "tags": [
+                {
+                  "title": "TypeScript",
+                  "href": "/resumes?skills%5B%5D=245"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "ООО \"Геопризма\"",
+          "href": null,
+          "location": "Киров",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "ООО \"Геопризма\""
+          },
+          "positions": [
+            {
+              "title": "FullStack-разработчик",
+              "message": "\u003cp\u003eРазработка геодезического и картографического приложения для лесного хозяйства.\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003eFull-stack разработка:\u003cbr\u003e- Api(RestFull)- python(Django)/postgreSQL\u003cbr\u003e- Frontend - typescript/scss/VueJS+LeafletJS (SPA)\u003cbr\u003eПоддержка 12 факторов, плюс:\u003cbr\u003e- Автоматическая сборка (front- webpack4, back - docker) и деплой (ansible)\u003cbr\u003e- Миграции БД\u003cbr\u003e- Использование паттернов программирования Python и Typescript\u003cbr\u003e- Автоматическое тестирование Unit, e2e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eРелиз MVP 20.12.2018\u003c/strong\u003e\u003c/p\u003e",
+              "duration": "Июнь 2018 — Август 2019  (1 год и 3 месяца)",
+              "tags": [
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "PostgreSQL",
+                  "href": "/resumes?skills%5B%5D=537"
+                },
+                {
+                  "title": "Django",
+                  "href": "/resumes?skills%5B%5D=1075"
+                },
+                {
+                  "title": "Python",
+                  "href": "/resumes?skills%5B%5D=446"
+                },
+                {
+                  "title": "Git",
+                  "href": "/resumes?skills%5B%5D=947"
+                },
+                {
+                  "title": "Docker",
+                  "href": "/resumes?skills%5B%5D=1067"
+                },
+                {
+                  "title": "Vue.js",
+                  "href": "/resumes?skills%5B%5D=1118"
+                },
+                {
+                  "title": "TypeScript",
+                  "href": "/resumes?skills%5B%5D=245"
+                },
+                {
+                  "title": "Leaflet",
+                  "href": "/resumes?skills%5B%5D=1007"
+                },
+                {
+                  "title": "Webpack",
+                  "href": "/resumes?skills%5B%5D=1094"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "ООО \"Цифровой платеж\"",
+          "href": null,
+          "location": "Киров",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "ООО \"Цифровой платеж\""
+          },
+          "positions": [
+            {
+              "title": "FullStack-разработчик",
+              "message": "\u003cp\u003eРазработка АРМ(Автоматизированного рабочего места) юридического лица платежной системы Sendy, которая получила статус национально значимой 2 апреля 2018г.\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003eРабота в команде с (git/mercurial + jira)\u003cbr\u003eFull-stack разработка микросервисного приложения:\u003cbr\u003e- Backend - golang/postgreSQL/Nats\u003cbr\u003e- Frontend - pug/scss/es6 (server-side)\u003cbr\u003eПоддержка 12 факторов, плюс:\u003cbr\u003e- Автоматическая сборка (front- Webpack4, back - make) и деплой (web-hooks + Jenkins)\u003cbr\u003e- Миграции БД\u003cbr\u003e- Управление зависимостями Go (с поддержкой приватных и удаленных репозиториев)\u003cbr\u003e- Разработка DevOps прослойки (деплой в контейнер docker, кластер kubernetes)\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003eИспользование паттернов программирования на языке Golang\u003c/p\u003e",
+              "duration": "Октябрь 2017 — Май 2018  (8 месяцев)",
+              "tags": [
+                {
+                  "title": "PostgreSQL",
+                  "href": "/resumes?skills%5B%5D=537"
+                },
+                {
+                  "title": "Golang",
+                  "href": "/resumes?skills%5B%5D=101"
+                },
+                {
+                  "title": "Высоконагруженные системы",
+                  "href": "/resumes?skills%5B%5D=645"
+                },
+                {
+                  "title": "Docker",
+                  "href": "/resumes?skills%5B%5D=1067"
+                },
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "Mercurial",
+                  "href": "/resumes?skills%5B%5D=961"
+                },
+                {
+                  "title": "Kubernetes",
+                  "href": "/resumes?skills%5B%5D=1207"
+                },
+                {
+                  "title": "Webpack",
+                  "href": "/resumes?skills%5B%5D=1094"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Инструмент",
+          "href": "https://career.habr.com/companies/instrument",
+          "subtitle": "Крупная оптово-розничная межрегиональная торговая компания по продаже инструмента",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/company/100/005/547/3/logo/medium_47367b7954020e5e2d1c1719545b3378.jpg",
+            "alt": "Инструмент"
+          },
+          "hint": "instrument",
+          "habrahabr_info": null,
+          "accredited": false,
+          "location": "Киров",
+          "users": {
+            "title": "От 100 до 1000 сотрудников",
+            "href": "/companies?sz=3"
+          },
+          "rateHref": null,
+          "positions": [
+            {
+              "title": "Руководитель интернет-магазина",
+              "message": "\u003cp\u003e\u003cstrong\u003eОбязанности:\u003c/strong\u003e \u003cbr\u003eОрганизация работы интернет-магазина, контроль продаж, веб-аналитика, а так же проектирование, дизайн и разработка функционала сайта.Генерация и исполнение в жизнь идей по развитию проекта\u003c/p\u003e\n\u003cp\u003e\u003cbr\u003eРезультаты:\u003cstrong\u003e\u003c/strong\u003e\u003cbr\u003e\u003cbr\u003e\u003c/p\u003e\n\u003cul\u003e\u003cli\u003eРост органического трафика в 1.5 раза.\u003c/li\u003e\u003cli\u003eОрганизованы и частично внедрены бизнес-процессы интернет-магазина (описаны в нотификации BPMN2.0)\u003c/li\u003e\u003cli\u003eПереобучение SMM-маркетолога в SEO-специалиста.\u003c/li\u003e\u003cli\u003eРеализован проект \"умный поиск\"\u003c/li\u003e\u003cli\u003eПереработан движок сайта и админки. (переезд на yii2)\u003c/li\u003e\u003cli\u003eРеализован проект \"быстрой навигации\"\u003c/li\u003e\u003cli\u003eРеализован проект \"синхронизация с 1С в режиме реального времени\"\u003c/li\u003e\u003cli\u003eРедизайн корзины в стиле материал (Отрисовка + верстка + программирование frontend-части на pug+sass+VueJs)\u003c/li\u003e\u003cli\u003eРедизайн сайта(Отрисовка макетов)\u003c/li\u003e\u003c/ul\u003e",
+              "duration": "Октябрь 2016 — Октябрь 2017  (1 год и 1 месяц)"
+            }
+          ]
+        },
+        {
+          "title": "ООО \"Карты и системы\"",
+          "href": null,
+          "location": "Киров",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "ООО \"Карты и системы\""
+          },
+          "positions": [
+            {
+              "title": "Front-end разработчик",
+              "message": "\u003cul\u003e\u003cli\u003eРазработка frontend составляющей новых отчетов для пользователя и пр\u003c/li\u003e\u003cli\u003eРазработка UI web-кассы системы ОРЛАН\u003c/li\u003e\u003cli\u003eРедизайн и переработка frontend части UI системы ОРЛАН (верстка, рефакторинг, подбор и внедрение плагинов (daterangepicker, свитчеры, вкладки, модальные окна и многое другое).\u003c/li\u003e\u003cli\u003eОпределение геолокации и мелкие работы на сайте stranakart.ru\u003c/li\u003e\u003cli\u003eРедизайн сайта fp-print.ru\u003cbr\u003e\u003c/li\u003e\u003c/ul\u003e",
+              "duration": "Март 2016 — Октябрь 2016  (8 месяцев)",
+              "tags": [
+                {
+                  "title": "JavaScript",
+                  "href": "/resumes?skills%5B%5D=264"
+                },
+                {
+                  "title": "Высоконагруженные системы",
+                  "href": "/resumes?skills%5B%5D=645"
+                },
+                {
+                  "title": "Angular",
+                  "href": "/resumes?skills%5B%5D=155"
+                },
+                {
+                  "title": "JQuery",
+                  "href": "/resumes?skills%5B%5D=363"
+                },
+                {
+                  "title": "Twitter Bootstrap",
+                  "href": "/resumes?skills%5B%5D=1050"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "EDITKIROV",
+          "href": null,
+          "location": "Киров",
+          "image": {
+            "src": "/assets/defaults/companies/logo/original-c9014e94193468f9ba2e7486a49560518dedb2e14f7e9c4899778eb707cf1f07.svg",
+            "alt": "EDITKIROV"
+          },
+          "positions": [
+            {
+              "title": "CTO (Chief technology officer)",
+              "message": "\u003cp\u003eВедение интернет-проектов(сайтов, техподдержки, SEO), составление техзаданий, распределение обязанностей, стоимости и сроков среди подчиненных, личная разработка интересных проектов, консультация, ведение переговоров с заказчиками по технической части, оптимизация и предложения по модернизации текущих интернет-проектов, а так же составление плана рекламной компании(контекст)\u003cbr\u003e\u003c/p\u003e",
+              "duration": "Декабрь 2015 — Март 2016  (4 месяца)",
+              "tags": [
+                {
+                  "title": "Веб-разработка",
+                  "href": "/resumes?skills%5B%5D=318"
+                },
+                {
+                  "title": "Twitter Bootstrap",
+                  "href": "/resumes?skills%5B%5D=1050"
+                },
+                {
+                  "title": "Адаптивная верстка",
+                  "href": "/resumes?skills%5B%5D=895"
+                },
+                {
+                  "title": "JQuery",
+                  "href": "/resumes?skills%5B%5D=363"
+                },
+                {
+                  "title": "HTML",
+                  "href": "/resumes?skills%5B%5D=1017"
+                },
+                {
+                  "title": "Кроссбраузерная верстка",
+                  "href": "/resumes?skills%5B%5D=802"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "placeholder": null
+    },
+    "education": {
+      "edit": null,
+      "items": null,
+      "placeholder": {
+        "title": "Нет информации",
+        "description": "Укажите, какие вузы вы\u0026nbsp;окончили, вашу специальность и\u0026nbsp;достижения в\u0026nbsp;учёбе.",
+        "action": {
+          "title": "Добавить высшее образование",
+          "href": "https://career.habr.com/profile/university_educations/new"
+        }
+      }
+    },
+    "additionalEducation": {
+      "edit": "/profile/educations",
+      "items": [
+        {
+          "title": "Яндекс Практикум",
+          "href": "/education_centers/35-yandeks-praktikum",
+          "subtitle": "Обучаем разработчиков, тестировщиков, аналитиков, дизайнеров, интернет-маркетологов",
+          "image": {
+            "src": "https://habrastorage.org/getpro/moikrug/uploads/education_platform/000/000/035/logo/6837b2a7ec8c5733477f61137249aae0.png",
+            "alt": "Яндекс Практикум"
+          },
+          "location": "Москва",
+          "users": {
+            "title": "12221 выпускник",
+            "href": "/resumes?edc_ids%5B%5D=35"
+          },
+          "courses": [
+            {
+              "id": 78719,
+              "title": "Управление командой: курс для руководителей",
+              "href": null,
+              "message": "\u003cp\u003eНа этот курс набирали только действующих руководителей.\u0026nbsp;\u003cbr\u003e\u003c/p\u003e\u003col\u003e\u003c/ol\u003e\n\u003col\u003e\u003cli\u003eМы полноценно перешли на scrum, спринты стали гораздо комфортнее, а версии стабильные\u003c/li\u003e\u003cli\u003eЯ смог защитить перед руководством ставку системного аналитика, что обеспечило всегда проработанный бэклог разработки и запланированные спринты на 2-3 месяца вперед\u003c/li\u003e\u003cli\u003eМы внедрили процесс обучения для команды и раз в месяц по пятницам проводим сессии обмена опытом в формате воркшопов\u003c/li\u003e\u003cli\u003eВнедрили инструменты долгосрочного планирования версий. Версии запланированы на полгода вперед (грубо говоря бэклог аналитика)\u003c/li\u003e\u003cli\u003eРазработчики начали трекать свое время и самостоятельно приоритизировать и распределять свое время в рамках спринтов по матрице Эйзенхауэра\u003c/li\u003e\u003cli\u003eПри сложном моделировании процессов, где мы не до конца понимаем как это происходит внутри внедрили и используем метод \"черного ящика\" (IDEF0) и анализ AS-IS/AS-TO-BE\u003c/li\u003e\u003cli\u003eПитчинг версий, работа с \"проблемами\" сотрудников и возражениями, оценка командной и индивидуальной эффективности\u003c/li\u003e\u003c/ol\u003e",
+              "duration": "Март 2022 — Июль 2022 (4 месяца)",
+              "tags": [
+                {
+                  "title": "Управление людьми",
+                  "href": "/resumes?skills%5B%5D=705"
+                },
+                {
+                  "title": "Управление разработкой",
+                  "href": "/resumes?skills%5B%5D=641"
+                },
+                {
+                  "title": "Построение команды",
+                  "href": "/resumes?skills%5B%5D=475"
+                },
+                {
+                  "title": "Ведение переговоров",
+                  "href": "/resumes?skills%5B%5D=131"
+                },
+                {
+                  "title": "Стратегическое управление",
+                  "href": "/resumes?skills%5B%5D=577"
+                },
+                {
+                  "title": "Организация бизнес-процессов",
+                  "href": "/resumes?skills%5B%5D=240"
+                },
+                {
+                  "title": "Оптимизация бизнес-процессов",
+                  "href": "/resumes?skills%5B%5D=618"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "placeholder": null
+    },
+    "recommendationLetters": null,
+    "habr_expert": null,
+    "ratings": {
+      "edit": "/preferences/socials",
+      "items": [
+        {
+          "title": "GitHub",
+          "href": "https://github.com",
+          "type": "github",
+          "user": {
+            "title": "@ichiro18",
+            "href": "https://github.com/ichiro18"
+          },
+          "icon": "github",
+          "duration": "c декабря 2015 (8 лет и 6 месяцев)",
+          "contribution": "1060 вкладов в 24 репозитория, связан с языками:",
+          "topics": [
+            {
+              "title": "Vue",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=vue"
+            },
+            {
+              "title": "JavaScript",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=javascript"
+            },
+            {
+              "title": "HTML",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=html"
+            },
+            {
+              "title": "PHP",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=php"
+            },
+            {
+              "title": "Go",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=go"
+            },
+            {
+              "title": "Dockerfile",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=dockerfile"
+            },
+            {
+              "title": "Python",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=python"
+            },
+            {
+              "title": "Shell",
+              "href": "https://github.com/ichiro18?tab=repositories\u0026language=shell"
+            }
+          ]
+        }
+      ],
+      "placeholder": null
+    },
+    "progressData": {
+      "recommendations": [
+        "Добавьте \u003ca href=\"/profile/university_educations/new\" target=\"_blank\"\u003eвысшее образование\u003c/a\u003e, чтобы набрать еще 8%",
+        "Добавьте \u003ca href=\"/profile/additional_educations/78719/edit#fill-education-diploma\" target=\"_blank\"\u003eполученный сертификат\u003c/a\u003e, чтобы набрать еще 4%"
+      ],
+      "progress": 88,
+      "progressGraphItems": [
+        49.523809523809526,
+        43.80952380952381,
+        44.76190476190476,
+        53.80952380952381,
+        53.33333333333333,
+        59.04761904761905,
+        60.0,
+        55.71428571428571,
+        40.00000000000001,
+        16.19047619047619
+      ],
+      "rating": 93,
+      "canHideProgress": true
+    }
+  },
+  "hasActiveConnection": false,
+  "visibleConnectionFeedback": false
+}
