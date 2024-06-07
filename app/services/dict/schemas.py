@@ -18,6 +18,7 @@ class City(BaseModel):
 
 class EmploymentType(BaseModel):
     id: str
+    name: Optional[str]
     habr_id: Optional[str]
     hh_id: Optional[str]
 

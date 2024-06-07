@@ -28,6 +28,7 @@ class CityDBModel(BaseDBModel):
 class EmploymentTypeDBModel(BaseDBModel):
     __tablename__ = 'dict_employment_type'
     id = Column(String(50), primary_key=True)
+    name = Column(String(50), nullable=True)
     habr_id = Column(String(50), nullable=True)
     hh_id = Column(String(50), nullable=True)
 
