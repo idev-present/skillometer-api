@@ -14,11 +14,13 @@ logger = get_logger(__name__)
 def init_app():
     app = FastAPI(
         title="Skillometer API",
+        version="0.1.0",
+        description="Service for recruiters and applicants",
         contact={
             "name": "IDEV team",
             "email": "info@idev-present.com"
         },
-        root_path=settings.API_BASE_URL
+        root_path=settings.API_PREFIX,
     )
 
     @app.on_event("startup")
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=8080,
         log_config=None,
         reload=True if settings.ENVIRONMENT == 'LOCAL' else False,
     )
