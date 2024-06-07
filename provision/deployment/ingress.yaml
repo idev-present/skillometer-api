@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: skillometer-api-ingress-route-websecure
+  namespace: skillometer
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`skillometer.idev-present.com`) && PathPrefix(`/api/v1`)
+      kind: Rule
+      services:
+        - name: api-service
+          port: 8080

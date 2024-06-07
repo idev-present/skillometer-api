@@ -1,9 +1,6 @@
 services:
   api:
-    build:
-      context: .
-    container_name: skillometer-api
-    image: ilyamachetto/skillometer-api:0.1.2
+    image: ilyamachetto/skillometer-api:0.1.0
     platform: linux/amd64
     env_file:
       - .env.development

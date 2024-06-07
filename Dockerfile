@@ -1,5 +1,5 @@
 # 
-FROM python:3.12 as builder
+FROM --platform=linux/amd64 python:3.12 as builder
 
 # 
 WORKDIR /tmp
@@ -14,7 +14,7 @@ COPY ./pyproject.toml ./poetry.lock* /tmp/
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # 
-FROM python:3.12
+FROM --platform=linux/amd64 python:3.12 as runner
 
 # 
 WORKDIR /code

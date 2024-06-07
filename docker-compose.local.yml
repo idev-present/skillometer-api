@@ -2,6 +2,7 @@ services:
   db:
     image: bitnami/postgresql:16
     container_name: skillometer_db
+    platform: linux/amd64
     restart: unless-stopped
     volumes:
       - pg_data:/bitnami/postgresql
