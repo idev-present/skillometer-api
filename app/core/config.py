@@ -24,6 +24,8 @@ class Settings(BaseSettings):
     DATABASE_PASSWORD: str
     DATABASE_DBNAME: str = ""
 
+    CASDOOR_HOSTNAME: str = ''
+
     @computed_field
     @property
     def DATABASE_DSN(self) -> PostgresDsn:
