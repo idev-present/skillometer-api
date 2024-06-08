@@ -45,6 +45,7 @@ class DivisionDBModel(BaseDBModel):
     __tablename__ = 'dict_division'
     id = Column(String(50), primary_key=True)
     name = Column(String(50), nullable=True)
+    group = Column(String(50), nullable=True)
     habr_id = Column(Integer, nullable=True)
 
     @classmethod
