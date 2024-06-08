@@ -21,6 +21,8 @@ class VacancyDBModel(BaseDBModel):
     currency = Column(String, nullable=False)
     is_remote = Column(Boolean, nullable=False, default=False)
     # * Description parts
+    # Название
+    name = Column(String, nullable=False)
     # Описание вакансии (текст или HTML)
     description = Column(String, nullable=False)
     # О компании и команде
