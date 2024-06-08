@@ -1,4 +1,7 @@
+from typing import List
+
 from sqlalchemy import Column, String, DateTime, Integer, Boolean
+from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 
@@ -28,6 +31,14 @@ class ApplicantDBModel(BaseDBModel):
     city_id = Column(String(50), nullable=True)
     # Примененные навыки
     skill_set = Column(String, nullable=True)
+
+    @classmethod
+    async def get_list(cls, db) -> List["ApplicantDBModel"]:
+        query = sql.select(cls)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res
 
 
 class ApplicantXPDBModel(BaseDBModel):

@@ -33,3 +33,18 @@ class Qualification(BaseModel):
     id: str
     name: Optional[str]
     habr_id: Optional[int]
+
+
+class SearchStatus(BaseModel):
+    id: Optional[str]
+    name: Optional[str]
+    habr_id: Optional[int]
+
+
+class Skill(BaseModel):
+    id: Optional[str]
+    name: Optional[str]
+    type: Optional[str]
+    qualification_id: Optional[str]
+    division_id: Optional[str]
+    habr_id: Optional[int]

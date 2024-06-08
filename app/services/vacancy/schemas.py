@@ -19,7 +19,7 @@ class Vacancy(BaseModel):
     employment_type_id: Optional[str] = None
     division_id: Optional[str] = None
     qualification_id: Optional[str] = None
-    skills: Optional[str] = None
+    skill_set: Optional[str] = None
     created_at: datetime
     published_at: datetime
     owner_id: Optional[str] = None

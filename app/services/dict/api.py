@@ -4,8 +4,23 @@ from fastapi import APIRouter, Depends
 
 from app.core.db import db_service
 from app.services.dict.const import CURRENCY
-from app.services.dict.db_models import CityDBModel, EmploymentTypeDBModel, DivisionDBModel, QualificationDBModel
-from app.services.dict.schemas import City, EmploymentType, Division, Qualification, Currency
+from app.services.dict.db_models import (
+    CityDBModel,
+    EmploymentTypeDBModel,
+    DivisionDBModel,
+    QualificationDBModel,
+    SearchStatusDBModel,
+    SkillDBModel
+)
+from app.services.dict.schemas import (
+    City,
+    EmploymentType,
+    Division,
+    Qualification,
+    Currency,
+    SearchStatus,
+    Skill
+)
 
 router = APIRouter()
 
@@ -44,4 +59,16 @@ async def division_list(db_session=Depends(db_service.get_db)) -> List[Division]
 @router.get("/qualification")
 async def qualification_list(db_session=Depends(db_service.get_db)) -> List[Qualification]:
     res = await QualificationDBModel.get_list(db_session)
+    return res
+
+
+@router.get("/search_status")
+async def search_status_list(db_session=Depends(db_service.get_db)) -> List[SearchStatus]:
+    res = await SearchStatusDBModel.get_list(db_session)
+    return res
+
+
+@router.get("/skill")
+async def skill_list(db_session=Depends(db_service.get_db)) -> List[Skill]:
+    res = await SkillDBModel.get_list(db_session)
     return res
