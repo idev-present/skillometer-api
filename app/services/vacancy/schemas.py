@@ -85,3 +85,16 @@ class Vacancy(VacancyForm):
             if key.name == v:
                 return Currency(key=key.name, value=key.value)
         return v
+
+
+class VacancyUpdateForm(VacancyForm):
+    name: Optional[str] = Field(None)
+    is_remote: Optional[bool] = Field(False)
+    description: Optional[str] = Field(None)
+    team: Optional[str] = Field(None)
+    todo: Optional[str] = Field(None)
+    city_id: Optional[str] = Field(None)
+    employment_type_id: Optional[str] = Field(None)
+    division_id: Optional[str] = Field(None)
+    qualification_id: Optional[str] = Field(None)
+    skill_set: Optional[str] = Field(None)

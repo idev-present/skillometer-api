@@ -1,10 +1,12 @@
+import json
 from typing import List
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
+from starlette import status
 
 from app.core.db import db_service
 from app.services.vacancy.db_models import VacancyDBModel
-from app.services.vacancy.schemas import VacancyListItem, Vacancy, VacancyForm
+from app.services.vacancy.schemas import VacancyListItem, Vacancy, VacancyForm, VacancyUpdateForm
 
 router = APIRouter()
 
@@ -22,15 +24,18 @@ async def get_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)) ->
 
 
 @router.put("/{vacancy_id}", response_model=Vacancy)
-async def update_vacancy(vacancy_id: str, vacancy: VacancyForm, db_session=Depends(db_service.get_db)) -> Vacancy:
+async def update_vacancy(vacancy_id: str, vacancy: VacancyUpdateForm, db_session=Depends(db_service.get_db)) -> Vacancy:
     res = await VacancyDBModel.update(db=db_session, item_id=vacancy_id, form=vacancy)
     return res
 
 
-@router.delete("/{vacancy_id}", response_model=Vacancy)
+@router.delete("/{vacancy_id}")
 async def delete_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
-    await VacancyDBModel.delete(db=db_session, item_id=vacancy_id)
-    return Response(status_code=204, content={"message": "Item has been deleted."})
+    res = await VacancyDBModel.delete(db=db_session, item_id=vacancy_id)
+    if res:
+        return Response(status_code=status.HTTP_204_NO_CONTENT)
+    else:
+        HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vacancy not found")
 
 
 @router.get("/")

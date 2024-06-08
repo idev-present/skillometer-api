@@ -65,19 +65,19 @@ class VacancyDBModel(BaseDBModel):
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id, form: VacancyForm) -> "VacancyDBModel":
+    async def update(cls, db, item_id: str, form: VacancyForm) -> "VacancyDBModel":
         vacancy = await cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(vacancy, field, value)
         db.add(vacancy)
         await db.commit()
-        await db.refresh(vacancy.id)
+        await db.refresh(vacancy)
         return vacancy
 
     @classmethod
     async def delete(cls, db, item_id: str) -> bool:
         vacancy = await cls.get(db, item_id)
-        db.delete(vacancy)
+        await db.delete(vacancy)
         await db.commit()
         return True
 
