@@ -69,3 +69,37 @@ class QualificationDBModel(BaseDBModel):
         res = res.scalars().all()
 
         return res
+
+
+class SearchStatusDBModel(BaseDBModel):
+    __tablename__ = 'dict_search_status'
+    id = Column(String(50), primary_key=True)
+    name = Column(String(50), nullable=True)
+    habr_id = Column(Integer, nullable=True)
+
+    @classmethod
+    async def get_list(cls, db) -> List["SearchStatusDBModel"]:
+        query = sql.select(cls)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res
+
+
+class SkillDBModel(BaseDBModel):
+    __tablename__ = 'dict_skill'
+
+    id = Column(String(50), primary_key=True)
+    name = Column(String(50), nullable=True)
+    type = Column(String(50), nullable=True)
+    qualification_id = Column(String(50), nullable=True)
+    division_id = Column(String(50), nullable=True)
+    habr_id = Column(Integer, nullable=True)
+
+    @classmethod
+    async def get_list(cls, db) -> List["SkillDBModel"]:
+        query = sql.select(cls)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res

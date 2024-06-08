@@ -1,0 +1,68 @@
+{
+  "id": "ichiro18",
+  "title": "Илья Журавлев",
+  "site": null,
+  "lastVisited": "сегодня",
+  "availability": "Рассмотрю предложения",
+  "salary": "От 400 000 ₽",
+  "qualification": "Ведущий (Lead)",
+  "specialization": {
+    "edit": "/profile/specialization",
+    "title": "Team Lead"
+  },
+  "divisions": [
+    {
+      "title": "Архитектор программного обеспечения"
+    },
+    {
+      "title": "Технический директор"
+    }
+  ],
+  "skills": [
+    {
+      "title": "TypeScript",
+      "href": "/resumes?skills%5B%5D=245"
+    },
+    {
+      "title": "Webpack",
+      "href": "/resumes?skills%5B%5D=1094"
+    },
+    {
+      "title": "Vue.js",
+      "href": "/resumes?skills%5B%5D=1118"
+    },
+    {
+      "title": "Docker",
+      "href": "/resumes?skills%5B%5D=1067"
+    },
+    {
+      "title": "Python",
+      "href": "/resumes?skills%5B%5D=446"
+    },
+    {
+      "title": "Высоконагруженные системы",
+      "href": "/resumes?skills%5B%5D=645"
+    },
+    {
+      "title": "PostgreSQL",
+      "href": "/resumes?skills%5B%5D=537"
+    },
+    {
+      "title": "Kubernetes",
+      "href": "/resumes?skills%5B%5D=1207"
+    },
+    {
+      "title": "AWS",
+      "href": "/resumes?skills%5B%5D=197"
+    },
+    {
+      "title": "MongoDB",
+      "href": "/resumes?skills%5B%5D=229"
+    }
+  ],
+  "age": "29 лет",
+  "registeredAt": "08.09.2016",
+  "experience": "8 лет и 7 месяцев",
+  "location": "Россия, Киров",
+  "relocation": "готов к удаленной работе"
+}
