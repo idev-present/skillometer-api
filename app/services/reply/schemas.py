@@ -25,9 +25,6 @@ class Reply(ReplyBase):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        orm_mode = True
-
 
 # Reply comments
 class ReplyCommentBase(BaseModel):
@@ -45,5 +42,7 @@ class ReplyComment(ReplyCommentBase):
     id: str
     created_at: datetime
 
-    class Config:
-        orm_mode = True
+
+# Reply status
+class ReplyStatus(BaseModel):
+    pass
