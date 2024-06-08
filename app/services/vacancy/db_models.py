@@ -28,6 +28,7 @@ class VacancyDBModel(BaseDBModel):
     # Ожидания от кандидата (текст или HTML)
     todo = Column(String, nullable=False)
     # * Dict
+    # Город проживания
     city_id = Column(String, nullable=True)
     # Тип занятости
     employment_type_id = Column(String, nullable=True)
@@ -36,7 +37,7 @@ class VacancyDBModel(BaseDBModel):
     # Квалификация
     qualification_id = Column(String, nullable=True)
     # Навыки (от 1 до 10)
-    skills = Column(String, nullable=True)
+    skill_set = Column(String, nullable=True)
     # * Timestamps
     created_at = Column(DateTime, default=datetime.datetime.now)
     published_at = Column(DateTime, default=datetime.datetime.now)
