@@ -5,12 +5,16 @@ from sqlalchemy import Column, String, Integer, Boolean, DateTime
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
+from app.services.vacancy.schemas import VacancyForm
+from app.utils.database_utils import generate_uid
 
 
 class VacancyDBModel(BaseDBModel):
     __tablename__ = 'vacancies'
 
     id = Column(String, primary_key=True)
+    # Название
+    name = Column(String, nullable=False)
     # * External links
     habr_id = Column(Integer, nullable=True)
     hh_id = Column(Integer, nullable=True)
@@ -21,8 +25,6 @@ class VacancyDBModel(BaseDBModel):
     currency = Column(String, nullable=False)
     is_remote = Column(Boolean, nullable=False, default=False)
     # * Description parts
-    # Название
-    name = Column(String, nullable=False)
     # Описание вакансии (текст или HTML)
     description = Column(String, nullable=False)
     # О компании и команде
@@ -46,6 +48,38 @@ class VacancyDBModel(BaseDBModel):
     # * Relationships
     owner_id = Column(String, nullable=True)
     company_id = Column(String, nullable=True)
+
+    @classmethod
+    async def create(cls, db, form: VacancyForm) -> "VacancyDBModel":
+        vacancy = cls(**form.dict())
+        vacancy.id = generate_uid('v')
+        db.add(vacancy)
+        await db.commit()
+        await db.refresh(vacancy)
+        return vacancy
+
+    @classmethod
+    async def get(cls, db, item_id: str) -> "VacancyDBModel":
+        query = sql.select(cls).filter(cls.id == item_id)
+        result = await db.execute(query)
+        return result.scalars().first()
+
+    @classmethod
+    async def update(cls, db, item_id, form: VacancyForm) -> "VacancyDBModel":
+        vacancy = await cls.get(db, item_id)
+        for field, value in form.dict(exclude_unset=True).items():
+            setattr(vacancy, field, value)
+        db.add(vacancy)
+        await db.commit()
+        await db.refresh(vacancy.id)
+        return vacancy
+
+    @classmethod
+    async def delete(cls, db, item_id: str) -> bool:
+        vacancy = await cls.get(db, item_id)
+        db.delete(vacancy)
+        await db.commit()
+        return True
 
     @classmethod
     async def get_list(cls, db) -> List["VacancyDBModel"]:

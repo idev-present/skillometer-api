@@ -11,11 +11,3 @@ api.include_router(dict_router, prefix="/dict", tags=["dict"])
 api.include_router(vacancy_router, prefix="/vacancy", tags=["vacancy"])
 api.include_router(company_router, prefix="/company", tags=["company"])
 api.include_router(applicant_router, prefix="/applicant", tags=["applicant"])
-
-
-@api.get("/config")
-async def show_settings():
-    try:
-        return settings
-    except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))

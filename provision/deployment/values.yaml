@@ -41,7 +41,7 @@ spec:
             - name: DATABASE_PASSWORD
               value: "skillometer_dba_idev2512"
             - name: DATABASE_DBNAME
-              value: "skillometer_db.puml"
+              value: "skillometer_db"
 ---
 apiVersion: v1
 kind: Service
