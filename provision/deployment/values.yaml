@@ -26,6 +26,8 @@ spec:
               value: "skillometer.idev-present.com"
             - name: ENVIRONMENT
               value: "staging"
+            - name: API_BASE_URL
+              value: "https://skillometer.idev-present.com/api/v1/"
             - name: API_PREFIX
               value: "/api/v1"
             - name: LOG_LEVEL
@@ -42,6 +44,8 @@ spec:
               value: "skillometer_dba_idev2512"
             - name: DATABASE_DBNAME
               value: "skillometer_db"
+            - name: CASDOOR_HOSTNAME
+              value: "https://iam.idev-present.com"
 ---
 apiVersion: v1
 kind: Service
