@@ -1,22 +1,52 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 from datetime import datetime
 from typing import Optional
 
+from app.services.dict.const import CURRENCY
+from app.services.dict.schemas import Currency
 
-class Applicant(BaseModel):
+
+class ApplicantForm(BaseModel):
+    title: str = Field(...)
+    salary_from: int = Field(..., gt=0)
+    currency: Optional[str] = Field(CURRENCY.RUR.name)
+    age: int = Field(..., gt=0)
+    is_relocation: Optional[bool] = Field(False, description="Готовность к переезду")
+    is_remote: Optional[bool] = Field(False, description="Готовность к удаленной работе")
+    # * Dict
+    search_status_id: Optional[str] = Field(None)
+    qualification_id: Optional[str] = Field(None)
+    division_id: Optional[str] = Field(None)
+    city_id: Optional[str] = Field(None)
+    skill_set: Optional[str] = Field(None)
+
+
+class ApplicantListItem(ApplicantForm):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     user_id: str
-    title: str
-    salary_from: Optional[int]
-    currency: Optional[str]
-    age: Optional[int]
-    experience: Optional[str]
-    is_relocation: bool = False
-    is_remote: bool = False
-    last_visited: Optional[datetime]
-    registered_at: Optional[datetime]
-    search_status_id: Optional[str]
-    qualification_id: Optional[str]
-    division_id: Optional[str]
-    city_id: Optional[str]
-    skill_set: Optional[str]
+    # * Config
+    currency: Currency = Field(...)
+    experience: Optional[str] = Field(None, description="Суммарный опыт работы, калькулируется из списка")
+    last_visited: Optional[datetime] = Field(None, description="Дата/время последнего посещения")
+    registered_at: Optional[datetime] = Field(None, description="Дата/время регистрации")
+
+    @field_validator("currency", mode="before")
+    @classmethod
+    def transform_currency(cls, v):
+        # todo: check valid key
+        for key in CURRENCY:
+            if key.name == v:
+                return Currency(key=key.name, value=key.value)
+        return v
+
+
+class Applicant(ApplicantListItem):
+    pass
+
+
+class ApplicantUpdateForm(ApplicantForm):
+    title: Optional[str] = Field(None)
+    salary_from: Optional[int] = Field(None)
+    age: Optional[int] = Field(None)

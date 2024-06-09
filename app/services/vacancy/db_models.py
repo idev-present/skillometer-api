@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, Integer, Boolean, DateTime
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
-from app.services.vacancy.schemas import VacancyForm
+from app.services.vacancy.schemas import VacancyForm, VacancyUpdateForm
 from app.utils.database_utils import generate_uid
 
 
@@ -65,7 +65,7 @@ class VacancyDBModel(BaseDBModel):
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: VacancyForm) -> "VacancyDBModel":
+    async def update(cls, db, item_id: str, form: VacancyUpdateForm) -> "VacancyDBModel":
         vacancy = await cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(vacancy, field, value)

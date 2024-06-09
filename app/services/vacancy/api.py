@@ -12,8 +12,8 @@ router = APIRouter()
 
 
 @router.post("/", response_model=Vacancy)
-async def create_vacancy(vacancy: VacancyForm, db_session=Depends(db_service.get_db)) -> Vacancy:
-    res = await VacancyDBModel.create(db=db_session, form=vacancy)
+async def create_vacancy(form: VacancyForm, db_session=Depends(db_service.get_db)) -> Vacancy:
+    res = await VacancyDBModel.create(db=db_session, form=form)
     return res
 
 
@@ -31,14 +31,11 @@ async def update_vacancy(vacancy_id: str, vacancy: VacancyUpdateForm, db_session
 
 @router.delete("/{vacancy_id}")
 async def delete_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
-    res = await VacancyDBModel.delete(db=db_session, item_id=vacancy_id)
-    if res:
-        return Response(status_code=status.HTTP_204_NO_CONTENT)
-    else:
-        HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vacancy not found")
+    await VacancyDBModel.delete(db=db_session, item_id=vacancy_id)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.get("/")
+@router.get("/", response_model=List[VacancyListItem])
 async def vacancy_list(db_session=Depends(db_service.get_db)) -> List[VacancyListItem]:
     res = await VacancyDBModel.get_list(db=db_session)
     return res

@@ -4,6 +4,8 @@ from sqlalchemy import Column, String, DateTime, Integer, Boolean
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
+from app.services.applicant.schemas import ApplicantForm
+from app.utils.database_utils import generate_uid
 
 
 class ApplicantDBModel(BaseDBModel):
@@ -31,6 +33,39 @@ class ApplicantDBModel(BaseDBModel):
     city_id = Column(String(50), nullable=True)
     # Примененные навыки
     skill_set = Column(String, nullable=True)
+
+    @classmethod
+    async def create(cls, db, form: ApplicantForm) -> "ApplicantDBModel":
+        applicant = cls(**form.dict())
+        applicant.id = generate_uid('apl')
+        applicant.user_id = 'u_123'
+        db.add(applicant)
+        await db.commit()
+        await db.refresh(applicant)
+        return applicant
+
+    @classmethod
+    async def get(cls, db, item_id: str) -> "ApplicantDBModel":
+        query = sql.select(ApplicantDBModel).where(cls.id == item_id)
+        result = await db.execute(query)
+        return result.scalars().first()
+
+    @classmethod
+    async def update(cls, db, item_id: str, form: ApplicantForm) -> "ApplicantDBModel":
+        applicant = await cls.get(db, item_id)
+        for field, value in form.dict(exclude_unset=True).items():
+            setattr(applicant, field, value)
+        db.add(applicant)
+        await db.commit()
+        await db.refresh(applicant)
+        return applicant
+
+    @classmethod
+    async def delete(cls, db, item_id: str) -> bool:
+        applicant = await cls.get(db, item_id)
+        await db.delete(applicant)
+        await db.commit()
+        return True
 
     @classmethod
     async def get_list(cls, db) -> List["ApplicantDBModel"]:

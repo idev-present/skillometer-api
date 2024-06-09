@@ -11,13 +11,12 @@ class VacancyForm(BaseModel):
     name: str
     salary_from: Optional[int] = Field(None)
     salary_to: Optional[int] = Field(None)
-    # TODO: add enum
     currency: Optional[str] = Field(CURRENCY.RUR.name)
     is_remote: bool = False
     # * Description parts
-    description: str
-    team: str
-    todo: str
+    description: str = Field(..., description="Описание вакансии")
+    team: str = Field(..., description="О компании и команде")
+    todo: str = Field(..., description="Ожидания от кандидата")
     # * Dict
     # Город проживания
     city_id: str = Field(...)
@@ -40,7 +39,7 @@ class VacancyListItem(VacancyForm):
     hh_id: Optional[int] = Field(None)
     url: Optional[str] = Field(None)
     # * Config
-    currency: Currency = Field(..., pre=True)
+    currency: Currency = Field(...)
     # * Dict
     # * Timestamps
     created_at: Optional[datetime]
@@ -59,32 +58,8 @@ class VacancyListItem(VacancyForm):
         return v
 
 
-class Vacancy(VacancyForm):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: str
-    # * External links
-    habr_id: Optional[int] = Field(None)
-    hh_id: Optional[int] = Field(None)
-    url: Optional[str] = Field(None)
-    # * Config
-    currency: Currency = Field(..., pre=True)
-    # * Dict
-    # * Timestamps
-    created_at: Optional[datetime]
-    published_at: Optional[datetime]
-    # * Relationships
-    owner_id: Optional[str] = Field(None)
-    company_id: Optional[str] = Field(None)
-
-    @field_validator("currency", mode="before")
-    @classmethod
-    def transform_currency(cls, v):
-        # todo: check valid key
-        for key in CURRENCY:
-            if key.name == v:
-                return Currency(key=key.name, value=key.value)
-        return v
+class Vacancy(VacancyListItem):
+    pass
 
 
 class VacancyUpdateForm(VacancyForm):
