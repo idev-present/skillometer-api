@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import httpx
 import requests
@@ -61,6 +61,7 @@ async def logout(request: Request):
 @router.get("/")
 async def list_users(_: dict = Depends(get_user_from_session)) -> List[UserInDB]:
     return sdk.get_users()
+
 
 @router.get("/oauth/habr/", include_in_schema=False)
 async def oauth_authorize(request: Request):
