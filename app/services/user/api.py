@@ -25,8 +25,14 @@ async def auth(state: str = 'docs'):
 
 
 @router.get("/me")
-async def me(request: Request, user=Depends(get_user_from_session)) -> UserInDB:
-    return UserInDB.model_validate((sdk.get_user(user['name'])).__dict__)
+async def me(user=Depends(get_user_from_session)) -> UserInDB:
+    user_data = sdk.get_user(user['name'])
+    if user.get('roles') and isinstance(user.get('roles'), list):
+        if isinstance(user['roles'][0], dict):
+            user_role = user['roles'][0].get('name')
+    result = UserInDB.model_validate(user_data.__dict__)
+    result.role = user_role if user_role else None
+    return result
 
 
 @router.get("/login", include_in_schema=False)
@@ -43,7 +49,7 @@ async def login(request: Request):
     return token
 
 
-@router.post("/logout", response_class=JSONResponse)
+@router.post("/logout")
 async def logout(request: Request):
     try:
         del request.session["casdoorUser"]
@@ -51,6 +57,10 @@ async def logout(request: Request):
     except KeyError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
 
+
+@router.get("/")
+async def list_users(_: dict = Depends(get_user_from_session)) -> List[UserInDB]:
+    return sdk.get_users()
 
 @router.get("/oauth/habr/", include_in_schema=False)
 async def oauth_authorize(request: Request):

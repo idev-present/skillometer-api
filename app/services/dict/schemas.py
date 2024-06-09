@@ -8,6 +8,7 @@ class Currency(BaseModel):
 
 
 class City(BaseModel):
+    id: str
     fias_id: Optional[str]
     habr_id: Optional[int]
     habr_alias: Optional[str]
