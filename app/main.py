@@ -46,7 +46,7 @@ def init_app():
     app.add_middleware(
         SessionMiddleware,
         secret_key=SECRET_KEY,
-        session_cookie="fastapi-session",
+        session_cookie="access-token",
     )
 
     app.include_router(api)

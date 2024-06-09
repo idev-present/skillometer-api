@@ -1,16 +1,14 @@
-from typing import Optional, List
+from typing import List
 
 import httpx
-import requests
 from fastapi import APIRouter, Depends, HTTPException
 from starlette import status
 from starlette.requests import Request
-from starlette.responses import JSONResponse, HTMLResponse, RedirectResponse
+from starlette.responses import RedirectResponse
 from structlog import get_logger
 
 from app.core.config import settings
-from app.core.db import db_service
-from app.services.user.schemas import UserInDB, UserSession
+from app.services.user.schemas import UserInDB
 from app.utils.iam_utils import CASDOOR_SDK as sdk, get_user_from_session
 
 router = APIRouter()
