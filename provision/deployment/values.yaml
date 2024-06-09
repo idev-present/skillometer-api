@@ -27,7 +27,7 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: API_BASE_URL
-              value: "https://skillometer.idev-present.com/api/v1/"
+              value: "https://skillometer.idev-present.com/api/v1"
             - name: API_PREFIX
               value: "/api/v1"
             - name: LOG_LEVEL
