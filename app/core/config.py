@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     )
     # API config
     DOMAIN: str = "localhost"
+    API_BASE_URL: str = ""
     API_PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
@@ -23,6 +24,8 @@ class Settings(BaseSettings):
     DATABASE_USERNAME: str
     DATABASE_PASSWORD: str
     DATABASE_DBNAME: str = ""
+
+    CASDOOR_HOSTNAME: str = ''
 
     @computed_field
     @property
