@@ -43,10 +43,10 @@ CASDOOR_SDK = CasdoorSDK(
     client_id='8aa124a89a76caf4e84b',
     client_secret='fa026ac3608de86085c8fe9cbac8f784ba764fd1',
     certificate=certificate,
-    org_name='built-in',
-    application_name='Skillometer',
+    org_name='skillometer',
+    application_name='skillometer',
 )
-REDIRECT_URI = 'http://localhost:8000/login'
+REDIRECT_URI = settings.API_BASE_URL
 SECRET_TYPE = 'filesystem'
 SECRET_KEY = os.urandom(24)
 
