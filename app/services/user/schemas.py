@@ -1,22 +1,23 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
 
-class Applicant(BaseModel):
+class BaseUser(BaseModel):
+    email: Optional[str]
+    name: Optional[str]
+    phone: Optional[str]
+
+
+class UserInDB(BaseUser):
     id: str
-    user_id: str
-    title: str
-    salary_from: Optional[int]
-    currency: Optional[str]
-    age: Optional[int]
-    experience: Optional[str]
-    is_relocation: bool = False
-    is_remote: bool = False
-    last_visited: Optional[datetime]
-    registered_at: Optional[datetime]
-    search_status_id: Optional[str]
-    qualification_id: Optional[str]
-    division_id: Optional[str]
-    city_id: Optional[str]
-    skill_set: Optional[str]
+    role: Optional[str] = Field(None)
+    avatar: Optional[str]
+    created_time: datetime = Field(alias='createdTime')
+
+
+class UserSession(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str
+    expires_in: int

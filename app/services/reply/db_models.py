@@ -48,7 +48,7 @@ class ReplyDBModel(BaseDBModel):
                 select(VacancyDBModel).where(VacancyDBModel.id == data.vacancy_id)).scalars().first()
             if not vacancy_db_model:
                 raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     detail=f'Vacancy #{data.vacancy_id} not found'
                 )
         if data.applicant_id:
@@ -56,7 +56,7 @@ class ReplyDBModel(BaseDBModel):
                 select(ApplicantDBModel).where(ApplicantDBModel.id == data.applicant_id)).scalars().first()
             if not applicant_db_model:
                 raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     detail=f'Applicant #{data.applicant_id} not found'
                 )
         new_reply = cls(**data.dict())

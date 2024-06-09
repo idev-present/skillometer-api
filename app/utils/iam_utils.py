@@ -1,48 +1,64 @@
 import os
 
-from casdoor import CasdoorSDK
+from casdoor import AsyncCasdoorSDK, CasdoorSDK
+from fastapi import HTTPException, Depends
+from starlette import status
+from starlette.requests import Request
 
 from app.core.config import settings
 
 certificate = '''-----BEGIN CERTIFICATE-----
-MIIE+TCCAuGgAwIBAgIDAeJAMA0GCSqGSIb3DQEBCwUAMDYxHTAbBgNVBAoTFENh
-c2Rvb3IgT3JnYW5pemF0aW9uMRUwEwYDVQQDEwxDYXNkb29yIENlcnQwHhcNMjEx
-MDE1MDgxMTUyWhcNNDExMDE1MDgxMTUyWjA2MR0wGwYDVQQKExRDYXNkb29yIE9y
-Z2FuaXphdGlvbjEVMBMGA1UEAxMMQ2FzZG9vciBDZXJ0MIICIjANBgkqhkiG9w0B
-AQEFAAOCAg8AMIICCgKCAgEAsInpb5E1/ym0f1RfSDSSE8IR7y+lw+RJjI74e5ej
-rq4b8zMYk7HeHCyZr/hmNEwEVXnhXu1P0mBeQ5ypp/QGo8vgEmjAETNmzkI1NjOQ
-CjCYwUrasO/f/MnI1C0j13vx6mV1kHZjSrKsMhYY1vaxTEP3+VB8Hjg3MHFWrb07
-uvFMCJe5W8+0rKErZCKTR8+9VB3janeBz//zQePFVh79bFZate/hLirPK0Go9P1g
-OvwIoC1A3sarHTP4Qm/LQRt0rHqZFybdySpyWAQvhNaDFE7mTstRSBb/wUjNCUBD
-PTSLVjC04WllSf6Nkfx0Z7KvmbPstSj+btvcqsvRAGtvdsB9h62Kptjs1Yn7GAuo
-I3qt/4zoKbiURYxkQJXIvwCQsEftUuk5ew5zuPSlDRLoLByQTLbx0JqLAFNfW3g/
-pzSDjgd/60d6HTmvbZni4SmjdyFhXCDb1Kn7N+xTojnfaNkwep2REV+RMc0fx4Gu
-hRsnLsmkmUDeyIZ9aBL9oj11YEQfM2JZEq+RVtUx+wB4y8K/tD1bcY+IfnG5rBpw
-IDpS262boq4SRSvb3Z7bB0w4ZxvOfJ/1VLoRftjPbLIf0bhfr/AeZMHpIKOXvfz4
-yE+hqzi68wdF0VR9xYc/RbSAf7323OsjYnjjEgInUtRohnRgCpjIk/Mt2Kt84Kb0
-wn8CAwEAAaMQMA4wDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAgEAn2lf
-DKkLX+F1vKRO/5gJ+Plr8P5NKuQkmwH97b8CS2gS1phDyNgIc4/LSdzuf4Awe6ve
-C06lVdWSIis8UPUPdjmT2uMPSNjwLxG3QsrimMURNwFlLTfRem/heJe0Zgur9J1M
-8haawdSdJjH2RgmFoDeE2r8NVRfhbR8KnCO1ddTJKuS1N0/irHz21W4jt4rxzCvl
-2nR42Fybap3O/g2JXMhNNROwZmNjgpsF7XVENCSuFO1jTywLaqjuXCg54IL7XVLG
-omKNNNcc8h1FCeKj/nnbGMhodnFWKDTsJcbNmcOPNHo6ixzqMy/Hqc+mWYv7maAG
-Jtevs3qgMZ8F9Qzr3HpUc6R3ZYYWDY/xxPisuKftOPZgtH979XC4mdf0WPnOBLqL
-2DJ1zaBmjiGJolvb7XNVKcUfDXYw85ZTZQ5b9clI4e+6bmyWqQItlwt+Ati/uFEV
-XzCj70B4lALX6xau1kLEpV9O1GERizYRz5P9NJNA7KoO5AVMp9w0DQTkt+LbXnZE
-HHnWKy8xHQKZF9sR7YBPGLs/Ac6tviv5Ua15OgJ/8dLRZ/veyFfGo2yZsI+hKVU5
-nCCJHBcAyFnm1hdvdwEdH33jDBjNB6ciotJZrf/3VYaIWSalADosHAgMWfXuWP+h
-8XKXmzlxuHbTMQYtZPDgspS5aK+S4Q9wb8RRAYo=
+MIIE3TCCAsWgAwIBAgIDAeJAMA0GCSqGSIb3DQEBCwUAMCgxDjAMBgNVBAoTBWFk
+bWluMRYwFAYDVQQDEw1jZXJ0LWJ1aWx0LWluMB4XDTI0MDUyOTIwMDM0MFoXDTQ0
+MDUyOTIwMDM0MFowKDEOMAwGA1UEChMFYWRtaW4xFjAUBgNVBAMTDWNlcnQtYnVp
+bHQtaW4wggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQCoJKhJjdrxXCTj
+uxYHBj3CUvZZ8gWJjHwRBbH+VCnRgQqm1ziQIZyIEuUbZ2F3iTmyHqppRba1FKY2
+6fZPyS3XZXrNF2u6mnJwJyKxWtb6E4rNRCS5Sw+ikPtFSD4kACMDSEJtMzSdZRP3
+PtteIpW7fF8QP0o+8sKHQ+LPh8g55VV9FTfAI4lXF0n9omMgmQ72jGNzh7vYg4wJ
+ETcPweVHPRxSU5CvXPQOwCc3DDnR66t4vn2iMhSdTGgNgXRLt+0MCMuIKQWkpIvg
+7gMgIofpH+/OwK6Fhkzx4hloXNd5dvGDe18WpT6mxrCTlh1GxVMYAVcMlvvvQ/bi
+GiMo4NH+dWX46qBiq96yv7sTR7rZ2QDOAmL6GJbBEqVbFnwuSD9JH4ateUqvVHZT
+XmM/oezt6efqWq+SLn4o9OdUd225+5U3FchjsvwANOgRtxtK4GhvplYJnHLhOsY2
+2622pDZa1m/I143sYASGadTGpQQ74R3iAVI2dilSv3sQjLGFGL5plJyVYGqgAGQD
+lraNboi3GWq9JlsjCHDmnxl1m5PJdscH1MEYJvD4xoqJFyUyJuVZXY/Vc9o2We84
+ltGKTxdlHa6itij1xzIyahPXUgvgBwVNVtm3JGZYandFEKVZOnAlP/vS7n/sMzLK
+zLTSEg8AWLzvoPsjRoqW+42NRrGYmwIDAQABoxAwDjAMBgNVHRMBAf8EAjAAMA0G
+CSqGSIb3DQEBCwUAA4ICAQAg6vmHpTKRedDVSxBUGhUPjHBDLHhLMOFwxn9IlvZ7
+/ONWgwUn4F5UUPvUm+GroF3ot69ZQ3j06DOMy2h8Dp6oBfUU9qixbE/fg1gSZccH
+Dgb27UVTszX93jfEuvRggNVTTTyOc9gt2KfPWSoa+vI3wGXu/9jPRETIQDdUmV5m
+G+6HZQAEGJqoeSix2OZUakZfLOZPkxyJOxgTifOvsND9+rZFRaiDn8jh7aP/wyle
+JSp2gVDGKZ2+iP954y8sqb0jyZLvBTPzywcH2yaSrWBLtREejETT54AL6FN5XsyQ
+K+cuIAwIWl/Ci5tTSoM1xuF7aDG04GKaoIDbPHxpYRgK2H+wjO8VMjdYtd4N/oUR
+iVF5fgk2vgPCgAnsrgOneojoWxO1LEKciFp76XA/DGyhRuhEBmJqOCqwrqOSovG2
+1bvguzkJegjVIVE4oXDmF1aVRkNnQ4iyt0mQnQAphLojbSyrtajIneilHC/PF+5f
+yTgAc+HRSlqaBDl1wFfej2EZu5w3gnz8I1AvoCRc6Gxn/obWTdyqkx3lF9/mULL0
+Mzr+5OYXmHUO9SUvVsTy/8JOaQcxr7DSIqtgQxfF5NlCsMwjyWUbCVQBvL0ADyzx
+a6kkNI/myPxzkcH5vVLLknknOrunnonXt5AkMbGHyEf4ZqLDDMmqO4CL5S+Ik8Lf
+cg==
 -----END CERTIFICATE-----'''
 
-class Config:
-    CASDOOR_SDK = CasdoorSDK(
-        endpoint=settings.CASDOOR_HOSTNAME,
-        client_id='8aa124a89a76caf4e84b',
-        client_secret='fa026ac3608de86085c8fe9cbac8f784ba764fd1',
-        certificate=certificate,
-        org_name='built-in',
-        application_name='Skillometer',
-    )
-    REDIRECT_URI = 'http://localhost:5000/api/signin'
-    SECRET_TYPE = 'filesystem'
-    SECRET_KEY = os.urandom(24)
+
+CASDOOR_SDK = CasdoorSDK(
+    endpoint=settings.CASDOOR_HOSTNAME,
+    client_id='8aa124a89a76caf4e84b',
+    client_secret='fa026ac3608de86085c8fe9cbac8f784ba764fd1',
+    certificate=certificate,
+    org_name='built-in',
+    application_name='Skillometer',
+)
+REDIRECT_URI = 'http://localhost:8000/login'
+SECRET_TYPE = 'filesystem'
+SECRET_KEY = os.urandom(24)
+
+
+async def get_user_from_session(request: Request):
+    user = request.session.get("casdoorUser")
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+    return user
+
+
+async def get_account(request: Request, user=Depends(get_user_from_session)):
+    sdk = request.app.state.sdk
+    print(user)
+    return {"status": "ok", "data": sdk.get_user(user["name"])}

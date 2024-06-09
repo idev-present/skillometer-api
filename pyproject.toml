@@ -19,6 +19,7 @@ greenlet = "^3.0.3"
 structlog = "^24.2.0"
 shortuuid = "^1.0.13"
 casdoor = "^1.24.0"
+itsdangerous = "^2.2.0"
 
 [tool.poetry.group.debug]
 optional = true
