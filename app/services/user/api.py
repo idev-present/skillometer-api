@@ -1,10 +1,12 @@
 from typing import Optional
 
+import httpx
 import requests
 from fastapi import APIRouter, Depends, HTTPException
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse, HTMLResponse, RedirectResponse
+from structlog import get_logger
 
 from app.core.config import settings
 from app.core.db import db_service
@@ -12,6 +14,8 @@ from app.services.user.schemas import UserInDB, UserSession
 from app.utils.iam_utils import CASDOOR_SDK as sdk, get_user_from_session
 
 router = APIRouter()
+
+logger = get_logger(__name__)
 
 
 @router.get("/auth")
@@ -48,4 +52,26 @@ async def logout(request: Request):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
 
 
-
+@router.get("/oauth/habr/", include_in_schema=False)
+async def oauth_authorize(request: Request):
+    if "error" in request.query_params:
+        logger.error("### error habr oauth")
+        logger.error(request.query_params["error"])
+        return {"status": "error"}
+    if "authorization_code" in request.query_params:
+        client_id = "25eb730f2b7a659ee7e70a1f2da5b6aa694c3f8d263d16314cadde2880492d61"
+        client_secret = "4713b17842d4676e91a9352126800c87489731a64077cfc8c4775c5e8fbed793"
+        authorization_code = request.query_params["authorization_code"]
+        redirect_uri = "https://skillometer.idev-present.com/vacancies"
+        res = httpx.post(f"https://career.habr.com/integrations/oauth/token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&grant_type=authorization_code&code={authorization_code}")
+        if res.status_code == 200:
+            logger.info("### habr oauth ok")
+            logger.info(res.json())
+            return res.json()
+        else:
+            logger.error("### habr oauth error")
+            logger.error(res.status_code)
+            logger.error(res.json())
+            return {"status": "error"}
+    logger.error("### bad request")
+    return request.query_params
