@@ -19,6 +19,12 @@
 
 - [ ] step-by-step install guide
 
+## Build
+```shell
+export TAG=0.3.1
+docker compose -f docker-compose.builder.yml build && docker compose -f docker-compose.builder.yml push
+```
+
 ## Configuration
 
 ### Env variables

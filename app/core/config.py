@@ -1,8 +1,5 @@
 import secrets
-import tomllib
-
-import toml
-from pydantic import computed_field, PostgresDsn, AnyHttpUrl, field_validator, AnyUrl, BeforeValidator
+from pydantic import computed_field, PostgresDsn, AnyHttpUrl, AnyUrl, BeforeValidator
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Literal, Optional, Annotated
@@ -17,9 +14,9 @@ class Settings(BaseSettings):
         extra="ignore"
     )
     # API config
-    APP: Optional[str] = None
+    APP: Optional[str] = "Skillometer"
     VERSION: Optional[str] = None
-    DESCRIPTION: Optional[str] = None
+    DESCRIPTION: Optional[str] = "Service for recruiters and applicants"
     DOMAIN: str = "localhost"
     API_PREFIX: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
@@ -56,30 +53,6 @@ class Settings(BaseSettings):
             port=self.DATABASE_PORT,
             path=self.DATABASE_DBNAME
         )
-
-    @field_validator("APP", mode="before")
-    @classmethod
-    def assert_app_name(cls, v):
-        if isinstance(v, str):
-            return v
-        config = toml.load('pyproject.toml')
-        return config['tool']['poetry']['name']
-
-    @field_validator("VERSION", mode="before")
-    @classmethod
-    def assert_version(cls, v):
-        if isinstance(v, str):
-            return v
-        config = toml.load('pyproject.toml')
-        return config['tool']['poetry']['version']
-
-    @field_validator("DESCRIPTION", mode="before")
-    @classmethod
-    def assert_description(cls, v):
-        if isinstance(v, str):
-            return v
-        config = toml.load('pyproject.toml')
-        return config['tool']['poetry']['description']
 
 
 settings = Settings()  # type: ignore

@@ -2,8 +2,10 @@ services:
   api:
     build:
       context: .
+      args:
+        DOCKER_TAG: ${TAG}
     container_name: skillometer-api
-    image: ilyamachetto/skillometer-api:0.3.0
+    image: ilyamachetto/skillometer-api:${TAG}
     platform: linux/amd64
     env_file:
       - .env.development
