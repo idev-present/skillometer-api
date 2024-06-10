@@ -23,19 +23,27 @@ async def auth(redirect: Optional[str] = None):
     return RedirectResponse(target_url)
 
 
-@router.post("/auth/callback")
+@router.get("/auth/callback")
 async def auth_callback(request: Request):
     code = request.query_params.get('code')
     redirect = request.query_params.get('redirect')
     token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
-    session = iam_service.parse_jwt(access_token)
     if redirect == 'swagger':
         base_url = HttpUrl(url=f"{settings.IAM_REDIRECT_URI}")
         target_url = f"{base_url.scheme}://{base_url.host}{f':{base_url.port}' if base_url.port else ''}{settings.API_PREFIX}/docs"
-        request.session[iam_service.session_name] = session
         response = RedirectResponse(url=target_url)
+        response.set_cookie('skillometer_access_token', access_token)
         return response
+    return token
+
+
+@router.post("/auth/callback")
+async def auth_callback(request: Request):
+    code = request.query_params.get('code')
+    token = iam_service.get_token_by_code(code)
+    access_token = token.get("access_token")
+    session = iam_service.parse_jwt(access_token)
     request.session[iam_service.session_name] = session
     return token
 
