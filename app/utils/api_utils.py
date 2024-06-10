@@ -1,5 +1,6 @@
+from collections import namedtuple
 from enum import Enum
-from typing import TypeVar, Type
+from typing import TypeVar, Type, Any
 
 from fastapi.routing import APIRoute
 from pydantic import BaseModel
@@ -36,3 +37,11 @@ def create_enum_model(enum: Type[T]) -> Type[BaseModel]:
             return self.__dict__['key'].value
 
     return EnumModel
+
+
+def parse_cors(v: Any) -> list[str] | str:
+    if isinstance(v, str) and not v.startswith("["):
+        return [i.strip() for i in v.split(",")]
+    elif isinstance(v, list | str):
+        return v
+    raise ValueError(v)

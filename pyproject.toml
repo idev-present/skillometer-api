@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "skillometer-api"
-version = "0.1.0"
+name = "Skillometer"
+version = "0.2.2"
 description = "Service for recruiters and applicants"
 authors = ["Ilya Zhuravlev <ichirozcom@gmail.com>"]
 readme = "README.md"
@@ -20,6 +20,7 @@ structlog = "^24.2.0"
 shortuuid = "^1.0.13"
 casdoor = "^1.24.0"
 itsdangerous = "^2.2.0"
+toml = "^0.10.2"
 
 [tool.poetry.group.debug]
 optional = true

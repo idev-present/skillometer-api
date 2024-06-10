@@ -1,30 +1,48 @@
-from typing import List
+from typing import List, Optional
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import HttpUrl
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
 from structlog import get_logger
 
 from app.core.config import settings
+from app.core.iam.main import iam_service
 from app.services.user.schemas import UserInDB
-from app.utils.iam_utils import CASDOOR_SDK as sdk, get_user_from_session
 
 router = APIRouter()
 
 logger = get_logger(__name__)
 
 
-@router.get("/auth")
-async def auth(state: str = 'docs'):
-    return RedirectResponse(
-        url=f'{settings.CASDOOR_HOSTNAME}/login/oauth/authorize?client_id={sdk.client_id}&response_type=code&redirect_uri={settings.API_BASE_URL}/user/login/&scope=read&state={state}')
+@router.get("/auth/login")
+async def auth(redirect: Optional[str] = None):
+    target_url = iam_service.get_login_url(redirect)
+    return RedirectResponse(target_url)
+
+
+@router.post("/auth/callback")
+async def auth_callback(request: Request):
+    code = request.query_params.get('code')
+    redirect = request.query_params.get('redirect')
+    token = iam_service.get_token_by_code(code)
+    access_token = token.get("access_token")
+    session = iam_service.parse_jwt(access_token)
+    if redirect == 'swagger':
+        base_url = HttpUrl(url=f"{settings.IAM_REDIRECT_URI}")
+        target_url = f"{base_url.scheme}://{base_url.host}{f':{base_url.port}' if base_url.port else ''}{settings.API_PREFIX}/docs"
+        request.session[iam_service.session_name] = session
+        response = RedirectResponse(url=target_url)
+        return response
+    request.session[iam_service.session_name] = session
+    return token
 
 
 @router.get("/me")
-async def me(user=Depends(get_user_from_session)) -> UserInDB:
-    user_data = sdk.get_user(user['name'])
+async def me(user=Depends(iam_service.get_user_from_session)) -> UserInDB:
+    user_data = iam_service.get_profile(user_id=user['name'])
     if user.get('roles') and isinstance(user.get('roles'), list):
         if isinstance(user['roles'][0], dict):
             user_role = user['roles'][0].get('name')
@@ -33,32 +51,18 @@ async def me(user=Depends(get_user_from_session)) -> UserInDB:
     return result
 
 
-@router.get("/login", include_in_schema=False)
-async def login(request: Request):
-    code = request.query_params.get('code')
-    state = request.query_params.get('state')
-    token = sdk.get_oauth_token(code)
-    access_token = token.get("access_token")
-    user = sdk.parse_jwt_token(access_token)
-    if state == 'docs':
-        response = RedirectResponse(url=f'{settings.API_BASE_URL}/docs')
-        request.session["casdoorUser"] = user
-        return response
-    return token
-
-
 @router.post("/logout")
 async def logout(request: Request):
     try:
-        del request.session["casdoorUser"]
+        del request.session[iam_service.session_name]
         return {"status": "ok"}
     except KeyError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
 
 
 @router.get("/")
-async def list_users(_: dict = Depends(get_user_from_session)) -> List[UserInDB]:
-    return sdk.get_users()
+async def list_users(_: dict = Depends(iam_service.get_user_from_session)) -> List[UserInDB]:
+    return iam_service.sdk.get_users()
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
@@ -72,7 +76,8 @@ async def oauth_authorize(request: Request):
         client_secret = "4713b17842d4676e91a9352126800c87489731a64077cfc8c4775c5e8fbed793"
         authorization_code = request.query_params["authorization_code"]
         redirect_uri = "https://skillometer.idev-present.com/vacancies"
-        res = httpx.post(f"https://career.habr.com/integrations/oauth/token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&grant_type=authorization_code&code={authorization_code}")
+        res = httpx.post(
+            f"https://career.habr.com/integrations/oauth/token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&grant_type=authorization_code&code={authorization_code}")
         if res.status_code == 200:
             logger.info("### habr oauth ok")
             logger.info(res.json())

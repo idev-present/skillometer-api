@@ -15,3 +15,11 @@ api.include_router(company_router, prefix="/company", tags=["company"])
 api.include_router(applicant_router, prefix="/applicant", tags=["applicant"])
 api.include_router(reply_router, prefix="/reply", tags=["reply"])
 api.include_router(user_router, prefix="/user", tags=["user"])
+
+
+@api.get("/config")
+async def show_settings():
+    try:
+        return settings
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))

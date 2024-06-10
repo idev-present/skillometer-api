@@ -1,12 +1,4 @@
-import os
-
-from casdoor import AsyncCasdoorSDK, CasdoorSDK
-from fastapi import HTTPException, Depends
-from starlette import status
-from starlette.requests import Request
-
-from app.core.config import settings
-
+# certificate:get in your Casdoor server -> application[cert-name] -> certs[cert-name]
 certificate = '''-----BEGIN CERTIFICATE-----
 MIIE3TCCAsWgAwIBAgIDAeJAMA0GCSqGSIb3DQEBCwUAMCgxDjAMBgNVBAoTBWFk
 bWluMRYwFAYDVQQDEw1jZXJ0LWJ1aWx0LWluMB4XDTI0MDUyOTIwMDM0MFoXDTQ0
@@ -36,29 +28,3 @@ Mzr+5OYXmHUO9SUvVsTy/8JOaQcxr7DSIqtgQxfF5NlCsMwjyWUbCVQBvL0ADyzx
 a6kkNI/myPxzkcH5vVLLknknOrunnonXt5AkMbGHyEf4ZqLDDMmqO4CL5S+Ik8Lf
 cg==
 -----END CERTIFICATE-----'''
-
-
-CASDOOR_SDK = CasdoorSDK(
-    endpoint=settings.CASDOOR_HOSTNAME,
-    client_id='8aa124a89a76caf4e84b',
-    client_secret='fa026ac3608de86085c8fe9cbac8f784ba764fd1',
-    certificate=certificate,
-    org_name='skillometer',
-    application_name='skillometer',
-)
-REDIRECT_URI = settings.API_BASE_URL
-SECRET_TYPE = 'filesystem'
-SECRET_KEY = os.urandom(24)
-
-
-async def get_user_from_session(request: Request):
-    user = request.session.get("casdoorUser")
-    if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
-    return user
-
-
-async def get_account(request: Request, user=Depends(get_user_from_session)):
-    sdk = request.app.state.sdk
-    print(user)
-    return {"status": "ok", "data": sdk.get_user(user["name"])}
