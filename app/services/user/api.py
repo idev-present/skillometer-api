@@ -11,8 +11,10 @@ from app.core.config import settings
 from app.core.db import db_service
 from app.core.iam.main import iam_service
 from app.services.user.crud import get_or_create_from_token
+from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
-from app.core.iam.schemas import TokenData, TokenResponse, IAMUser
+from app.core.iam.schemas import TokenData, TokenResponse
+from app.services.user.schemas import User, UserUpdateForm
 
 router = APIRouter()
 
@@ -44,16 +46,17 @@ async def auth_callback(code: str):
     return token
 
 
-@router.get("/me", response_model=IAMUser)
-async def me(token_data: TokenData = Depends(get_current_user)):
-    iam_user = iam_service.get_profile(token_data.id)
-    return iam_user
-
-
 @router.get("/profile")
-async def profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+async def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
     user = await get_or_create_from_token(token_data=token_data, db=db_session)
     return user
+
+
+@router.put("/profile")
+async def update_user_profile(form: UserUpdateForm, token_data: TokenData = Depends(get_current_user),
+                  db_session=Depends(db_service.get_db)) -> User:
+    res = await UserDBModel.update(form=form, item_id=token_data.id, db=db_session)
+    return res
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
