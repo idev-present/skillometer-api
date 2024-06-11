@@ -1,6 +1,9 @@
+from datetime import datetime
 from enum import Enum
-from typing import TypeVar, Type
+import arrow
+from typing import TypeVar, Type, Any
 
+from arrow import Arrow
 from fastapi.routing import APIRoute
 from pydantic import BaseModel
 
@@ -36,3 +39,18 @@ def create_enum_model(enum: Type[T]) -> Type[BaseModel]:
             return self.__dict__['key'].value
 
     return EnumModel
+
+
+def parse_cors(v: Any) -> list[str] | str:
+    if isinstance(v, str) and not v.startswith("["):
+        return [i.strip() for i in v.split(",")]
+    elif isinstance(v, list | str):
+        return v
+    raise ValueError(v)
+
+
+def str2datetime(s: str | None) -> datetime | None:
+    if not s:
+        return None
+    dt = arrow.get(s)
+    return dt.replace(tzinfo=None).datetime

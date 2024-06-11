@@ -1,64 +1,62 @@
-from typing import List
+from typing import Optional
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException
-from starlette import status
+from fastapi import APIRouter, Depends
+from pydantic import HttpUrl
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
 from structlog import get_logger
 
 from app.core.config import settings
-from app.services.user.schemas import UserInDB
-from app.utils.iam_utils import CASDOOR_SDK as sdk, get_user_from_session
+from app.core.db import db_service
+from app.core.iam.main import iam_service
+from app.services.user.crud import get_or_create_from_token
+from app.services.user.db_models import UserDBModel
+from app.services.user.middlewares import get_current_user
+from app.core.iam.schemas import TokenData, TokenResponse
+from app.services.user.schemas import User, UserUpdateForm
 
 router = APIRouter()
 
 logger = get_logger(__name__)
 
 
-@router.get("/auth")
-async def auth(state: str = 'docs'):
-    return RedirectResponse(
-        url=f'{settings.CASDOOR_HOSTNAME}/login/oauth/authorize?client_id={sdk.client_id}&response_type=code&redirect_uri={settings.API_BASE_URL}/user/login/&scope=read&state={state}')
+@router.get("/auth/login", include_in_schema=False)
+async def auth(redirect: Optional[str] = None):
+    target_url = iam_service.get_login_url(redirect)
+    return RedirectResponse(target_url)
 
 
-@router.get("/me")
-async def me(user=Depends(get_user_from_session)) -> UserInDB:
-    user_data = sdk.get_user(user['name'])
-    if user.get('roles') and isinstance(user.get('roles'), list):
-        if isinstance(user['roles'][0], dict):
-            user_role = user['roles'][0].get('name')
-    result = UserInDB.model_validate(user_data.__dict__)
-    result.role = user_role if user_role else None
-    return result
-
-
-@router.get("/login", include_in_schema=False)
-async def login(request: Request):
-    code = request.query_params.get('code')
-    state = request.query_params.get('state')
-    token = sdk.get_oauth_token(code)
+@router.get("/auth/callback", response_model=TokenResponse, include_in_schema=False)
+async def auth_callback(code: str, redirect: Optional[str] = None):
+    token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
-    user = sdk.parse_jwt_token(access_token)
-    if state == 'docs':
-        response = RedirectResponse(url=f'{settings.API_BASE_URL}/docs')
-        request.session["casdoorUser"] = user
+    if redirect == 'swagger':
+        base_url = HttpUrl(url=f"{settings.IAM_REDIRECT_URI}")
+        target_url = f"{base_url.scheme}://{base_url.host}{f':{base_url.port}' if base_url.port else ''}{settings.API_PREFIX}/docs"
+        response = RedirectResponse(url=target_url)
+        response.set_cookie('skillometer_access_token', access_token)
         return response
     return token
 
 
-@router.post("/logout")
-async def logout(request: Request):
-    try:
-        del request.session["casdoorUser"]
-        return {"status": "ok"}
-    except KeyError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
+@router.post("/auth/callback", response_model=TokenResponse)
+async def auth_callback(code: str):
+    token = iam_service.get_token_by_code(code)
+    return token
 
 
-@router.get("/")
-async def list_users(_: dict = Depends(get_user_from_session)) -> List[UserInDB]:
-    return sdk.get_users()
+@router.get("/profile")
+async def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    user = await get_or_create_from_token(token_data=token_data, db=db_session)
+    return user
+
+
+@router.put("/profile")
+async def update_user_profile(form: UserUpdateForm, token_data: TokenData = Depends(get_current_user),
+                  db_session=Depends(db_service.get_db)) -> User:
+    res = await UserDBModel.update(form=form, item_id=token_data.id, db=db_session)
+    return res
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
@@ -72,7 +70,8 @@ async def oauth_authorize(request: Request):
         client_secret = "4713b17842d4676e91a9352126800c87489731a64077cfc8c4775c5e8fbed793"
         authorization_code = request.query_params["authorization_code"]
         redirect_uri = "https://skillometer.idev-present.com/vacancies"
-        res = httpx.post(f"https://career.habr.com/integrations/oauth/token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&grant_type=authorization_code&code={authorization_code}")
+        res = httpx.post(
+            f"https://career.habr.com/integrations/oauth/token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&grant_type=authorization_code&code={authorization_code}")
         if res.status_code == 200:
             logger.info("### habr oauth ok")
             logger.info(res.json())
