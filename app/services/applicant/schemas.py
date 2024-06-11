@@ -49,3 +49,26 @@ class Applicant(ApplicantListItem):
 
 class ApplicantUpdateForm(ApplicantForm):
     salary_from: Optional[int] = Field(None)
+
+
+# * Job XP
+class ApplicantXPForm(BaseModel):
+    company_name: str = Field(..., title="Name of the company")
+    company_id: Optional[str] = Field(None, title="The unique identifier of the company")
+    position: str = Field(..., title="Position held at the company")
+    position_id: Optional[str] = Field(None, title="The unique identifier of the position")
+    start_date: datetime = Field(..., title="Start date of the position")
+    end_date: Optional[datetime] = Field(None, title="End date of the position")
+    description: Optional[str] = Field(None, title="Description of position and responsibilities")
+    skill_set: Optional[str] = Field(None, title="Skills applied in the position")
+
+
+class ApplicantXP(ApplicantXPForm):
+    id: str = Field(..., title="The unique identifier of the experience")
+    applicant_id: str = Field(..., title="The unique identifier of the applicant", max_length=50)
+
+
+class ApplicantXPUpdateForm(ApplicantXPForm):
+    company_name: Optional[str] = Field(None, title="Name of the company")
+    position: Optional[str] = Field(None, title="Position held at the company")
+    start_date: Optional[datetime] = Field(None, title="Start date of the position")

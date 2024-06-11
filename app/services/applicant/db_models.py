@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey
@@ -5,7 +6,8 @@ from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
-from app.services.applicant.schemas import ApplicantForm
+from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm
+from app.utils.database_utils import generate_uid
 
 
 class ApplicantDBModel(BaseDBModel):
@@ -92,3 +94,53 @@ class ApplicantXPDBModel(BaseDBModel):
     description = Column(String, nullable=True)
     # Примененные навыки
     skill_set = Column(String, nullable=True)
+
+    @classmethod
+    async def create(cls, form: ApplicantXPForm, parent_id: str, db) -> "ApplicantXPDBModel":
+        xp_item = cls(**form.dict())
+        xp_item.id = generate_uid('xp')
+        xp_item.applicant_id = parent_id
+        if xp_item.start_date:
+            xp_item.start_date = datetime.fromtimestamp(xp_item.start_date.timestamp())
+        if xp_item.end_date:
+            xp_item.end_date = datetime.fromtimestamp(xp_item.end_date.timestamp())
+        db.add(xp_item)
+        await db.commit()
+        await db.refresh(xp_item)
+        return xp_item
+
+    @classmethod
+    async def get(cls, db, item_id: str) -> "ApplicantXPDBModel":
+        query = sql.select(ApplicantXPDBModel).where(cls.id == item_id)
+        result = await db.execute(query)
+        return result.scalars().first()
+
+    @classmethod
+    async def update(cls, db, item_id: str, form: ApplicantXPUpdateForm) -> "ApplicantXPDBModel":
+        xp_item = await cls.get(db, item_id)
+        for field, value in form.dict(exclude_unset=True).items():
+            setattr(xp_item, field, value)
+
+        if xp_item.start_date:
+            xp_item.start_date = datetime.fromtimestamp(xp_item.start_date.timestamp())
+        if xp_item.end_date:
+            xp_item.end_date = datetime.fromtimestamp(xp_item.end_date.timestamp())
+        db.add(xp_item)
+        await db.commit()
+        await db.refresh(xp_item)
+        return xp_item
+
+    @classmethod
+    async def delete(cls, db, item_id: str) -> bool:
+        applicant = await cls.get(db, item_id)
+        await db.delete(applicant)
+        await db.commit()
+        return True
+
+    @classmethod
+    async def get_list(cls, parent_id: str, db) -> List["ApplicantXPDBModel"]:
+        query = sql.select(cls).where(cls.applicant_id == parent_id)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res

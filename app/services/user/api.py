@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import httpx
 from fastapi import APIRouter, Depends
@@ -10,8 +10,8 @@ from structlog import get_logger
 from app.core.config import settings
 from app.core.db import db_service
 from app.core.iam.main import iam_service
-from app.services.applicant.db_models import ApplicantDBModel
-from app.services.applicant.schemas import ApplicantUpdateForm
+from app.services.applicant.db_models import ApplicantDBModel, ApplicantXPDBModel
+from app.services.applicant.schemas import ApplicantUpdateForm, ApplicantXP, ApplicantXPForm, ApplicantXPUpdateForm
 from app.services.user.crud import get_or_create_user_from_token, get_or_create_applicant_from_token
 from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
@@ -68,8 +68,36 @@ async def get_applicant_info(token_data: TokenData = Depends(get_current_user), 
 
 
 @router.put("/applicant_info")
-async def get_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+async def get_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user),
+                             db_session=Depends(db_service.get_db)):
     res = await ApplicantDBModel.update(item_id=token_data.name, form=form, db=db_session)
+    return res
+
+
+@router.get("/work_xp", response_model=List[ApplicantXP])
+async def get_work_xp_list(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.get_list(parent_id=token_data.name, db=db_session)
+    return res
+
+
+@router.post("/work_xp", response_model=ApplicantXPForm)
+async def create_work_xp(form: ApplicantXPForm, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.create(form=form, parent_id=token_data.name, db=db_session)
+    return res
+
+
+@router.post("/work_xp/{xp_id}", response_model=ApplicantXPForm)
+async def update_work_xp(xp_id: str, form: ApplicantXPUpdateForm, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.update(item_id=xp_id, form=form, db=db_session)
+    return res
+
+
+@router.delete("/work_xp/{xp_id}", response_model=ApplicantXPForm)
+async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.delete(item_id=xp_id, db=db_session)
     return res
 
 
