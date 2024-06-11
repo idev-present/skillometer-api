@@ -7,10 +7,8 @@ from app.services.dict.schemas import Currency
 
 
 class ApplicantForm(BaseModel):
-    title: str = Field(...)
     salary_from: int = Field(..., gt=0)
     currency: Optional[str] = Field(CURRENCY.RUR.name)
-    age: int = Field(..., gt=0)
     is_relocation: Optional[bool] = Field(False, description="Готовность к переезду")
     is_remote: Optional[bool] = Field(False, description="Готовность к удаленной работе")
     # * Dict
@@ -28,9 +26,12 @@ class ApplicantListItem(ApplicantForm):
     user_id: str
     # * Config
     currency: Currency = Field(...)
-    experience: Optional[str] = Field(None, description="Суммарный опыт работы, калькулируется из списка")
     last_visited: Optional[datetime] = Field(None, description="Дата/время последнего посещения")
     registered_at: Optional[datetime] = Field(None, description="Дата/время регистрации")
+    # * Computed fields
+    experience: Optional[str] = Field(None, description="Суммарный опыт работы, калькулируется из списка")
+    age: int = Field(..., gt=0)
+    title: str = Field(...)
 
     @field_validator("currency", mode="before")
     @classmethod
@@ -47,6 +48,4 @@ class Applicant(ApplicantListItem):
 
 
 class ApplicantUpdateForm(ApplicantForm):
-    title: Optional[str] = Field(None)
     salary_from: Optional[int] = Field(None)
-    age: Optional[int] = Field(None)

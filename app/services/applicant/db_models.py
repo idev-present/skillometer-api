@@ -1,27 +1,21 @@
 from typing import List
 
-from sqlalchemy import Column, String, DateTime, Integer, Boolean
+from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey
+from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.applicant.schemas import ApplicantForm
-from app.utils.database_utils import generate_uid
 
 
 class ApplicantDBModel(BaseDBModel):
     __tablename__ = 'applicants'
 
     id = Column(String, primary_key=True)
-    user_id = Column(String(50), nullable=False)
-    title = Column(String, nullable=False)
     salary_from = Column(Integer, nullable=True)
     currency = Column(String(50), nullable=True)
-    age = Column(Integer, nullable=True)
-    experience = Column(String)
     is_relocation = Column(Boolean, default=False)
     is_remote = Column(Boolean, default=False)
-    last_visited = Column(DateTime, nullable=True)
-    registered_at = Column(DateTime, nullable=True)
     # * Dict
     # статус поиска
     search_status_id = Column(String(50), nullable=True)
@@ -33,16 +27,20 @@ class ApplicantDBModel(BaseDBModel):
     city_id = Column(String(50), nullable=True)
     # Примененные навыки
     skill_set = Column(String, nullable=True)
+    # * Computed fields
+    experience = Column(String)
+    age = Column(Integer, nullable=True)
+    title = Column(String, nullable=False)
 
-    @classmethod
-    async def create(cls, db, form: ApplicantForm) -> "ApplicantDBModel":
-        applicant = cls(**form.dict())
-        applicant.id = generate_uid('apl')
-        applicant.user_id = 'u_123'
-        db.add(applicant)
-        await db.commit()
-        await db.refresh(applicant)
-        return applicant
+    # * Timestamps
+    registered_at = Column(DateTime, nullable=True)
+    last_visited = Column(DateTime, nullable=True)
+    # * Relationships
+    user_id = mapped_column(ForeignKey('users.id'))
+    user = relationship(
+        "UserDBModel",
+        back_populates="applicant"
+    )
 
     @classmethod
     async def get(cls, db, item_id: str) -> "ApplicantDBModel":

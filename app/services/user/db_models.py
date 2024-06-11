@@ -2,17 +2,20 @@ from datetime import datetime
 from typing import List
 
 from sqlalchemy import Column, String, DateTime, UUID
+from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.user.schemas import User, UserUpdateForm
+from app.services.applicant.db_models import ApplicantDBModel # noqa
 
 
 class UserDBModel(BaseDBModel):
     __tablename__ = 'users'
 
-    id = Column(UUID, primary_key=True)
+    id = mapped_column(UUID, primary_key=True)
     login = Column(String, unique=True, nullable=False)
+    # * Config
     avatar = Column(String, nullable=True)
     gender = Column(String, nullable=True)
     first_name = Column(String, nullable=True)
@@ -21,13 +24,21 @@ class UserDBModel(BaseDBModel):
     birthday = Column(DateTime, nullable=True)
     bio = Column(String, nullable=True)
     role = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    country_code = Column(String, nullable=True, default="RU")
-    phone = Column(String, nullable=True)
     city = Column(String, nullable=True)
+    # * Primary contacts
+    country_code = Column(String, nullable=True, default="RU")
+    email = Column(String, nullable=False)
+    phone = Column(String, nullable=True)
+    # * Timestamps
     created_at = Column(DateTime, nullable=True)
     updated_at = Column(DateTime, nullable=True)
     deleted_at = Column(DateTime, nullable=True)
+    # * Relationships
+    applicant = relationship(
+        "ApplicantDBModel",
+        back_populates="user",
+        uselist=False
+    )
 
     @classmethod
     async def create(cls, db, form: User) -> "UserDBModel":
