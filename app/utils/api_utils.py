@@ -1,6 +1,9 @@
 from datetime import datetime
 from enum import Enum
+import arrow
 from typing import TypeVar, Type, Any
+
+from arrow import Arrow
 from fastapi.routing import APIRoute
 from pydantic import BaseModel
 
@@ -49,4 +52,5 @@ def parse_cors(v: Any) -> list[str] | str:
 def str2datetime(s: str | None) -> datetime | None:
     if not s:
         return None
-    return datetime.fromisoformat(s)
+    dt = arrow.get(s)
+    return dt.replace(tzinfo=None).datetime

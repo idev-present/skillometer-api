@@ -6,7 +6,6 @@ from structlog import get_logger
 from app.api.main import api
 from app.core.config import settings
 from app.core.db import db_service
-from app.core.iam.main import IAM
 from app.core.logger.main import configure_logging
 
 configure_logging()
@@ -46,8 +45,6 @@ def init_app():
             allow_methods=["*"],
             allow_headers=["*"],
         )
-
-    IAM.add_to_swagger(app)
 
     app.add_middleware(
         SessionMiddleware,

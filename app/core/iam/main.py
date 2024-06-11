@@ -1,12 +1,18 @@
 import functools
 
+import httpx
 from casdoor import CasdoorSDK
-from fastapi import Request, HTTPException, FastAPI
+from fastapi import Request, HTTPException
 from requests import PreparedRequest
 from starlette import status
+from structlog import get_logger
 
 from app.core.config import settings
+from app.core.exceptions import ServerError
 from app.core.iam.secrets import certificate
+from app.core.iam.schemas import IAMUser
+
+logger = get_logger(__name__)
 
 
 class IAM:
@@ -43,31 +49,26 @@ class IAM:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
         return user
 
-    def get_profile(self, user_id: str):
-        return self.sdk.get_user(user_id=user_id)
+    async def get_profile(self, user_id: str):
+        logger.info("api request to iam_api", user_id=user_id)
+
+        async with httpx.AsyncClient() as client:
+            query = await client.get(url=f"{self.api_uri}/get-user", params={"userId": user_id})
+
+        logger.info("api response from iam_api", httpx_status=query.status_code)
+
+        if query.status_code != 200:
+            raise ServerError(query.text)
+
+        response_data = query.json()
+        user = IAMUser.model_validate(response_data['data'])
+        return user
 
     def get_token_by_code(self, code: str):
         return self.sdk.get_oauth_token(code=code)
 
     def parse_jwt(self, jwt: str):
         return self.sdk.parse_jwt_token(jwt)
-
-    @classmethod
-    def add_to_swagger(cls, app: FastAPI):
-        """Adds the client id and secret securely to the swagger ui.
-        Enabling Swagger ui users to perform actions they usually need the client credentials, without exposing them.
-
-        Args:
-            app (FastAPI): Optional FastAPI app to add the config to swagger
-
-        Returns:
-            None: Inplace method
-        """
-        app.swagger_ui_init_oauth = {
-            "usePkceWithAuthorizationCodeGrant": True,
-            "clientId": settings.IAM_CLIENT_ID,
-            "clientSecret": settings.IAM_CLIENT_SECRET,
-        }
 
     @functools.cached_property
     def token_uri(self) -> str:
@@ -76,6 +77,10 @@ class IAM:
     @functools.cached_property
     def authorize_uri(self) -> str:
         return self.iam_endpoint + "/login/oauth/authorize"
+
+    @functools.cached_property
+    def api_uri(self) -> str:
+        return self.iam_endpoint + "/api"
 
 
 iam_service = IAM()

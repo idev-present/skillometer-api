@@ -1,31 +1,31 @@
-from typing import List, Optional
+from typing import Optional
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, Security
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2AuthorizationCodeBearer
+from fastapi import APIRouter, Depends
 from pydantic import HttpUrl
-from starlette import status
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
 from structlog import get_logger
 
 from app.core.config import settings
+from app.core.db import db_service
 from app.core.iam.main import iam_service
+from app.services.user.crud import get_or_create_from_token
 from app.services.user.middlewares import get_current_user
-from app.services.user.schemas import UserInDB, CasdoorUser
+from app.core.iam.schemas import TokenData, TokenResponse, IAMUser
 
 router = APIRouter()
 
 logger = get_logger(__name__)
 
 
-@router.get("/auth/login")
+@router.get("/auth/login", include_in_schema=False)
 async def auth(redirect: Optional[str] = None):
     target_url = iam_service.get_login_url(redirect)
     return RedirectResponse(target_url)
 
 
-@router.get("/auth/callback", include_in_schema=False)
+@router.get("/auth/callback", response_model=TokenResponse, include_in_schema=False)
 async def auth_callback(code: str, redirect: Optional[str] = None):
     token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
@@ -38,33 +38,22 @@ async def auth_callback(code: str, redirect: Optional[str] = None):
     return token
 
 
-@router.post("/auth/callback")
-async def auth_callback(request: Request):
-    code = request.query_params.get('code')
+@router.post("/auth/callback", response_model=TokenResponse)
+async def auth_callback(code: str):
     token = iam_service.get_token_by_code(code)
-    access_token = token.get("access_token")
-    session = iam_service.parse_jwt(access_token)
-    request.session[iam_service.session_name] = session
     return token
 
 
-@router.get("/me")
-async def me(user: CasdoorUser = Depends(get_current_user)):
+@router.get("/me", response_model=IAMUser)
+async def me(token_data: TokenData = Depends(get_current_user)):
+    iam_user = iam_service.get_profile(token_data.id)
+    return iam_user
+
+
+@router.get("/profile")
+async def profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    user = await get_or_create_from_token(token_data=token_data, db=db_session)
     return user
-
-
-@router.post("/logout")
-async def logout(request: Request):
-    try:
-        del request.session[iam_service.session_name]
-        return {"status": "ok"}
-    except KeyError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
-
-
-@router.get("/")
-async def list_users(_: dict = Depends(iam_service.get_user_from_session)) -> List[UserInDB]:
-    return iam_service.sdk.get_users()
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
