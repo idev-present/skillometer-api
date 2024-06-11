@@ -1,7 +1,8 @@
 from typing import List, Optional
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Security
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2AuthorizationCodeBearer
 from pydantic import HttpUrl
 from starlette import status
 from starlette.requests import Request
@@ -10,7 +11,8 @@ from structlog import get_logger
 
 from app.core.config import settings
 from app.core.iam.main import iam_service
-from app.services.user.schemas import UserInDB
+from app.services.user.middlewares import get_current_user
+from app.services.user.schemas import UserInDB, CasdoorUser
 
 router = APIRouter()
 
@@ -23,10 +25,8 @@ async def auth(redirect: Optional[str] = None):
     return RedirectResponse(target_url)
 
 
-@router.get("/auth/callback")
-async def auth_callback(request: Request):
-    code = request.query_params.get('code')
-    redirect = request.query_params.get('redirect')
+@router.get("/auth/callback", include_in_schema=False)
+async def auth_callback(code: str, redirect: Optional[str] = None):
     token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
     if redirect == 'swagger':
@@ -49,14 +49,8 @@ async def auth_callback(request: Request):
 
 
 @router.get("/me")
-async def me(user=Depends(iam_service.get_user_from_session)) -> UserInDB:
-    user_data = iam_service.get_profile(user_id=user['name'])
-    if user.get('roles') and isinstance(user.get('roles'), list):
-        if isinstance(user['roles'][0], dict):
-            user_role = user['roles'][0].get('name')
-    result = UserInDB.model_validate(user_data.__dict__)
-    result.role = user_role if user_role else None
-    return result
+async def me(user: CasdoorUser = Depends(get_current_user)):
+    return user
 
 
 @router.post("/logout")

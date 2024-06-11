@@ -1,9 +1,9 @@
-from http import HTTPStatus
+from starlette import status
 
 
 class ValidationError(Exception):
     def __init__(self, errors=None, message="Bad Request"):
-        self.status_code = HTTPStatus.BAD_REQUEST.value  # 400
+        self.status_code = status.HTTP_400_BAD_REQUEST  # 400
         self.errors = errors
         self.message = message
         super().__init__(self.message)
@@ -11,7 +11,7 @@ class ValidationError(Exception):
 
 class UnauthorizedError(Exception):
     def __init__(self, errors=None, message="Unauthorized error"):
-        self.status_code = HTTPStatus.UNAUTHORIZED.value  # 401
+        self.status_code = status.HTTP_401_UNAUTHORIZED  # 401
         self.errors = errors
         self.message = message
         super().__init__(self.message)
@@ -19,7 +19,7 @@ class UnauthorizedError(Exception):
 
 class PermissionError(Exception):
     def __init__(self, errors=None, message="Permission error"):
-        self.status_code = HTTPStatus.FORBIDDEN.value  # 403
+        self.status_code = status.HTTP_403_FORBIDDEN  # 403
         self.errors = errors
         self.message = message
         super().__init__(self.message)
@@ -27,7 +27,7 @@ class PermissionError(Exception):
 
 class NotFoundError(Exception):
     def __init__(self, errors=None, message="NotFound error"):
-        self.status_code = HTTPStatus.NOT_FOUND.value  # 404
+        self.status_code = status.HTTP_404_NOT_FOUND  # 404
         self.errors = errors
         self.message = message
         super().__init__(self.message)
@@ -35,7 +35,7 @@ class NotFoundError(Exception):
 
 class ConflictError(Exception):
     def __init__(self, errors=None, message="Conflict error"):
-        self.status_code = HTTPStatus.CONFLICT.value  # 409
+        self.status_code = status.HTTP_409_CONFLICT  # 409
         self.errors = errors
         self.message = message
         super().__init__(self.message)
@@ -43,7 +43,7 @@ class ConflictError(Exception):
 
 class ServerError(Exception):
     def __init__(self, errors=None, message="Server error"):
-        self.status_code = HTTPStatus.INTERNAL_SERVER_ERROR.value  # 500
+        self.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR  # 500
         self.errors = errors
         self.message = message
         super().__init__(self.message)

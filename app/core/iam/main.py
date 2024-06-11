@@ -1,5 +1,7 @@
+import functools
+
 from casdoor import CasdoorSDK
-from fastapi import Request, HTTPException
+from fastapi import Request, HTTPException, FastAPI
 from requests import PreparedRequest
 from starlette import status
 
@@ -10,19 +12,20 @@ from app.core.iam.secrets import certificate
 class IAM:
     sdk: CasdoorSDK
     session_name: str = "casdoorUser"
+    iam_endpoint: str = settings.IAM_HOSTNAME
 
     def __init__(self):
-        iam_endpoint = str(settings.IAM_HOSTNAME)
-        if iam_endpoint[-1] == '/':
-            iam_endpoint = iam_endpoint[:-1]
+        self.iam_endpoint = str(settings.IAM_HOSTNAME)
+        if self.iam_endpoint[-1] == '/':
+            self.iam_endpoint = self.iam_endpoint[:-1]
         self.sdk = CasdoorSDK(
-            endpoint=iam_endpoint,
+            endpoint=self.iam_endpoint,
             client_id=settings.IAM_CLIENT_ID,
             client_secret=settings.IAM_CLIENT_SECRET,
             certificate=certificate,
             org_name=settings.IAM_ORGANIZATION_ID,
             application_name=settings.IAM_APPLICATION_ID,
-            front_endpoint=iam_endpoint
+            front_endpoint=self.iam_endpoint
         )
 
     def get_login_url(self, redirect):
@@ -48,6 +51,31 @@ class IAM:
 
     def parse_jwt(self, jwt: str):
         return self.sdk.parse_jwt_token(jwt)
+
+    @classmethod
+    def add_to_swagger(cls, app: FastAPI):
+        """Adds the client id and secret securely to the swagger ui.
+        Enabling Swagger ui users to perform actions they usually need the client credentials, without exposing them.
+
+        Args:
+            app (FastAPI): Optional FastAPI app to add the config to swagger
+
+        Returns:
+            None: Inplace method
+        """
+        app.swagger_ui_init_oauth = {
+            "usePkceWithAuthorizationCodeGrant": True,
+            "clientId": settings.IAM_CLIENT_ID,
+            "clientSecret": settings.IAM_CLIENT_SECRET,
+        }
+
+    @functools.cached_property
+    def token_uri(self) -> str:
+        return self.iam_endpoint + "/login/oauth/access_token"
+
+    @functools.cached_property
+    def authorize_uri(self) -> str:
+        return self.iam_endpoint + "/login/oauth/authorize"
 
 
 iam_service = IAM()

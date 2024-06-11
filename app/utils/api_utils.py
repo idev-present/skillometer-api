@@ -1,8 +1,6 @@
-from collections import namedtuple
+from datetime import datetime
 from enum import Enum
 from typing import TypeVar, Type, Any
-
-import toml
 from fastapi.routing import APIRoute
 from pydantic import BaseModel
 
@@ -48,11 +46,7 @@ def parse_cors(v: Any) -> list[str] | str:
     raise ValueError(v)
 
 
-def get_value_from_requirements(name: str):
-    def get_value(v: Any):
-        if isinstance(v, str):
-            return v
-        config = toml.load('pyproject.toml')
-        return config.get('tool', {}).get('poetry', {}).get(name, v)
-
-    return get_value
+def str2datetime(s: str | None) -> datetime | None:
+    if not s:
+        return None
+    return datetime.fromisoformat(s)
