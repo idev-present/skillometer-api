@@ -13,7 +13,7 @@ from app.core.db import db_service
 from app.core.iam.main import iam_service
 from app.services.applicant.db_models import ApplicantDBModel, ApplicantXPDBModel, ApplicantEducationDBModel
 from app.services.applicant.schemas import ApplicantUpdateForm, ApplicantXP, ApplicantXPForm, ApplicantXPUpdateForm, \
-    ApplicantEducationForm, ApplicantEducation, ApplicantEducationUpdateForm
+    ApplicantEducationForm, ApplicantEducation, ApplicantEducationUpdateForm, Applicant
 from app.services.user.crud import get_or_create_user_from_token, get_or_create_applicant_from_token
 from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
@@ -63,13 +63,13 @@ async def update_user_profile(form: UserUpdateForm, token_data: TokenData = Depe
     return res
 
 
-@router.get("/applicant_info")
+@router.get("/applicant_info", response_model=Applicant)
 async def get_applicant_info(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
     res = await get_or_create_applicant_from_token(token_data=token_data, db=db_session)
     return res
 
 
-@router.put("/applicant_info")
+@router.put("/applicant_info", response_model=Applicant)
 async def update_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user),
                                 db_session=Depends(db_service.get_db)):
     res = await ApplicantDBModel.update(item_id=token_data.name, form=form, db=db_session)

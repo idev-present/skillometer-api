@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from pydantic import BaseModel, Field, ConfigDict, field_validator
 from datetime import datetime
 from typing import Optional
@@ -23,9 +25,9 @@ class ApplicantListItem(ApplicantForm):
     model_config = ConfigDict(from_attributes=True)
 
     id: str
-    user_id: str
+    user_id: UUID
     # * Config
-    currency: Currency = Field(...)
+    currency: Optional[Currency] = Field(None, description="Код валюты")
     last_visited: Optional[datetime] = Field(None, description="Дата/время последнего посещения")
     registered_at: Optional[datetime] = Field(None, description="Дата/время регистрации")
     # * Computed fields

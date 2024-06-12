@@ -7,19 +7,19 @@ from starlette import status
 
 from app.core.db import db_service
 from app.services.applicant.db_models import ApplicantDBModel
-from app.services.applicant.schemas import Applicant, ApplicantListItem, ApplicantForm, ApplicantUpdateForm
+from app.services.applicant.schemas import ApplicantUpdateForm, Applicant, ApplicantListItem
 
 router = APIRouter()
 
 
 @router.get("/{applicant_id}", response_model=Applicant)
-async def get_applicant(applicant_id: str, db: Session = Depends(db_service.get_db)) -> Applicant:
+async def get_applicant(applicant_id: str, db: Session = Depends(db_service.get_db)):
     res = await ApplicantDBModel.get(db=db, item_id=applicant_id)
     return res
 
 
 @router.put("/{applicant_id}", response_model=Applicant)
-async def update_applicant(applicant_id: str, form: ApplicantUpdateForm, db: Session = Depends(db_service.get_db)) -> Applicant:
+async def update_applicant(applicant_id: str, form: ApplicantUpdateForm, db: Session = Depends(db_service.get_db)):
     res = await ApplicantDBModel.update(db=db, item_id=applicant_id, form=form)
     return res
 
@@ -31,6 +31,6 @@ async def delete_applicant(applicant_id: str, db: Session = Depends(db_service.g
 
 
 @router.get("/", response_model=List[ApplicantListItem])
-async def applicant_list(db_session=Depends(db_service.get_db)) -> List[ApplicantListItem]:
+async def applicant_list(db_session=Depends(db_service.get_db)):
     res = await ApplicantDBModel.get_list(db_session)
     return res

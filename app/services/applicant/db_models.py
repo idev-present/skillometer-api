@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import List
+from structlog import get_logger
 
 from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship, mapped_column
@@ -8,7 +9,9 @@ from sqlalchemy.sql import expression as sql
 from app.core.db import BaseDBModel
 from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm, \
     ApplicantEducationForm, ApplicantEducationUpdateForm
-from app.utils.database_utils import generate_uid
+from app.utils.database_utils import generate_uid, get_result_query
+
+logger = get_logger(__name__)
 
 
 class ApplicantDBModel(BaseDBModel):
@@ -47,7 +50,8 @@ class ApplicantDBModel(BaseDBModel):
 
     @classmethod
     async def get(cls, db, item_id: str) -> "ApplicantDBModel":
-        query = sql.select(ApplicantDBModel).where(cls.id == item_id)
+        query = sql.select(cls).where(cls.id == item_id)
+        logger.debug(query)
         result = await db.execute(query)
         return result.scalars().first()
 
