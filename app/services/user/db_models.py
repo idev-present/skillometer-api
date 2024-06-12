@@ -67,6 +67,8 @@ class UserDBModel(BaseDBModel):
         user = await cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(user, field, value)
+        if user.birthday:
+            user.birthday = datetime.fromtimestamp(user.birthday.timestamp())
         db.add(user)
         await db.commit()
         await db.refresh(user)

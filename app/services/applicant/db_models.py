@@ -111,7 +111,7 @@ class ApplicantXPDBModel(BaseDBModel):
 
     @classmethod
     async def get(cls, db, item_id: str) -> "ApplicantXPDBModel":
-        query = sql.select(ApplicantXPDBModel).where(cls.id == item_id)
+        query = sql.select(cls).where(cls.id == item_id)
         result = await db.execute(query)
         return result.scalars().first()
 
