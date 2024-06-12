@@ -12,12 +12,6 @@ from app.services.applicant.schemas import Applicant, ApplicantListItem, Applica
 router = APIRouter()
 
 
-@router.post("/", response_model=Applicant)
-async def create_applicant(form: ApplicantForm, db: Session = Depends(db_service.get_db)) -> Applicant:
-    res = await ApplicantDBModel.create(db=db, form=form)
-    return res
-
-
 @router.get("/{applicant_id}", response_model=Applicant)
 async def get_applicant(applicant_id: str, db: Session = Depends(db_service.get_db)) -> Applicant:
     res = await ApplicantDBModel.get(db=db, item_id=applicant_id)

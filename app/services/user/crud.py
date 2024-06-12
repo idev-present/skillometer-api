@@ -1,16 +1,19 @@
+import arrow
 from sqlalchemy.exc import DBAPIError
 from structlog import get_logger
-
-from app.core.exceptions import NotFoundError, ValidationError
+from fastapi import HTTPException
+from starlette import status
 from app.core.iam.main import iam_service
 from app.core.iam.schemas import TokenData, IAMUser
+from app.services.applicant.db_models import ApplicantDBModel
+from app.services.applicant.schemas import Applicant
 from app.services.user.db_models import UserDBModel
 from app.services.user.schemas import User
 
 logger = get_logger(__name__)
 
 
-async def get_or_create_from_token(token_data: TokenData, db):
+async def get_or_create_user_from_token(token_data: TokenData, db):
     user_id = token_data.id
     logger.info("try find user in db", user_id=user_id)
     user_db_model = await UserDBModel.get(item_id=user_id, db=db)
@@ -19,7 +22,7 @@ async def get_or_create_from_token(token_data: TokenData, db):
         # TODO(ilya.zhuravlev): check expternal_api errors
         iam_user: IAMUser = await iam_service.get_profile(token_data.id)
         if not iam_user:
-            raise NotFoundError(message="User from api not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
         user_form = User(
             id=iam_user.id,
@@ -46,3 +49,26 @@ async def get_or_create_from_token(token_data: TokenData, db):
             raise e
         # TODO(ilya.zhuravlev): check unuque constraint
     return user_db_model
+
+
+async def get_or_create_applicant_from_token(token_data: TokenData, db):
+    applicant = await ApplicantDBModel.get(item_id=token_data.name, db=db)
+    if not applicant:
+        user_db_model = await UserDBModel.get(item_id=token_data.id, db=db)
+        if not user_db_model:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        applicant = ApplicantDBModel(
+            id=user_db_model.login,
+            user_id=user_db_model.id,
+            title=f"{user_db_model.first_name} {user_db_model.last_name}",
+        )
+        if user_db_model.birthday:
+            birthday_date = arrow.get(user_db_model.birthday)
+            now = arrow.now()
+            age = now.year - birthday_date.year
+            applicant.age = age
+
+        db.add(applicant)
+        await db.commit()
+        await db.refresh(applicant)
+    return applicant

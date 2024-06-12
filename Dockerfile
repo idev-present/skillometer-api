@@ -27,8 +27,8 @@ COPY --from=builder /tmp/requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 #
-COPY ./alembic.ini /app/alembic.ini
-COPY ./pyproject.toml /app/pyproject.toml
+COPY ./alembic.ini /code/alembic.ini
+COPY ./pyproject.toml ./poetry.lock* /code/
 COPY ./app /code/app
 
 # 
