@@ -21,3 +21,4 @@ class REPLY_STATUS(Enum):
     OFFER_ACCEPTED = "Оффер принят"
     RESERVE = "Резерв"
     DECLINED = "Отказ"
+    DONE = "Готово"
