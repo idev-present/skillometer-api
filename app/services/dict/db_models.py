@@ -93,6 +93,7 @@ class SkillDBModel(BaseDBModel):
     id = Column(String(50), primary_key=True)
     name = Column(String(50), nullable=True)
     type = Column(String(50), nullable=True)
+    group = Column(String(50), nullable=True)
     qualification_id = Column(String(50), nullable=True)
     division_id = Column(String(50), nullable=True)
     habr_id = Column(Integer, nullable=True)
