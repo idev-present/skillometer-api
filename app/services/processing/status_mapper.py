@@ -11,43 +11,47 @@ class FlowConfig(BaseModel):
 
 
 available_status_flow = {
-    [REPLY_STATUS.NEW.name]: [
+    REPLY_STATUS.NEW.name: [
         FlowConfig(status=REPLY_STATUS.CV_REVIEW.name)
     ],
-    [REPLY_STATUS.CV_REVIEW.name]: [
+    REPLY_STATUS.CV_REVIEW.name: [
         FlowConfig(status=REPLY_STATUS.HR_INTERVIEW.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.CV_AGREEMENT.name]: [
+    REPLY_STATUS.HR_INTERVIEW.name: [
         FlowConfig(status=REPLY_STATUS.CV_AGREEMENT.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.JOB_INTERVIEW.name]: [
+    REPLY_STATUS.CV_AGREEMENT.name: [
+        FlowConfig(status=REPLY_STATUS.JOB_INTERVIEW.name),
+        FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
+    ],
+    REPLY_STATUS.JOB_INTERVIEW.name: [
         FlowConfig(status=REPLY_STATUS.REQUIRED_TASK.name),
         FlowConfig(status=REPLY_STATUS.WAITING.name),
         FlowConfig(status=REPLY_STATUS.RESERVE.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.REQUIRED_TASK.name]: [
+    REPLY_STATUS.REQUIRED_TASK.name: [
         FlowConfig(status=REPLY_STATUS.WAITING.name),
         FlowConfig(status=REPLY_STATUS.RESERVE.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.WAITING.name]: [
+    REPLY_STATUS.WAITING.name: [
         FlowConfig(status=REPLY_STATUS.OFFER_POSTED.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.OFFER_POSTED.name]: [
+    REPLY_STATUS.OFFER_POSTED.name: [
         FlowConfig(status=REPLY_STATUS.OFFER_ACCEPTED.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.OFFER_ACCEPTED.name]: [
+    REPLY_STATUS.OFFER_ACCEPTED.name: [
         FlowConfig(status=REPLY_STATUS.DONE.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.RESERVE.name]: [
+    REPLY_STATUS.RESERVE.name: [
         FlowConfig(status=REPLY_STATUS.DONE.name),
         FlowConfig(status=REPLY_STATUS.DECLINED.name, is_required_reason=True)
     ],
-    [REPLY_STATUS.DECLINED.name]: [],
+    REPLY_STATUS.DECLINED.name: [],
 }

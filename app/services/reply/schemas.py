@@ -26,6 +26,10 @@ class Reply(ReplyForm):
     updated_by_role: Optional[str]
 
 
+class ReplyUpdateForm(BaseModel):
+    status: str
+
+
 # Reply comments
 class ReplyCommentBase(BaseModel):
     author_id: str
