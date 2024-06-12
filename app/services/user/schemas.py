@@ -31,6 +31,6 @@ class User(UserForm):
 
 
 class UserUpdateForm(UserForm):
-    login: Optional[str] = Field(..., description="Username used to log in")
+    login: Optional[str] = Field(None, description="Username used to log in")
     first_name: Optional[str] = Field(None, description="The user's first name")
     last_name: Optional[str] = Field(None, description="The user's last name")

@@ -30,7 +30,7 @@ async def auth(redirect: Optional[str] = None):
 
 
 @router.get("/auth/callback", response_model=TokenResponse, include_in_schema=False)
-async def auth_callback(code: str, redirect: Optional[str] = None):
+async def redirect_auth_callback(code: str, redirect: Optional[str] = None):
     token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
     if redirect == 'swagger':
@@ -68,7 +68,7 @@ async def get_applicant_info(token_data: TokenData = Depends(get_current_user), 
 
 
 @router.put("/applicant_info")
-async def get_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user),
+async def update_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user),
                              db_session=Depends(db_service.get_db)):
     res = await ApplicantDBModel.update(item_id=token_data.name, form=form, db=db_session)
     return res
@@ -102,7 +102,7 @@ async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
-async def oauth_authorize(request: Request):
+async def habr_oauth_authorize(request: Request):
     if "error" in request.query_params:
         logger.error("### error habr oauth")
         logger.error(request.query_params["error"])
