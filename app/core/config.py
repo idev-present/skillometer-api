@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
     ]
+    FS_TYPE: str = 'LOCAL'
 
     # Database
     DATABASE_SERVER: str
@@ -41,6 +42,14 @@ class Settings(BaseSettings):
     IAM_REDIRECT_URI: AnyHttpUrl
     IAM_ORGANIZATION_ID: str
     IAM_APPLICATION_ID: str
+
+    # S3
+    S3_ENDPOINT: str
+    S3_API_KEY: str
+    S3_SECRET_KEY: str
+    S3_BUCKET_NAME: str
+    S3_TENANT_ID: str
+
 
     @computed_field
     @property

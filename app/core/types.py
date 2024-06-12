@@ -21,3 +21,8 @@ class StrEnum(str, Enum):
     @classmethod
     def list(cls):
         return list(map(lambda c: c.value, cls))
+
+
+class FileStorageType(StrEnum):
+    SBER = "SBER"
+    LOCAL = "LOCAL"
