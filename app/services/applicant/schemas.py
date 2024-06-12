@@ -72,3 +72,26 @@ class ApplicantXPUpdateForm(ApplicantXPForm):
     company_name: Optional[str] = Field(None, title="Name of the company")
     position: Optional[str] = Field(None, title="Position held at the company")
     start_date: Optional[datetime] = Field(None, title="Start date of the position")
+
+
+# * Education
+class ApplicantEducationForm(BaseModel):
+    university_name: str = Field(..., title="Name of the university")
+    university_id: Optional[str] = Field(None, title="The unique identifier of the university")
+    faculty_name: str = Field(..., title="Name of the faculty")
+    faculty_id: Optional[str] = Field(None, title="The unique identifier of the faculty")
+    city_id: Optional[str] = Field(None, title="The unique identifier of the city where the university is located")
+    start_date: datetime = Field(..., title="Start date of education")
+    end_date: Optional[datetime] = Field(None, title="End date of education")
+    specialization: Optional[str] = Field(None, title="Education specialization")
+
+
+class ApplicantEducation(ApplicantEducationForm):
+    id: str = Field(..., title="The unique identifier")
+    applicant_id: str = Field(..., title="The unique identifier of the applicant")
+
+
+class ApplicantEducationUpdateForm(ApplicantEducationForm):
+    university_name: Optional[str] = Field(None, title="Name of the university")
+    faculty_name: Optional[str] = Field(None, title="Name of the faculty")
+    start_date: Optional[datetime] = Field(None, title="Start date of education")

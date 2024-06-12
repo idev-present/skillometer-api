@@ -1,8 +1,8 @@
 import arrow
 from sqlalchemy.exc import DBAPIError
 from structlog import get_logger
-
-from app.core.exceptions import NotFoundError, ValidationError
+from fastapi import HTTPException
+from starlette import status
 from app.core.iam.main import iam_service
 from app.core.iam.schemas import TokenData, IAMUser
 from app.services.applicant.db_models import ApplicantDBModel
@@ -22,7 +22,7 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
         # TODO(ilya.zhuravlev): check expternal_api errors
         iam_user: IAMUser = await iam_service.get_profile(token_data.id)
         if not iam_user:
-            raise NotFoundError(message="User from api not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
         user_form = User(
             id=iam_user.id,
@@ -56,7 +56,7 @@ async def get_or_create_applicant_from_token(token_data: TokenData, db):
     if not applicant:
         user_db_model = await UserDBModel.get(item_id=token_data.id, db=db)
         if not user_db_model:
-            raise NotFoundError(message="User not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         applicant = ApplicantDBModel(
             id=user_db_model.login,
             user_id=user_db_model.id,

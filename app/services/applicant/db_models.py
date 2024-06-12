@@ -6,7 +6,8 @@ from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
-from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm
+from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm, \
+    ApplicantEducationForm, ApplicantEducationUpdateForm
 from app.utils.database_utils import generate_uid
 
 
@@ -139,6 +140,76 @@ class ApplicantXPDBModel(BaseDBModel):
 
     @classmethod
     async def get_list(cls, parent_id: str, db) -> List["ApplicantXPDBModel"]:
+        query = sql.select(cls).where(cls.applicant_id == parent_id)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res
+
+
+class ApplicantEducationDBModel(BaseDBModel):
+    __tablename__ = 'applicant_education'
+
+    id = Column(String, primary_key=True)
+    applicant_id = Column(String(50), nullable=False)
+    # Название заведения
+    university_name = Column(String, nullable=False)
+    university_id = Column(String, nullable=True)
+    # Факультет
+    faculty_name = Column(String, nullable=False)
+    faculty_id = Column(String, nullable=True)
+    # Местоположение учебного заведения
+    city_id = Column(String(50), nullable=True)
+    # Продолжительность учёбы
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=True)
+    # Специализация
+    specialization = Column(String, nullable=True)
+
+    @classmethod
+    async def create(cls, form: ApplicantEducationForm, parent_id: str, db) -> "ApplicantEducationDBModel":
+        edu_item = cls(**form.dict())
+        edu_item.id = generate_uid('edu')
+        edu_item.applicant_id = parent_id
+        if edu_item.start_date:
+            edu_item.start_date = datetime.fromtimestamp(edu_item.start_date.timestamp())
+        if edu_item.end_date:
+            edu_item.end_date = datetime.fromtimestamp(edu_item.end_date.timestamp())
+        db.add(edu_item)
+        await db.commit()
+        await db.refresh(edu_item)
+        return edu_item
+
+    @classmethod
+    async def get(cls, db, item_id: str) -> "ApplicantEducationDBModel":
+        query = sql.select(cls).where(cls.id == item_id)
+        result = await db.execute(query)
+        return result.scalars().first()
+
+    @classmethod
+    async def update(cls, db, item_id: str, form: ApplicantEducationUpdateForm) -> "ApplicantEducationDBModel":
+        edu_item = await cls.get(db, item_id)
+        for field, value in form.dict(exclude_unset=True).items():
+            setattr(edu_item, field, value)
+
+        if edu_item.start_date:
+            edu_item.start_date = datetime.fromtimestamp(edu_item.start_date.timestamp())
+        if edu_item.end_date:
+            edu_item.end_date = datetime.fromtimestamp(edu_item.end_date.timestamp())
+        db.add(edu_item)
+        await db.commit()
+        await db.refresh(edu_item)
+        return edu_item
+
+    @classmethod
+    async def delete(cls, db, item_id: str) -> bool:
+        edu_item = await cls.get(db, item_id)
+        await db.delete(edu_item)
+        await db.commit()
+        return True
+
+    @classmethod
+    async def get_list(cls, parent_id: str, db) -> List["ApplicantEducationDBModel"]:
         query = sql.select(cls).where(cls.applicant_id == parent_id)
         res = await db.execute(query)
         res = res.scalars().all()
