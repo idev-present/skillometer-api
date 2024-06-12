@@ -61,6 +61,18 @@ spec:
               value: "skillometer"
             - name: IAM_APPLICATION_ID
               value: "skillometer"
+            - name: S3_ENDPOINT
+              value: "https://s3.cloud.ru"
+            - name: S3_API_KEY
+              value: "c90b7ab7cb7a0c774be72124413d910b"
+            - name: S3_SECRET_KEY
+              value: "5ef1e5a7209a701035d18343a064a43f"
+            - name: S3_TENANT_ID
+              value: "d380f324-2845-4fac-8afb-398bb612359f"
+            - name: S3_BUCKET_NAME
+              value: "resume"
+            - name: FS_TYPE
+              value: "SBER"
 ---
 apiVersion: v1
 kind: Service
