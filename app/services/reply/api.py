@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Optional
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Body
 
 from app.core.db import db_service
 from app.services.processing.main import get_status_info, update_reply_status
@@ -24,6 +24,6 @@ async def get_reply_status_info(reply_id: str, db_session=Depends(db_service.get
 
 
 @router.post("/{reply_id}/status")
-async def set_reply_status(reply_id: str, status: str, db_session=Depends(db_service.get_db)):
+async def set_reply_status(reply_id: str, status: str, reason: Optional[str] = Body(None), db_session=Depends(db_service.get_db)):
     res = await update_reply_status(reply_id=reply_id, to_status=status, db=db_session)
     return res

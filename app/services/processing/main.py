@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from typing import Optional
 
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
@@ -50,12 +51,15 @@ async def get_status_info(reply_id: str, db: Session):
     return available_flows
 
 
-async def update_reply_status(reply_id: str, to_status: str, db: Session):
+async def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db: Session):
     available_flow = await get_status_info(reply_id=reply_id, db=db)
     available_status_list = [item.status for item in available_flow]
     if to_status not in available_status_list:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Status #{reply_id} not available")
-    update_form = ReplyUpdateForm(status=to_status)
+    available_flow_item = available_flow[available_status_list.index(to_status)]
+    if available_flow_item.is_required_reason and not reason:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Reason #{reply_id} is required")
+    update_form = ReplyUpdateForm(status=to_status, reason=reason)
     updated_reply = await ReplyDBModel.update(item_id=reply_id, form=update_form, db=db)
     new_available_flow = available_status_flow.get(updated_reply.status)
     if not new_available_flow:

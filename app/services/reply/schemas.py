@@ -28,6 +28,7 @@ class Reply(ReplyForm):
 
 class ReplyUpdateForm(BaseModel):
     status: str
+    reason: Optional[str]
 
 
 # Reply comments
