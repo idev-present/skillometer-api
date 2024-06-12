@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field, field_validator, ConfigDict
 from typing import Optional
 
 from app.services.dict.const import CURRENCY
-from app.services.dict.schemas import Currency
+from app.services.dict.schemas import KeyValueDict
 
 
 class VacancyForm(BaseModel):
@@ -39,7 +39,7 @@ class VacancyListItem(VacancyForm):
     hh_id: Optional[int] = Field(None)
     url: Optional[str] = Field(None)
     # * Config
-    currency: Currency = Field(...)
+    currency: KeyValueDict = Field(...)
     # * Dict
     # * Timestamps
     created_at: Optional[datetime]
@@ -54,7 +54,7 @@ class VacancyListItem(VacancyForm):
         # todo: check valid key
         for key in CURRENCY:
             if key.name == v:
-                return Currency(key=key.name, value=key.value)
+                return KeyValueDict(key=key.name, value=key.value)
         return v
 
 

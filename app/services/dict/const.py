@@ -7,3 +7,7 @@ class CURRENCY(Enum):
     EUR = "€"
     UAH = "₴"
     KZT = "₸"
+
+
+class REPLY_STATUS(Enum):
+    NEW = "NEW"

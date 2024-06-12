@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 
 from app.core.db import db_service
-from app.services.dict.const import CURRENCY
+from app.services.dict.const import CURRENCY, REPLY_STATUS
 from app.services.dict.db_models import (
     CityDBModel,
     EmploymentTypeDBModel,
@@ -17,9 +17,8 @@ from app.services.dict.schemas import (
     EmploymentType,
     Division,
     Qualification,
-    Currency,
     SearchStatus,
-    Skill
+    Skill, KeyValueDict
 )
 
 router = APIRouter()
@@ -31,7 +30,7 @@ def get_enum_members(enum_class):
 
 
 @router.get("/currency")
-def get_currency_list() -> List[Currency]:
+def get_currency_list() -> List[KeyValueDict]:
     return [
         {"key": name, "value": currency.value}
         for name, currency in get_enum_members(CURRENCY)
@@ -72,3 +71,11 @@ async def search_status_list(db_session=Depends(db_service.get_db)) -> List[Sear
 async def skill_list(db_session=Depends(db_service.get_db)) -> List[Skill]:
     res = await SkillDBModel.get_list(db_session)
     return res
+
+
+@router.get("/reply_status")
+def reply_status_list() -> List[KeyValueDict]:
+    return [
+        {"key": name, "value": currency.value}
+        for name, currency in get_enum_members(REPLY_STATUS)
+    ]

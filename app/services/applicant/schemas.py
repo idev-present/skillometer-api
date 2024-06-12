@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Optional
 
 from app.services.dict.const import CURRENCY
-from app.services.dict.schemas import Currency
+from app.services.dict.schemas import KeyValueDict
 
 
 class ApplicantForm(BaseModel):
@@ -27,7 +27,7 @@ class ApplicantListItem(ApplicantForm):
     id: str
     user_id: UUID
     # * Config
-    currency: Optional[Currency] = Field(None, description="Код валюты")
+    currency: Optional[KeyValueDict] = Field(None, description="Код валюты")
     last_visited: Optional[datetime] = Field(None, description="Дата/время последнего посещения")
     registered_at: Optional[datetime] = Field(None, description="Дата/время регистрации")
     # * Computed fields
@@ -41,7 +41,7 @@ class ApplicantListItem(ApplicantForm):
         # todo: check valid key
         for key in CURRENCY:
             if key.name == v:
-                return Currency(key=key.name, value=key.value)
+                return KeyValueDict(key=key.name, value=key.value)
         return v
 
 
