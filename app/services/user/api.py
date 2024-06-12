@@ -1,8 +1,9 @@
-from typing import Optional
+from typing import Optional, List
 
 import httpx
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response, HTTPException
 from pydantic import HttpUrl
+from starlette import status
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
 from structlog import get_logger
@@ -10,11 +11,14 @@ from structlog import get_logger
 from app.core.config import settings
 from app.core.db import db_service
 from app.core.iam.main import iam_service
-from app.services.user.crud import get_or_create_from_token
+from app.services.applicant.db_models import ApplicantDBModel, ApplicantXPDBModel, ApplicantEducationDBModel
+from app.services.applicant.schemas import ApplicantUpdateForm, ApplicantXP, ApplicantXPForm, ApplicantXPUpdateForm, \
+    ApplicantEducationForm, ApplicantEducation, ApplicantEducationUpdateForm, Applicant
+from app.services.user.crud import get_or_create_user_from_token, get_or_create_applicant_from_token
 from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
 from app.core.iam.schemas import TokenData, TokenResponse
-from app.services.user.schemas import User, UserUpdateForm
+from app.services.user.schemas import User, UserUpdateForm, UserContacts
 
 router = APIRouter()
 
@@ -28,7 +32,7 @@ async def auth(redirect: Optional[str] = None):
 
 
 @router.get("/auth/callback", response_model=TokenResponse, include_in_schema=False)
-async def auth_callback(code: str, redirect: Optional[str] = None):
+async def redirect_auth_callback(code: str, redirect: Optional[str] = None):
     token = iam_service.get_token_by_code(code)
     access_token = token.get("access_token")
     if redirect == 'swagger':
@@ -48,19 +52,103 @@ async def auth_callback(code: str):
 
 @router.get("/profile")
 async def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
-    user = await get_or_create_from_token(token_data=token_data, db=db_session)
+    user = await get_or_create_user_from_token(token_data=token_data, db=db_session)
     return user
 
 
 @router.put("/profile")
 async def update_user_profile(form: UserUpdateForm, token_data: TokenData = Depends(get_current_user),
-                  db_session=Depends(db_service.get_db)) -> User:
+                              db_session=Depends(db_service.get_db)) -> User:
     res = await UserDBModel.update(form=form, item_id=token_data.id, db=db_session)
     return res
 
 
+@router.get("/applicant_info", response_model=Applicant)
+async def get_applicant_info(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    res = await get_or_create_applicant_from_token(token_data=token_data, db=db_session)
+    return res
+
+
+@router.put("/applicant_info", response_model=Applicant)
+async def update_applicant_info(form: ApplicantUpdateForm, token_data: TokenData = Depends(get_current_user),
+                                db_session=Depends(db_service.get_db)):
+    res = await ApplicantDBModel.update(item_id=token_data.name, form=form, db=db_session)
+    return res
+
+
+@router.get("/contacts", response_model=UserContacts)
+async def get_contacts(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    res = await UserDBModel.get(item_id=token_data.id, db=db_session)
+    return res
+
+
+@router.put("/contacts", response_model=UserContacts)
+async def update_contacts(form: UserContacts, token_data: TokenData = Depends(get_current_user),
+                          db_session=Depends(db_service.get_db)):
+    res = await UserDBModel.update(item_id=token_data.id, form=form, db=db_session)
+    return res
+
+
+@router.post('/education', response_model=ApplicantEducation)
+async def create_education_info(form: ApplicantEducationForm, token_data: TokenData = Depends(get_current_user),
+                                db_session=Depends(db_service.get_db)):
+    res = await ApplicantEducationDBModel.create(form=form, parent_id=token_data.name, db=db_session)
+    return res
+
+
+@router.get('/education', response_model=ApplicantEducation)
+async def get_education_info(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    res = await ApplicantEducationDBModel.get_list(parent_id=token_data.name, db=db_session)
+    if len(res) == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Education info not found")
+    return res[0]
+
+
+@router.put('/education/{education_item_id}', response_model=ApplicantEducation)
+async def update_education_info(education_item_id: str, form: ApplicantEducationUpdateForm,
+                                token_data: TokenData = Depends(get_current_user),
+                                db_session=Depends(db_service.get_db)):
+    res = await ApplicantEducationDBModel.update(form=form, item_id=education_item_id, db=db_session)
+    return res
+
+
+@router.delete('/education/{education_item_id}')
+async def delete_education_info(education_item_id: str,
+                                token_data: TokenData = Depends(get_current_user),
+                                db_session=Depends(db_service.get_db)):
+    res = await ApplicantEducationDBModel.delete(item_id=education_item_id, db=db_session)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/work_xp", response_model=List[ApplicantXP])
+async def get_work_xp_list(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.get_list(parent_id=token_data.name, db=db_session)
+    return res
+
+
+@router.post("/work_xp", response_model=ApplicantXPForm)
+async def create_work_xp(form: ApplicantXPForm, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.create(form=form, parent_id=token_data.name, db=db_session)
+    return res
+
+
+@router.post("/work_xp/{xp_id}", response_model=ApplicantXPForm)
+async def update_work_xp(xp_id: str, form: ApplicantXPUpdateForm, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.update(item_id=xp_id, form=form, db=db_session)
+    return res
+
+
+@router.delete("/work_xp/{xp_id}")
+async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current_user),
+                         db_session=Depends(db_service.get_db)):
+    res = await ApplicantXPDBModel.delete(item_id=xp_id, db=db_session)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
 @router.get("/oauth/habr/", include_in_schema=False)
-async def oauth_authorize(request: Request):
+async def habr_oauth_authorize(request: Request):
     if "error" in request.query_params:
         logger.error("### error habr oauth")
         logger.error(request.query_params["error"])

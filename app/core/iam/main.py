@@ -8,7 +8,6 @@ from starlette import status
 from structlog import get_logger
 
 from app.core.config import settings
-from app.core.exceptions import ServerError
 from app.core.iam.secrets import certificate
 from app.core.iam.schemas import IAMUser
 
@@ -58,7 +57,7 @@ class IAM:
         logger.info("api response from iam_api", httpx_status=query.status_code)
 
         if query.status_code != 200:
-            raise ServerError(query.text)
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=query.text)
 
         response_data = query.json()
         user = IAMUser.model_validate(response_data['data'])
