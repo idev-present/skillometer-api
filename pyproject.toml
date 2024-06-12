@@ -22,6 +22,7 @@ casdoor = "^1.24.0"
 itsdangerous = "^2.2.0"
 toml = "^0.10.2"
 arrow = "^1.3.0"
+boto3 = "^1.34.124"
 
 [tool.poetry.group.debug]
 optional = true
