@@ -9,8 +9,8 @@ class UserForm(BaseModel):
     login: str = Field(..., description="Username used to log in")
     avatar: Optional[str] = Field(None, description="A link to the user's avatar picture")
     gender: Optional[Literal["male", "female"]] = Field(None, description="The user's gender")
-    first_name: str = Field(None, description="The user's first name")
-    last_name: str = Field(None, description="The user's last name")
+    first_name: Optional[str] = Field(None, description="The user's first name")
+    last_name: Optional[str] = Field(None, description="The user's last name")
     birthday: Optional[datetime] = Field(None, description="The user's birthday")
     city: Optional[str] = Field(None, description="The user's hometown or current city of residence")
     bio: Optional[str] = Field(None, description="A short description or biography of the user")
@@ -32,8 +32,6 @@ class User(UserForm):
 
 class UserUpdateForm(UserForm):
     login: Optional[str] = Field(None, description="Username used to log in")
-    first_name: Optional[str] = Field(None, description="The user's first name")
-    last_name: Optional[str] = Field(None, description="The user's last name")
 
 
 class UserContacts(BaseModel):

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class Currency(BaseModel):
+class KeyValueDict(BaseModel):
     key: str
     value: str
 
