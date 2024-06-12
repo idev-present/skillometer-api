@@ -15,7 +15,7 @@ class FileStorageService:
         if settings.FS_TYPE == FileStorageType.SBER:
             self.engine = CloudFSEngine()
 
-    def get_dict(self, filename, bucket: str = settings.S3_BUCKET_NAME):
+    def get_file(self, filename, bucket: str = settings.S3_BUCKET_NAME):
         file = self.engine.get_file(bucket=bucket, filename=filename)
         return file
 
