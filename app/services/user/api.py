@@ -150,10 +150,8 @@ async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current
 
 
 @router.get("/cv", response_model=CV)
-async def get_cv(
-        token_data: TokenData = Depends(get_current_user),
-        db_session=Depends(db_service.get_db)
-):
+async def get_cv(token_data=Depends(get_current_user), db_session=Depends(db_service.get_db)
+                 ):
     res = await load_user_cv(applicant_id=token_data.name, db=db_session)
     return res
 
