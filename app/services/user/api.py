@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 import httpx
-from fastapi import APIRouter, Depends, Response, HTTPException
+from fastapi import APIRouter, Depends, Response
 from pydantic import HttpUrl
 from starlette import status
 from starlette.requests import Request
@@ -15,6 +15,9 @@ from app.services.applicant.db_models import ApplicantDBModel, ApplicantXPDBMode
 from app.services.applicant.schemas import ApplicantUpdateForm, ApplicantXP, ApplicantXPForm, ApplicantXPUpdateForm, \
     ApplicantEducationForm, ApplicantEducation, ApplicantEducationUpdateForm, Applicant
 from app.services.cv.main import load_user_cv
+from app.services.cv.schemas import CV
+from app.services.reply.db_models import ReplyDBModel
+from app.services.reply.schemas import Reply, ReplyDBModelFilters
 from app.services.user.crud import get_or_create_user_from_token, get_or_create_applicant_from_token
 from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
@@ -146,12 +149,22 @@ async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.get("/cv")
+@router.get("/cv", response_model=CV)
 async def get_cv(
         token_data: TokenData = Depends(get_current_user),
         db_session=Depends(db_service.get_db)
 ):
     res = await load_user_cv(applicant_id=token_data.name, db=db_session)
+    return res
+
+
+@router.get("/reply/history", response_model=List[Reply])
+async def get_user_replies_history(
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+):
+    filters = ReplyDBModelFilters(applicant_id=token_data.name)
+    res = await ReplyDBModel.get_list(filters=filters, db=db_session)
     return res
 
 

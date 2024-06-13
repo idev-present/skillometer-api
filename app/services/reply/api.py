@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.get("/")
 async def reply_list(db_session=Depends(db_service.get_db)) -> List[Reply]:
-    res = await ReplyDBModel.get_list(db_session)
+    res = await ReplyDBModel.get_list(db=db_session)
     return res
 
 

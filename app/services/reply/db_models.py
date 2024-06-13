@@ -1,12 +1,12 @@
 import sqlalchemy
-from typing import List
+from typing import List, Optional
 
 from sqlalchemy import Column, String, DateTime, func, UUID
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.dict.const import REPLY_STATUS
-from app.services.reply.schemas import Reply, ReplyUpdateForm
+from app.services.reply.schemas import Reply, ReplyUpdateForm, ReplyDBModelFilters
 
 
 class ReplyDBModel(BaseDBModel):
@@ -58,8 +58,11 @@ class ReplyDBModel(BaseDBModel):
         return reply
 
     @classmethod
-    async def get_list(cls, db) -> List["ReplyDBModel"]:
+    async def get_list(cls, db, filters: Optional[ReplyDBModelFilters] = None) -> List["ReplyDBModel"]:
         query = sql.select(cls)
+        if filters:
+            if filters.applicant_id:
+                query = query.where(cls.applicant_id == filters.applicant_id)
         res = await db.execute(query)
         res = res.scalars().all()
 
