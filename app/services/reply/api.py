@@ -35,5 +35,11 @@ async def comment_create(
         comment: ReplyCommentForm,
         db_session=Depends(db_service.get_db)
 ) -> List[ReplyCommentInDB]:
-    res = await ReplyCommentDBModel.create(reply_id, comment, db_session)
+    res = await ReplyCommentDBModel.create(reply_id, comment, db=db_session)
+    return res
+
+
+@router.get("/{reply_id}/comments")
+async def get_reply_comments(reply_id: str, db_session=Depends(db_service.get_db)) -> List[ReplyCommentInDB]:
+    res = await ReplyCommentDBModel.get_list(reply_id, db=db_session)
     return res
