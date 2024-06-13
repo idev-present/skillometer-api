@@ -14,6 +14,7 @@ from app.core.iam.main import iam_service
 from app.services.applicant.db_models import ApplicantDBModel, ApplicantXPDBModel, ApplicantEducationDBModel
 from app.services.applicant.schemas import ApplicantUpdateForm, ApplicantXP, ApplicantXPForm, ApplicantXPUpdateForm, \
     ApplicantEducationForm, ApplicantEducation, ApplicantEducationUpdateForm, Applicant
+from app.services.cv.main import load_user_cv
 from app.services.user.crud import get_or_create_user_from_token, get_or_create_applicant_from_token
 from app.services.user.db_models import UserDBModel
 from app.services.user.middlewares import get_current_user
@@ -143,6 +144,15 @@ async def delete_work_xp(xp_id: str, token_data: TokenData = Depends(get_current
                          db_session=Depends(db_service.get_db)):
     res = await ApplicantXPDBModel.delete(item_id=xp_id, db=db_session)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/cv")
+async def get_cv(
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+):
+    res = await load_user_cv(applicant_id=token_data.name, db=db_session)
+    return res
 
 
 @router.get("/oauth/habr/", include_in_schema=False)
