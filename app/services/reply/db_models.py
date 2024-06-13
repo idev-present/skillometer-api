@@ -89,6 +89,7 @@ class ReplyCommentDBModel(BaseDBModel):
     @classmethod
     async def create(cls, reply_id: str, form: ReplyCommentForm, db) -> List["ReplyCommentDBModel"]:
         reply_comment = cls(**form.dict())
+        reply_comment.reply_id = reply_id
         db.add(reply_comment)
         await db.commit()
         await db.refresh(reply_comment)

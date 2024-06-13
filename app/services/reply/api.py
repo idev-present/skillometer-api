@@ -28,6 +28,7 @@ async def set_reply_status(reply_id: str, form: ReplyUpdateForm, db_session=Depe
     res = await update_reply_status(reply_id=reply_id, to_status=form.status, reason=form.reason, db=db_session)
     return res
 
+
 @router.post("/{reply_id}")
 async def comment_create(
         reply_id: str,
