@@ -39,14 +39,14 @@ class ReplyDBModelFilters(BaseModel):
 class ReplyCommentBase(BaseModel):
     author_id: str
     author_name: str
-    reply_id: str
     content: str
 
 
-class ReplyCommentInput(ReplyCommentBase):
+class ReplyCommentForm(ReplyCommentBase):
     pass
 
 
 class ReplyCommentInDB(ReplyCommentBase):
     id: UUID
+    reply_id: UUID
     created_at: datetime

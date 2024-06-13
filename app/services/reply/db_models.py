@@ -6,7 +6,7 @@ from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.dict.const import REPLY_STATUS
-from app.services.reply.schemas import Reply, ReplyUpdateForm, ReplyDBModelFilters
+from app.services.reply.schemas import Reply, ReplyUpdateForm, ReplyDBModelFilters, ReplyCommentForm
 
 
 class ReplyDBModel(BaseDBModel):
@@ -78,3 +78,19 @@ class ReplyCommentDBModel(BaseDBModel):
     reply_id = Column(String, nullable=False)
     content = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    @classmethod
+    async def get_list(cls, reply_id: str, db) -> List["ReplyCommentDBModel"]:
+        query = sql.select(cls).filter(cls.reply_id == reply_id).order_by(cls.created_at.desc())
+        result = await db.execute(query)
+        result = result.scalars().all()
+        return result
+
+    @classmethod
+    async def create(cls, reply_id: str, form: ReplyCommentForm, db) -> List["ReplyCommentDBModel"]:
+        reply_comment = cls(**form.dict())
+        reply_comment.reply_id = reply_id
+        db.add(reply_comment)
+        await db.commit()
+        await db.refresh(reply_comment)
+        return await cls.get_list(reply_id, db)
