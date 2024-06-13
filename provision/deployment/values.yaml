@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ilyamachetto/skillometer-api:0.8.0
+          image: ilyamachetto/skillometer-api:0.8.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -39,7 +39,7 @@ spec:
               value: "/var/log/"
             # Database
             - name: DATABASE_SERVER
-              value: "postgres-postgresql.skillometer.svc.cluster.local"
+              value: "10.244.0.151"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USERNAME
