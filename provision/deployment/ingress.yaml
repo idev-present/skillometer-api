@@ -12,4 +12,5 @@ spec:
       services:
         - name: api-service
           port: 8080
-  tls: {}
+  tls:
+    secretName: wildcard-skillometer-idev-present-com-tls

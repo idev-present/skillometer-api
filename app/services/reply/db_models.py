@@ -1,12 +1,12 @@
 import sqlalchemy
-from typing import List
+from typing import List, Optional
 
 from sqlalchemy import Column, String, DateTime, func, UUID
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.dict.const import REPLY_STATUS
-from app.services.reply.schemas import Reply, ReplyCommentForm
+from app.services.reply.schemas import Reply, ReplyUpdateForm, ReplyDBModelFilters, ReplyCommentForm
 
 
 class ReplyDBModel(BaseDBModel):
@@ -14,6 +14,7 @@ class ReplyDBModel(BaseDBModel):
 
     id = Column(UUID, primary_key=True, server_default=sqlalchemy.text("gen_random_uuid()"))
     status = Column(String, nullable=False, default=REPLY_STATUS.NEW.value)
+    reason = Column(String, nullable=True)
     # Vacancy
     vacancy_id = Column(String, nullable=False)
     # Applicant
@@ -31,13 +32,6 @@ class ReplyDBModel(BaseDBModel):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    @classmethod
-    async def get_list(cls, db) -> List["ReplyDBModel"]:
-        query = sql.select(cls)
-        res = await db.execute(query)
-        res = res.scalars().all()
-
-        return res
 
     @classmethod
     async def create(cls, form: Reply, db) -> "ReplyDBModel":
@@ -46,6 +40,33 @@ class ReplyDBModel(BaseDBModel):
         await db.commit()
         await db.refresh(new_reply)
         return new_reply
+
+    @classmethod
+    async def get(cls, db, item_id: str) -> "ReplyDBModel":
+        query = sql.select(cls).filter(cls.id == item_id)
+        result = await db.execute(query)
+        return result.scalars().first()
+
+    @classmethod
+    async def update(cls, db, item_id: str, form: ReplyUpdateForm) -> "ReplyDBModel":
+        reply = await cls.get(db, item_id)
+        for field, value in form.dict(exclude_unset=True).items():
+            setattr(reply, field, value)
+        db.add(reply)
+        await db.commit()
+        await db.refresh(reply)
+        return reply
+
+    @classmethod
+    async def get_list(cls, db, filters: Optional[ReplyDBModelFilters] = None) -> List["ReplyDBModel"]:
+        query = sql.select(cls)
+        if filters:
+            if filters.applicant_id:
+                query = query.where(cls.applicant_id == filters.applicant_id)
+        res = await db.execute(query)
+        res = res.scalars().all()
+
+        return res
 
 
 class ReplyCommentDBModel(BaseDBModel):

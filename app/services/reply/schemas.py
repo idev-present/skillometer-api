@@ -26,6 +26,15 @@ class Reply(ReplyForm):
     updated_by_role: Optional[str]
 
 
+class ReplyUpdateForm(BaseModel):
+    status: str
+    reason: Optional[str] = Field(None, title="Причина изменения статуса")
+
+
+class ReplyDBModelFilters(BaseModel):
+    applicant_id: Optional[str]
+
+
 # Reply comments
 class ReplyCommentBase(BaseModel):
     author_id: str

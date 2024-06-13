@@ -5,6 +5,7 @@ services:
     platform: linux/amd64
     restart: unless-stopped
     volumes:
+      - ./runtime/dump/stage-dump.sql:/tmp/stage-dump.sql
       - pg_data:/bitnami/postgresql
     ports:
       - "5432:5432"
@@ -14,6 +15,5 @@ services:
       - POSTGRESQL_USERNAME=${DATABASE_USERNAME?Variable not set}
       - POSTGRESQL_PASSWORD=${DATABASE_PASSWORD?Variable not set}
       - POSTGRESQL_DATABASE=${DATABASE_DBNAME?Variable not set}
-
 volumes:
   pg_data:

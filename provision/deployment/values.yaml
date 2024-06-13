@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ilyamachetto/skillometer-api:0.7.1
+          image: ilyamachetto/skillometer-api:0.9.1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -37,9 +37,11 @@ spec:
               value: "INFO"
             - name: LOG_DIR
               value: "/var/log/"
+            - name: FS_TYPE
+              value: "SBER"
             # Database
             - name: DATABASE_SERVER
-              value: "postgres-postgresql.skillometer.svc.cluster.local"
+              value: "10.244.0.151"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USERNAME
@@ -50,17 +52,28 @@ spec:
               value: "skillometer_db"
             # IAM
             - name: IAM_HOSTNAME
-              value: "https://iam.idev-present.com"
+              value: "http://10.244.0.191:8000"
             - name: IAM_CLIENT_ID
               value: "8aa124a89a76caf4e84b"
             - name: IAM_CLIENT_SECRET
               value: "fa026ac3608de86085c8fe9cbac8f784ba764fd1"
             - name: IAM_REDIRECT_URI
-              value: "http://localhost:8000/api/v1/user/auth/callback"
+              value: "https://skillometer.idev-present.com/api/v1/user/auth/callback"
             - name: IAM_ORGANIZATION_ID
               value: "skillometer"
             - name: IAM_APPLICATION_ID
               value: "skillometer"
+            # S3
+            - name: S3_ENDPOINT
+              value: "https://s3.cloud.ru"
+            - name: S3_API_KEY
+              value: "c90b7ab7cb7a0c774be72124413d910b"
+            - name: S3_SECRET_KEY
+              value: "5ef1e5a7209a701035d18343a064a43f"
+            - name: S3_TENANT_ID
+              value: "d380f324-2845-4fac-8afb-398bb612359f"
+            - name: S3_BUCKET_NAME
+              value: "resume"
 ---
 apiVersion: v1
 kind: Service

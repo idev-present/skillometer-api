@@ -13,7 +13,7 @@ class REPLY_STATUS(Enum):
     NEW = "Новый"
     CV_REVIEW = "Проверка резюме"
     HR_INTERVIEW = "Первичное интервью"
-    CV_AGREEMENT = "Согласование кандидата"
+    CV_AGREEMENT = "Выбор кандидата"
     JOB_INTERVIEW = "Собеседование"
     REQUIRED_TASK = "Техническое задание"
     WAITING = "Принятие решения"
@@ -21,3 +21,4 @@ class REPLY_STATUS(Enum):
     OFFER_ACCEPTED = "Оффер принят"
     RESERVE = "Резерв"
     DECLINED = "Отказ"
+    DONE = "Готово"
