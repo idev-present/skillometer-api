@@ -58,7 +58,7 @@ async def update_reply_status(reply_id: str, to_status: str, reason: Optional[st
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Status #{reply_id} not available")
     available_flow_item = available_flow[available_status_list.index(to_status)]
     if available_flow_item.is_required_reason and not reason:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Reason #{reply_id} is required")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Reason for status #{to_status} is required")
     update_form = ReplyUpdateForm(status=to_status, reason=reason)
     updated_reply = await ReplyDBModel.update(item_id=reply_id, form=update_form, db=db)
     new_available_flow = available_status_flow.get(updated_reply.status)

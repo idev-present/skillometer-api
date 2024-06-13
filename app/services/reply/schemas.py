@@ -28,7 +28,7 @@ class Reply(ReplyForm):
 
 class ReplyUpdateForm(BaseModel):
     status: str
-    reason: Optional[str]
+    reason: Optional[str] = Field(None, title="Причина изменения статуса")
 
 
 # Reply comments
