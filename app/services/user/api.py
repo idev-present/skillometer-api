@@ -99,8 +99,6 @@ async def create_education_info(form: ApplicantEducationForm, token_data: TokenD
 @router.get('/education', response_model=List[ApplicantEducation])
 async def get_education_info(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
     res = await ApplicantEducationDBModel.get_list(parent_id=token_data.name, db=db_session)
-    if len(res) == 0:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Education info not found")
     return res
 
 

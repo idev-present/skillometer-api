@@ -47,6 +47,16 @@ class ApplicantDBModel(BaseDBModel):
         "UserDBModel",
         back_populates="applicant"
     )
+    xp = relationship(
+        "ApplicantXPDBModel",
+        order_by="desc(ApplicantXPDBModel.start_date)",
+        back_populates='applicant'
+    )
+    education = relationship(
+        "ApplicantEducationDBModel",
+        order_by="desc(ApplicantEducationDBModel.start_date)",
+        back_populates='applicant'
+    )
 
     @classmethod
     async def get(cls, db, item_id: str) -> "ApplicantDBModel":
@@ -84,8 +94,8 @@ class ApplicantDBModel(BaseDBModel):
 class ApplicantXPDBModel(BaseDBModel):
     __tablename__ = 'applicant_xp'
 
-    id = Column(String, primary_key=True)
-    applicant_id = Column(String(50), nullable=False)
+    id = mapped_column(String, primary_key=True)
+    applicant_id = Column(String(50), ForeignKey('applicants.id'), nullable=False)
     # Компания
     company_name = Column(String, nullable=False)
     company_id = Column(String, nullable=True)
@@ -99,6 +109,11 @@ class ApplicantXPDBModel(BaseDBModel):
     description = Column(String, nullable=True)
     # Примененные навыки
     skill_set = Column(String, nullable=True)
+    # * Relationships
+    applicant = relationship(
+        "ApplicantDBModel",
+        back_populates='xp'
+    )
 
     @classmethod
     async def create(cls, form: ApplicantXPForm, parent_id: str, db) -> "ApplicantXPDBModel":
@@ -154,8 +169,8 @@ class ApplicantXPDBModel(BaseDBModel):
 class ApplicantEducationDBModel(BaseDBModel):
     __tablename__ = 'applicant_education'
 
-    id = Column(String, primary_key=True)
-    applicant_id = Column(String(50), nullable=False)
+    id = mapped_column(String, primary_key=True)
+    applicant_id = Column(String(50), ForeignKey('applicants.id'), nullable=False)
     # Название заведения
     university_name = Column(String, nullable=False)
     university_id = Column(String, nullable=True)
@@ -169,6 +184,11 @@ class ApplicantEducationDBModel(BaseDBModel):
     end_date = Column(DateTime, nullable=True)
     # Специализация
     specialization = Column(String, nullable=True)
+    # * Relationships
+    applicant = relationship(
+        "ApplicantDBModel",
+        back_populates='education'
+    )
 
     @classmethod
     async def create(cls, form: ApplicantEducationForm, parent_id: str, db) -> "ApplicantEducationDBModel":
