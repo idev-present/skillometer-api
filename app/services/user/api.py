@@ -50,13 +50,13 @@ async def auth_callback(code: str):
     return token
 
 
-@router.get("/profile")
+@router.get("/profile", response_model=User)
 async def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
     user = await get_or_create_user_from_token(token_data=token_data, db=db_session)
     return user
 
 
-@router.put("/profile")
+@router.put("/profile", response_model=User)
 async def update_user_profile(form: UserUpdateForm, token_data: TokenData = Depends(get_current_user),
                               db_session=Depends(db_service.get_db)) -> User:
     res = await UserDBModel.update(form=form, item_id=token_data.id, db=db_session)
@@ -96,12 +96,12 @@ async def create_education_info(form: ApplicantEducationForm, token_data: TokenD
     return res
 
 
-@router.get('/education', response_model=ApplicantEducation)
+@router.get('/education', response_model=List[ApplicantEducation])
 async def get_education_info(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
     res = await ApplicantEducationDBModel.get_list(parent_id=token_data.name, db=db_session)
     if len(res) == 0:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Education info not found")
-    return res[0]
+    return res
 
 
 @router.put('/education/{education_item_id}', response_model=ApplicantEducation)
@@ -133,7 +133,7 @@ async def create_work_xp(form: ApplicantXPForm, token_data: TokenData = Depends(
     return res
 
 
-@router.post("/work_xp/{xp_id}", response_model=ApplicantXPForm)
+@router.put("/work_xp/{xp_id}", response_model=ApplicantXPForm)
 async def update_work_xp(xp_id: str, form: ApplicantXPUpdateForm, token_data: TokenData = Depends(get_current_user),
                          db_session=Depends(db_service.get_db)):
     res = await ApplicantXPDBModel.update(item_id=xp_id, form=form, db=db_session)
