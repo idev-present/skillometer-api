@@ -41,13 +41,11 @@ def run_migrations_offline() -> None:
     script output.
 
     """
+
     context.configure(
         url=config.get_main_option("sqlalchemy.url"),
         target_metadata=target_metadata,
-        literal_binds=True,
-        compare_type=True,
-        dialect_name="postgresql",
-        dialect_opts={"paramstyle": "named"},
+        literal_binds=True
     )
 
     with context.begin_transaction():
@@ -56,7 +54,6 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
-
     configuration = config.get_section(config.config_ini_section)
     connectable = context.config.attributes.get("connection", None)  # for pytest-alembic
 
@@ -71,11 +68,10 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            compare_type=True,
-            compare_server_default=True,
-            include_schemas=True,
-            dialect_name="postgresql",
         )
+
+        with context.begin_transaction():
+            context.run_migrations()
 
 
 if context.is_offline_mode():
