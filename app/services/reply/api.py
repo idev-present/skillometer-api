@@ -38,7 +38,7 @@ def set_reply_status(reply_id: str, form: ReplyUpdateForm, db_session=Depends(db
     return res
 
 
-@router.post("/{reply_id}/comments", response_model=ReplyCommentInDB)
+@router.post("/{reply_id}/comments", response_model=List[ReplyCommentInDB])
 def reply_comment_create(
         reply_id: str,
         comment: ReplyCommentForm,

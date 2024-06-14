@@ -13,14 +13,14 @@ from app.services.user.schemas import User
 logger = get_logger(__name__)
 
 
-def get_or_create_user_from_token(token_data: TokenData, db):
+async def get_or_create_user_from_token(token_data: TokenData, db):
     user_id = token_data.id
     logger.info("try find user in db", user_id=user_id)
     user_db_model = UserDBModel.get(item_id=user_id, db=db)
     if not user_db_model:
         logger.info("user not found, try get profile from api", user_id=user_id)
-        # TODO(ilya.zhuravlev): check expternal_api errors
-        iam_user: IAMUser = iam_service.get_profile(token_data.id)
+        # TODO(ilya.zhuravlev): check external_api errors
+        iam_user: IAMUser = await iam_service.get_profile(token_data.id)
         if not iam_user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
@@ -47,7 +47,7 @@ def get_or_create_user_from_token(token_data: TokenData, db):
             user_db_model = UserDBModel.create(db=db, form=user_form)
         except DBAPIError as e:
             raise e
-        # TODO(ilya.zhuravlev): check unuque constraint
+        # TODO(ilya.zhuravlev): check unique constraint
     return user_db_model
 
 

@@ -55,8 +55,8 @@ def auth_callback(code: str):
 
 
 @router.get("/profile", response_model=User)
-def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
-    user = get_or_create_user_from_token(token_data=token_data, db=db_session)
+async def get_user_profile(token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
+    user = await get_or_create_user_from_token(token_data=token_data, db=db_session)
     return user
 
 

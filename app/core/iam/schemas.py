@@ -71,6 +71,7 @@ class IAMUser(BaseModel):
     def prepare_user_fields(cls, data: Dict) -> Dict:
         cls.prepare_user_role(data)
         cls.prepare_fullname(data)
+        cls.prepare_gender(data)
         cls.prepare_time_fields(data, ['birthday', 'createdTime', 'updatedTime', 'deletedTime'])
         return data
 
@@ -92,10 +93,15 @@ class IAMUser(BaseModel):
             data['role'] = 'recruiter' if data.get('tag') == 'recruiter_tag' else 'applicant'
 
     @staticmethod
+    def prepare_gender(data: Dict):
+        if 'gender' in data and data['gender'] == '':
+                data['gender'] = None
+
+    @staticmethod
     def prepare_time_fields(data: Dict, time_fields: List[str]):
         for field in time_fields:
-            if data.get(field):
-                field_name = f"{field.replace('Time', '')}_at"
+            if field in data:
+                field_name = f"{field.replace('Time', '')}_at" if field != 'birthday' else field
                 if data.get(field) == "":
                     data[field] = None
                     data[field_name] = None
