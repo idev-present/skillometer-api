@@ -9,7 +9,7 @@ from app.services.dict.schemas import KeyValueDict
 class VacancyForm(BaseModel):
     # * Config
     name: str
-    salary_from: Optional[int] = Field(None)
+    salary_from: Optional[int] = Field(None, description="Зарплата от")
     salary_to: Optional[int] = Field(None)
     currency: Optional[str] = Field(CURRENCY.RUR.name)
     is_remote: bool = False
