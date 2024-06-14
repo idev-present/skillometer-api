@@ -109,7 +109,7 @@ def session_factory(db_engine: Engine) -> sessionmaker:
     return sessionmaker(bind=db_engine, expire_on_commit=False, class_=Session)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def db_session(session_factory):
     with session_factory() as session:
         try:

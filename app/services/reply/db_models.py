@@ -32,7 +32,6 @@ class ReplyDBModel(BaseDBModel):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-
     @classmethod
     def create(cls, form: Reply, db) -> "ReplyDBModel":
         new_reply = cls(**form.dict())
