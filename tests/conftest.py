@@ -103,13 +103,13 @@ def _apply_migrations(
     # alembic_runner.migrate_down_to(revision="base")
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def session_factory(db_engine: Engine) -> sessionmaker:
     """Create async session factory."""
     return sessionmaker(bind=db_engine, expire_on_commit=False, class_=Session)
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def db_session(session_factory):
     with session_factory() as session:
         try:

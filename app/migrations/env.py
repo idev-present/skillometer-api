@@ -46,7 +46,6 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         compare_type=True,
-        transactional_ddl=False,
         dialect_name="postgresql",
         dialect_opts={"paramstyle": "named"},
     )
