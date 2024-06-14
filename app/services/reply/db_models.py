@@ -32,38 +32,37 @@ class ReplyDBModel(BaseDBModel):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-
     @classmethod
-    async def create(cls, form: Reply, db) -> "ReplyDBModel":
+    def create(cls, form: Reply, db) -> "ReplyDBModel":
         new_reply = cls(**form.dict())
         db.add(new_reply)
-        await db.commit()
-        await db.refresh(new_reply)
+        db.commit()
+        db.refresh(new_reply)
         return new_reply
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "ReplyDBModel":
+    def get(cls, db, item_id: str) -> "ReplyDBModel":
         query = sql.select(cls).filter(cls.id == item_id)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: ReplyUpdateForm) -> "ReplyDBModel":
-        reply = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: ReplyUpdateForm) -> "ReplyDBModel":
+        reply = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(reply, field, value)
         db.add(reply)
-        await db.commit()
-        await db.refresh(reply)
+        db.commit()
+        db.refresh(reply)
         return reply
 
     @classmethod
-    async def get_list(cls, db, filters: Optional[ReplyDBModelFilters] = None) -> List["ReplyDBModel"]:
+    def get_list(cls, db, filters: Optional[ReplyDBModelFilters] = None) -> List["ReplyDBModel"]:
         query = sql.select(cls)
         if filters:
             if filters.applicant_id:
                 query = query.where(cls.applicant_id == filters.applicant_id)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -80,17 +79,17 @@ class ReplyCommentDBModel(BaseDBModel):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     @classmethod
-    async def get_list(cls, reply_id: str, db) -> List["ReplyCommentDBModel"]:
+    def get_list(cls, reply_id: str, db) -> List["ReplyCommentDBModel"]:
         query = sql.select(cls).filter(cls.reply_id == reply_id).order_by(cls.created_at.desc())
-        result = await db.execute(query)
+        result = db.execute(query)
         result = result.scalars().all()
         return result
 
     @classmethod
-    async def create(cls, reply_id: str, form: ReplyCommentForm, db) -> List["ReplyCommentDBModel"]:
+    def create(cls, reply_id: str, form: ReplyCommentForm, db) -> List["ReplyCommentDBModel"]:
         reply_comment = cls(**form.dict())
         reply_comment.reply_id = reply_id
         db.add(reply_comment)
-        await db.commit()
-        await db.refresh(reply_comment)
-        return await cls.get_list(reply_id, db)
+        db.commit()
+        db.refresh(reply_comment)
+        return cls.get_list(reply_id, db)

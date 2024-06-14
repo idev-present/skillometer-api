@@ -51,8 +51,7 @@ class IAM:
     async def get_profile(self, user_id: str):
         logger.info("api request to iam_api", user_id=user_id)
 
-        async with httpx.AsyncClient() as client:
-            query = await client.get(url=f"{self.api_uri}/get-user", params={"userId": user_id})
+        query = httpx.get(url=f"{self.api_uri}/get-user", params={"userId": user_id})
 
         logger.info("api response from iam_api", httpx_status=query.status_code)
 

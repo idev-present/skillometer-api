@@ -13,9 +13,9 @@ logger = get_logger(__name__)
 
 
 @router.get("/", response_model=CV)
-async def get_user_cv(
+def get_user_cv(
         applicant_id: str,
         token_data: TokenData = Depends(get_current_user),
         db_session=Depends(db_service.get_db)
 ):
-    return await load_user_cv(applicant_id=applicant_id, db=db_session)
+    return load_user_cv(applicant_id=applicant_id, db=db_session)

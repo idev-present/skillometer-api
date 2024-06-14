@@ -41,7 +41,7 @@ class UserDBModel(BaseDBModel):
     )
 
     @classmethod
-    async def create(cls, db, form: User) -> "UserDBModel":
+    def create(cls, db, form: User) -> "UserDBModel":
         user = cls(**form.dict())
         if user.birthday:
             user.birthday = datetime.fromtimestamp(user.birthday.timestamp())
@@ -52,39 +52,39 @@ class UserDBModel(BaseDBModel):
         if user.deleted_at:
             user.deleted_at = datetime.fromtimestamp(user.deleted_at.timestamp())
         db.add(user)
-        await db.commit()
-        await db.refresh(user)
+        db.commit()
+        db.refresh(user)
         return user
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "UserDBModel":
+    def get(cls, db, item_id: str) -> "UserDBModel":
         query = sql.select(cls).filter(cls.id == item_id)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: UserUpdateForm) -> "UserDBModel":
-        user = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: UserUpdateForm) -> "UserDBModel":
+        user = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(user, field, value)
         if user.birthday:
             user.birthday = datetime.fromtimestamp(user.birthday.timestamp())
         db.add(user)
-        await db.commit()
-        await db.refresh(user)
+        db.commit()
+        db.refresh(user)
         return user
 
     @classmethod
-    async def delete(cls, db, item_id: str) -> bool:
-        user = await cls.get(db, item_id)
-        await db.delete(user)
-        await db.commit()
+    def delete(cls, db, item_id: str) -> bool:
+        user = cls.get(db, item_id)
+        db.delete(user)
+        db.commit()
         return True
 
     @classmethod
-    async def get_list(cls, db) -> List["UserDBModel"]:
+    def get_list(cls, db) -> List["UserDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res

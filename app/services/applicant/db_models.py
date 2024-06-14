@@ -59,33 +59,33 @@ class ApplicantDBModel(BaseDBModel):
     )
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "ApplicantDBModel":
+    def get(cls, db, item_id: str) -> "ApplicantDBModel":
         query = sql.select(cls).where(cls.id == item_id)
         logger.debug(query)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: ApplicantForm) -> "ApplicantDBModel":
-        applicant = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: ApplicantForm) -> "ApplicantDBModel":
+        applicant = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(applicant, field, value)
         db.add(applicant)
-        await db.commit()
-        await db.refresh(applicant)
+        db.commit()
+        db.refresh(applicant)
         return applicant
 
     @classmethod
-    async def delete(cls, db, item_id: str) -> bool:
-        applicant = await cls.get(db, item_id)
-        await db.delete(applicant)
-        await db.commit()
+    def delete(cls, db, item_id: str) -> bool:
+        applicant = cls.get(db, item_id)
+        db.delete(applicant)
+        db.commit()
         return True
 
     @classmethod
-    async def get_list(cls, db) -> List["ApplicantDBModel"]:
+    def get_list(cls, db) -> List["ApplicantDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -116,7 +116,7 @@ class ApplicantXPDBModel(BaseDBModel):
     )
 
     @classmethod
-    async def create(cls, form: ApplicantXPForm, parent_id: str, db) -> "ApplicantXPDBModel":
+    def create(cls, form: ApplicantXPForm, parent_id: str, db) -> "ApplicantXPDBModel":
         xp_item = cls(**form.dict())
         xp_item.id = generate_uid('xp')
         xp_item.applicant_id = parent_id
@@ -125,19 +125,19 @@ class ApplicantXPDBModel(BaseDBModel):
         if xp_item.end_date:
             xp_item.end_date = datetime.fromtimestamp(xp_item.end_date.timestamp())
         db.add(xp_item)
-        await db.commit()
-        await db.refresh(xp_item)
+        db.commit()
+        db.refresh(xp_item)
         return xp_item
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "ApplicantXPDBModel":
+    def get(cls, db, item_id: str) -> "ApplicantXPDBModel":
         query = sql.select(cls).where(cls.id == item_id)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: ApplicantXPUpdateForm) -> "ApplicantXPDBModel":
-        xp_item = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: ApplicantXPUpdateForm) -> "ApplicantXPDBModel":
+        xp_item = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(xp_item, field, value)
 
@@ -146,21 +146,21 @@ class ApplicantXPDBModel(BaseDBModel):
         if xp_item.end_date:
             xp_item.end_date = datetime.fromtimestamp(xp_item.end_date.timestamp())
         db.add(xp_item)
-        await db.commit()
-        await db.refresh(xp_item)
+        db.commit()
+        db.refresh(xp_item)
         return xp_item
 
     @classmethod
-    async def delete(cls, db, item_id: str) -> bool:
-        applicant = await cls.get(db, item_id)
-        await db.delete(applicant)
-        await db.commit()
+    def delete(cls, db, item_id: str) -> bool:
+        applicant = cls.get(db, item_id)
+        db.delete(applicant)
+        db.commit()
         return True
 
     @classmethod
-    async def get_list(cls, parent_id: str, db) -> List["ApplicantXPDBModel"]:
+    def get_list(cls, parent_id: str, db) -> List["ApplicantXPDBModel"]:
         query = sql.select(cls).where(cls.applicant_id == parent_id)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -191,7 +191,7 @@ class ApplicantEducationDBModel(BaseDBModel):
     )
 
     @classmethod
-    async def create(cls, form: ApplicantEducationForm, parent_id: str, db) -> "ApplicantEducationDBModel":
+    def create(cls, form: ApplicantEducationForm, parent_id: str, db) -> "ApplicantEducationDBModel":
         edu_item = cls(**form.dict())
         edu_item.id = generate_uid('edu')
         edu_item.applicant_id = parent_id
@@ -200,19 +200,19 @@ class ApplicantEducationDBModel(BaseDBModel):
         if edu_item.end_date:
             edu_item.end_date = datetime.fromtimestamp(edu_item.end_date.timestamp())
         db.add(edu_item)
-        await db.commit()
-        await db.refresh(edu_item)
+        db.commit()
+        db.refresh(edu_item)
         return edu_item
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "ApplicantEducationDBModel":
+    def get(cls, db, item_id: str) -> "ApplicantEducationDBModel":
         query = sql.select(cls).where(cls.id == item_id)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: ApplicantEducationUpdateForm) -> "ApplicantEducationDBModel":
-        edu_item = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: ApplicantEducationUpdateForm) -> "ApplicantEducationDBModel":
+        edu_item = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(edu_item, field, value)
 
@@ -221,21 +221,21 @@ class ApplicantEducationDBModel(BaseDBModel):
         if edu_item.end_date:
             edu_item.end_date = datetime.fromtimestamp(edu_item.end_date.timestamp())
         db.add(edu_item)
-        await db.commit()
-        await db.refresh(edu_item)
+        db.commit()
+        db.refresh(edu_item)
         return edu_item
 
     @classmethod
-    async def delete(cls, db, item_id: str) -> bool:
-        edu_item = await cls.get(db, item_id)
-        await db.delete(edu_item)
-        await db.commit()
+    def delete(cls, db, item_id: str) -> bool:
+        edu_item = cls.get(db, item_id)
+        db.delete(edu_item)
+        db.commit()
         return True
 
     @classmethod
-    async def get_list(cls, parent_id: str, db) -> List["ApplicantEducationDBModel"]:
+    def get_list(cls, parent_id: str, db) -> List["ApplicantEducationDBModel"]:
         query = sql.select(cls).where(cls.applicant_id == parent_id)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res

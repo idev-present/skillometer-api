@@ -15,14 +15,14 @@ from app.services.user.db_models import UserDBModel
 from app.services.vacancy.db_models import VacancyDBModel
 
 
-async def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Session):
-    user = await UserDBModel.get(item_id=user_id, db=db)
+def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Session):
+    user = UserDBModel.get(item_id=user_id, db=db)
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User #{user_id} not found")
-    vacancy = await VacancyDBModel.get(item_id=vacancy_id, db=db)
+    vacancy = VacancyDBModel.get(item_id=vacancy_id, db=db)
     if not vacancy:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Vacancy #{vacancy_id} not found")
-    applicant = await ApplicantDBModel.get(item_id=applicant_id, db=db)
+    applicant = ApplicantDBModel.get(item_id=applicant_id, db=db)
     if not applicant:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Applicant #{applicant_id} not found")
     reply_form = Reply(
@@ -39,20 +39,20 @@ async def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Ses
         updated_by=str(user.id),
         updated_by_role=user.role
     )
-    reply = await ReplyDBModel.create(form=reply_form, db=db)
+    reply = ReplyDBModel.create(form=reply_form, db=db)
     return reply
 
 
-async def get_status_info(reply_id: str, db: Session):
-    reply = await ReplyDBModel.get(item_id=reply_id, db=db)
+def get_status_info(reply_id: str, db: Session):
+    reply = ReplyDBModel.get(item_id=reply_id, db=db)
     available_flows = available_status_flow.get(reply.status)
     if not available_flows:
         return []
     return available_flows
 
 
-async def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db: Session):
-    available_flow = await get_status_info(reply_id=reply_id, db=db)
+def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db: Session):
+    available_flow = get_status_info(reply_id=reply_id, db=db)
     available_status_list = [item.status for item in available_flow]
     if to_status not in available_status_list:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Status #{reply_id} not available")
@@ -60,7 +60,7 @@ async def update_reply_status(reply_id: str, to_status: str, reason: Optional[st
     if available_flow_item.is_required_reason and not reason:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Reason for status #{to_status} is required")
     update_form = ReplyUpdateForm(status=to_status, reason=reason)
-    updated_reply = await ReplyDBModel.update(item_id=reply_id, form=update_form, db=db)
+    updated_reply = ReplyDBModel.update(item_id=reply_id, form=update_form, db=db)
     new_available_flow = available_status_flow.get(updated_reply.status)
     if not new_available_flow:
         return []

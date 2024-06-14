@@ -9,7 +9,7 @@ from app.services.user.db_models import UserDBModel
 logger = get_logger(__name__)
 
 
-async def load_user_cv(applicant_id: str, db):
+def load_user_cv(applicant_id: str, db):
     stmt = (
         select(ApplicantDBModel)
         .options(
@@ -25,7 +25,7 @@ async def load_user_cv(applicant_id: str, db):
         )
     )
 
-    result = await db.execute(stmt)
+    result = db.execute(stmt)
     applicant = result.scalars().first()
     user_data = {
         **applicant.__dict__,

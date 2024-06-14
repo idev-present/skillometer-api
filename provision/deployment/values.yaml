@@ -41,7 +41,7 @@ spec:
               value: "SBER"
             # Database
             - name: DATABASE_SERVER
-              value: "10.244.0.151"
+              value: "10.244.0.204"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USERNAME

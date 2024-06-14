@@ -17,9 +17,9 @@ class CityDBModel(BaseDBModel):
     region_name = Column(String(50), nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["CityDBModel"]:
+    def get_list(cls, db) -> List["CityDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -33,9 +33,9 @@ class EmploymentTypeDBModel(BaseDBModel):
     hh_id = Column(String(50), nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["EmploymentTypeDBModel"]:
+    def get_list(cls, db) -> List["EmploymentTypeDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -49,9 +49,9 @@ class DivisionDBModel(BaseDBModel):
     habr_id = Column(Integer, nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["DivisionDBModel"]:
+    def get_list(cls, db) -> List["DivisionDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -64,9 +64,9 @@ class QualificationDBModel(BaseDBModel):
     habr_id = Column(Integer, nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["QualificationDBModel"]:
+    def get_list(cls, db) -> List["QualificationDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -79,9 +79,9 @@ class SearchStatusDBModel(BaseDBModel):
     habr_id = Column(Integer, nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["SearchStatusDBModel"]:
+    def get_list(cls, db) -> List["SearchStatusDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res
@@ -99,9 +99,9 @@ class SkillDBModel(BaseDBModel):
     habr_id = Column(Integer, nullable=True)
 
     @classmethod
-    async def get_list(cls, db) -> List["SkillDBModel"]:
+    def get_list(cls, db) -> List["SkillDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res

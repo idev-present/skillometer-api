@@ -39,37 +39,37 @@ def get_currency_list() -> List[KeyValueDict]:
 
 @router.get("/city")
 async def city_list(db_session=Depends(db_service.get_db)) -> List[City]:
-    res = await CityDBModel.get_list(db_session)
+    res = CityDBModel.get_list(db_session)
     return res
 
 
 @router.get("/employment_type")
 async def employment_type_list(db_session=Depends(db_service.get_db)) -> List[EmploymentType]:
-    res = await EmploymentTypeDBModel.get_list(db_session)
+    res = EmploymentTypeDBModel.get_list(db_session)
     return res
 
 
 @router.get("/division")
 async def division_list(db_session=Depends(db_service.get_db)) -> List[Division]:
-    res = await DivisionDBModel.get_list(db_session)
+    res = DivisionDBModel.get_list(db_session)
     return res
 
 
 @router.get("/qualification")
 async def qualification_list(db_session=Depends(db_service.get_db)) -> List[Qualification]:
-    res = await QualificationDBModel.get_list(db_session)
+    res = QualificationDBModel.get_list(db_session)
     return res
 
 
 @router.get("/search_status")
 async def search_status_list(db_session=Depends(db_service.get_db)) -> List[SearchStatus]:
-    res = await SearchStatusDBModel.get_list(db_session)
+    res = SearchStatusDBModel.get_list(db_session)
     return res
 
 
 @router.get("/skill")
 async def skill_list(db_session=Depends(db_service.get_db)) -> List[Skill]:
-    res = await SkillDBModel.get_list(db_session)
+    res = SkillDBModel.get_list(db_session)
     return res
 
 

@@ -50,41 +50,41 @@ class VacancyDBModel(BaseDBModel):
     company_id = Column(String, nullable=True)
 
     @classmethod
-    async def create(cls, db, form: VacancyForm) -> "VacancyDBModel":
+    def create(cls, db, form: VacancyForm) -> "VacancyDBModel":
         vacancy = cls(**form.dict())
         vacancy.id = generate_uid('v')
         db.add(vacancy)
-        await db.commit()
-        await db.refresh(vacancy)
+        db.commit()
+        db.refresh(vacancy)
         return vacancy
 
     @classmethod
-    async def get(cls, db, item_id: str) -> "VacancyDBModel":
+    def get(cls, db, item_id: str) -> "VacancyDBModel":
         query = sql.select(cls).filter(cls.id == item_id)
-        result = await db.execute(query)
+        result = db.execute(query)
         return result.scalars().first()
 
     @classmethod
-    async def update(cls, db, item_id: str, form: VacancyUpdateForm) -> "VacancyDBModel":
-        vacancy = await cls.get(db, item_id)
+    def update(cls, db, item_id: str, form: VacancyUpdateForm) -> "VacancyDBModel":
+        vacancy = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(vacancy, field, value)
         db.add(vacancy)
-        await db.commit()
-        await db.refresh(vacancy)
+        db.commit()
+        db.refresh(vacancy)
         return vacancy
 
     @classmethod
-    async def delete(cls, db, item_id: str) -> bool:
-        vacancy = await cls.get(db, item_id)
-        await db.delete(vacancy)
-        await db.commit()
+    def delete(cls, db, item_id: str) -> bool:
+        vacancy = cls.get(db, item_id)
+        db.delete(vacancy)
+        db.commit()
         return True
 
     @classmethod
-    async def get_list(cls, db) -> List["VacancyDBModel"]:
+    def get_list(cls, db) -> List["VacancyDBModel"]:
         query = sql.select(cls)
-        res = await db.execute(query)
+        res = db.execute(query)
         res = res.scalars().all()
 
         return res

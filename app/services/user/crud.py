@@ -13,14 +13,14 @@ from app.services.user.schemas import User
 logger = get_logger(__name__)
 
 
-async def get_or_create_user_from_token(token_data: TokenData, db):
+def get_or_create_user_from_token(token_data: TokenData, db):
     user_id = token_data.id
     logger.info("try find user in db", user_id=user_id)
-    user_db_model = await UserDBModel.get(item_id=user_id, db=db)
+    user_db_model = UserDBModel.get(item_id=user_id, db=db)
     if not user_db_model:
         logger.info("user not found, try get profile from api", user_id=user_id)
         # TODO(ilya.zhuravlev): check expternal_api errors
-        iam_user: IAMUser = await iam_service.get_profile(token_data.id)
+        iam_user: IAMUser = iam_service.get_profile(token_data.id)
         if not iam_user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
@@ -44,17 +44,17 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
             deleted_at=iam_user.deleted_at,
         )
         try:
-            user_db_model = await UserDBModel.create(db=db, form=user_form)
+            user_db_model = UserDBModel.create(db=db, form=user_form)
         except DBAPIError as e:
             raise e
         # TODO(ilya.zhuravlev): check unuque constraint
     return user_db_model
 
 
-async def get_or_create_applicant_from_token(token_data: TokenData, db):
-    applicant = await ApplicantDBModel.get(item_id=token_data.name, db=db)
+def get_or_create_applicant_from_token(token_data: TokenData, db):
+    applicant = ApplicantDBModel.get(item_id=token_data.name, db=db)
     if not applicant:
-        user_db_model = await UserDBModel.get(item_id=token_data.id, db=db)
+        user_db_model = UserDBModel.get(item_id=token_data.id, db=db)
         if not user_db_model:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         applicant = ApplicantDBModel(
@@ -69,6 +69,6 @@ async def get_or_create_applicant_from_token(token_data: TokenData, db):
             applicant.age = age
 
         db.add(applicant)
-        await db.commit()
-        await db.refresh(applicant)
+        db.commit()
+        db.refresh(applicant)
     return applicant
