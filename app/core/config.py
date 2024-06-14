@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     DOMAIN: str = "localhost"
     API_PREFIX: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"
+    ENVIRONMENT: Literal["local", "staging", "production", "testing"] = "local"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     LOG_DIR: str = "runtime/logs"
     CORS_ORIGINS: Annotated[
@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     FS_TYPE: str = 'LOCAL'
 
     # Database
+    DATABASE_DRIVER: Optional[str] = 'postgresql+asyncpg'
     DATABASE_SERVER: str
     DATABASE_PORT: int = 5432
     DATABASE_USERNAME: str
@@ -55,7 +56,7 @@ class Settings(BaseSettings):
     @property
     def DATABASE_DSN(self) -> PostgresDsn:
         return MultiHostUrl.build(
-            scheme="postgresql+asyncpg",
+            scheme=self.DATABASE_DRIVER,
             username=self.DATABASE_USERNAME,
             password=self.DATABASE_PASSWORD,
             host=self.DATABASE_SERVER,
