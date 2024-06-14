@@ -11,7 +11,7 @@ from app.core.iam.schemas import TokenData
 user_auth_scheme = HTTPBearer()
 
 
-async def parse_user_token(credentials: HTTPAuthorizationCredentials = Depends(user_auth_scheme)) -> TokenData:
+def parse_user_token(credentials: HTTPAuthorizationCredentials = Depends(user_auth_scheme)) -> TokenData:
     if credentials.scheme != "Bearer":
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token scheme")
     token: str = credentials.credentials
@@ -27,7 +27,7 @@ async def parse_user_token(credentials: HTTPAuthorizationCredentials = Depends(u
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-async def get_current_user(user: Annotated[TokenData, Depends(parse_user_token)]):
+def get_current_user(user: Annotated[TokenData, Depends(parse_user_token)]):
     if user.isDeleted or user.isForbidden:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You are not allowed to access this resource")
     return user

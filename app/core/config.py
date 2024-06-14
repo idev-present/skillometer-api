@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     FS_TYPE: str = 'LOCAL'
 
     # Database
-    DATABASE_DRIVER: Optional[str] = 'postgresql+asyncpg'
+    DATABASE_DRIVER: Optional[str] = 'postgresql'
     DATABASE_SERVER: str
     DATABASE_PORT: int = 5432
     DATABASE_USERNAME: str
