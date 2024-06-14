@@ -1,0 +1,740 @@
+[
+  {
+    "id": "frontend_developer",
+    "name": "Фронтенд разработчик",
+    "habr_id": 3,
+    "group": "software_development"
+  },
+  {
+    "id": "backend_developer",
+    "name": "Бэкенд разработчик",
+    "habr_id": 2,
+    "group": "software_development"
+  },
+  {
+    "id": "fullstack_developer",
+    "name": "Фулстек разработчик",
+    "habr_id": 4,
+    "group": "software_development"
+  },
+  {
+    "id": "web_developer",
+    "name": "Веб-разработчик",
+    "habr_id": 82,
+    "group": "software_development"
+  },
+  {
+    "id": "application_developer",
+    "name": "Разработчик приложений",
+    "habr_id": 72,
+    "group": "software_development"
+  },
+  {
+    "id": "mobile_application_developer",
+    "name": "Разработчик мобильных приложений",
+    "habr_id": 5,
+    "group": "software_development"
+  },
+  {
+    "id": "software_developer",
+    "name": "Десктоп разработчик",
+    "habr_id": 1,
+    "group": "software_development"
+  },
+  {
+    "id": "game_developer",
+    "name": "Разработчик игр",
+    "habr_id": 6,
+    "group": "software_development"
+  },
+  {
+    "id": "release_manager",
+    "name": "Релиз менеджер",
+    "habr_id": 75,
+    "group": "software_development"
+  },
+  {
+    "id": "embedded_software_engineer",
+    "name": "Инженер втраиваемых систем",
+    "habr_id": 7,
+    "group": "software_development"
+  },
+  {
+    "id": "html_coding",
+    "name": "HTML-верстальщик",
+    "habr_id": 83,
+    "group": "software_development"
+  },
+  {
+    "id": "1c_developer",
+    "name": "Программист 1C",
+    "habr_id": 84,
+    "group": "software_development"
+  },
+  {
+    "id": "database_developer",
+    "name": "Разработчик баз данных",
+    "habr_id": 77,
+    "group": "software_development"
+  },
+  {
+    "id": "erp_developer",
+    "name": "ERP-программист",
+    "habr_id": 85,
+    "group": "software_development"
+  },
+  {
+    "id": "system_software_engineer",
+    "name": "Системный инженер",
+    "habr_id": 8,
+    "group": "software_development"
+  },
+  {
+    "id": "software_architect",
+    "name": "Архитектор программного обеспечения",
+    "habr_id": 73,
+    "group": "software_development"
+  },
+  {
+    "id": "database_architect",
+    "name": "Архитектор баз данных",
+    "habr_id": 86,
+    "group": "software_development"
+  },
+  {
+    "id": "manual_test_engineer",
+    "name": "Инженер по ручному тестированию",
+    "habr_id": 12,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "test_automation_engineer",
+    "name": "Инженер по автоматизации тестирования",
+    "habr_id": 10,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "quality_assurance_engineer",
+    "name": "Инженер по обеспечению качества",
+    "habr_id": 13,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "software_performance_engineer",
+    "name": "Инженер по производительности",
+    "habr_id": 11,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "ux_tester",
+    "name": "UX-тестировщик",
+    "habr_id": 87,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "quality_assurance_analyst",
+    "name": "Аналитик по обеспечению качества",
+    "habr_id": 14,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "quality_assurance_manager",
+    "name": "Менеджер по обеспечению качества",
+    "habr_id": 15,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "quality_assurance_director",
+    "name": "Директор по обеспечению качества",
+    "habr_id": 16,
+    "group": "quality_assurance"
+  },
+  {
+    "id": "mobile_analyst",
+    "name": "Аналитик мобильных приложений",
+    "habr_id": 98,
+    "group": "analytics"
+  },
+  {
+    "id": "systems_analyst",
+    "name": "Системный аналитик",
+    "habr_id": 41,
+    "group": "analytics"
+  },
+  {
+    "id": "business_analist",
+    "name": "Бизнес-аналитик",
+    "habr_id": 42,
+    "group": "analytics"
+  },
+  {
+    "id": "ux_analyst",
+    "name": "UX_аналитик",
+    "habr_id": 168,
+    "group": "analytics"
+  },
+  {
+    "id": "game_analyst",
+    "name": "Гейм-аналитик",
+    "habr_id": 99,
+    "group": "analytics"
+  },
+  {
+    "id": "data_analyst",
+    "name": "Аналитик по данным",
+    "habr_id": 43,
+    "group": "analytics"
+  },
+  {
+    "id": "data_engineer",
+    "name": "Инженер по данным",
+    "habr_id": 76,
+    "group": "analytics"
+  },
+  {
+    "id": "software_analyst",
+    "name": "Программный аналитик",
+    "habr_id": 96,
+    "group": "analytics"
+  },
+  {
+    "id": "product_analyst",
+    "name": "Продуктовый аналитик",
+    "habr_id": 97,
+    "group": "analytics"
+  },
+  {
+    "id": "bi_developer",
+    "name": "BI-разработчик",
+    "habr_id": 95,
+    "group": "analytics"
+  },
+  {
+    "id": "web_analyst",
+    "name": "Веб-аналитик",
+    "habr_id": 100,
+    "group": "analytics"
+  },
+  {
+    "id": "1c_analyst",
+    "name": "Аналитик 1С",
+    "habr_id": 133,
+    "group": "analytics"
+  },
+  {
+    "id": "ui/ux_designer",
+    "name": "UI/UX дизайнер",
+    "habr_id": 23,
+    "group": "design"
+  },
+  {
+    "id": "product_designer",
+    "name": "Продуктовый дизайнер",
+    "habr_id": 94,
+    "group": "design"
+  },
+  {
+    "id": "web_designer",
+    "name": "Веб дизайнер",
+    "habr_id": 24,
+    "group": "design"
+  },
+  {
+    "id": "graphic_designer",
+    "name": "Графический дизайнер",
+    "habr_id": 30,
+    "group": "design"
+  },
+  {
+    "id": "application_designer",
+    "name": "Дизайнер приложений",
+    "habr_id": 25,
+    "group": "design"
+  },
+  {
+    "id": "designer_illustrator",
+    "name": "Дизайнер иллюстратор",
+    "habr_id": 27,
+    "group": "design"
+  },
+  {
+    "id": "game_designer",
+    "name": "Дизайнер игр",
+    "habr_id": 26,
+    "group": "design"
+  },
+  {
+    "id": "narrative_designer",
+    "name": "Нерративный дизайнер",
+    "habr_id": 90,
+    "group": "design"
+  },
+  {
+    "id": "3d_animator",
+    "name": "3d-аниматор",
+    "habr_id": 91,
+    "group": "design"
+  },
+  {
+    "id": "motion_designer",
+    "name": "Моушен дизайнер",
+    "habr_id": 28,
+    "group": "design"
+  },
+  {
+    "id": "flash_animator",
+    "name": "Flash-аниматор",
+    "habr_id": 92,
+    "group": "design"
+  },
+  {
+    "id": "3d_modeler",
+    "name": "3d-моделлер",
+    "habr_id": 29,
+    "group": "design"
+  },
+  {
+    "id": "computer_graphics_artist",
+    "name": "Художник компьютерной графики",
+    "habr_id": 93,
+    "group": "design"
+  },
+  {
+    "id": "vui_designer",
+    "name": "VUI-дизайнер",
+    "habr_id": 122,
+    "group": "design"
+  },
+  {
+    "id": "art_director",
+    "name": "Арт директор",
+    "habr_id": 31,
+    "group": "design"
+  },
+  {
+    "id": "project_manager",
+    "name": "Менеджер проекта",
+    "habr_id": 32,
+    "group": "management"
+  },
+  {
+    "id": "project_director",
+    "name": "Директор проекта",
+    "habr_id": 33,
+    "group": "management"
+  },
+  {
+    "id": "product_manager",
+    "name": "Менеджер продукта",
+    "habr_id": 34,
+    "group": "management"
+  },
+  {
+    "id": "scrum_master",
+    "name": "Scrum-мастер",
+    "habr_id": 119,
+    "group": "management"
+  },
+  {
+    "id": "community_manager",
+    "name": "Менеджер сообщества",
+    "habr_id": 36,
+    "group": "management"
+  },
+  {
+    "id": "program_manager",
+    "name": "Программный менеджер",
+    "habr_id": 37,
+    "group": "management"
+  },
+  {
+    "id": "pentester",
+    "name": "Пентестер",
+    "habr_id": 78,
+    "group": "information_security"
+  },
+  {
+    "id": "information_security_specialist",
+    "name": "Специалист по информационной безопасности",
+    "habr_id": 174,
+    "group": "information_security"
+  },
+  {
+    "id": "security_administrator",
+    "name": "Администратор защиты",
+    "habr_id": 21,
+    "group": "information_security"
+  },
+  {
+    "id": "soc_analyst",
+    "name": "Аналитик SOC",
+    "habr_id": 172,
+    "group": "information_security"
+  },
+  {
+    "id": "reverse_engineer",
+    "name": "Специалист по реверс-инжинирингу",
+    "habr_id": 79,
+    "group": "information_security"
+  },
+  {
+    "id": "appsec_engineer",
+    "name": "AppSec-инженер",
+    "habr_id": 173,
+    "group": "information_security"
+  },
+  {
+    "id": "hr_director",
+    "name": "Директор по персоналу",
+    "habr_id": 63,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_product_officer",
+    "name": "Директор по продукту",
+    "habr_id": 35,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_operating_officer",
+    "name": "Исполнительный директор",
+    "habr_id": 38,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_information_officer",
+    "name": "Директор по информационным технологиям",
+    "habr_id": 70,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_financial_officer",
+    "name": "Финансовый директор",
+    "habr_id": 71,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_executive_officer",
+    "name": "Генеральный директор",
+    "habr_id": 39,
+    "group": "top_management"
+  },
+  {
+    "id": "chief_technology_officer",
+    "name": "Технический директор",
+    "habr_id": 9,
+    "group": "top_management"
+  },
+  {
+    "id": "data_scientist",
+    "name": "Ученый по данным",
+    "habr_id": 44,
+    "group": "artificial_intelligence"
+  },
+  {
+    "id": "ml_engineer",
+    "name": "ML разработчик",
+    "habr_id": 125,
+    "group": "artificial_intelligence"
+  },
+  {
+    "id": "computer_vision_engineer",
+    "name": "Инженер по компьютерному зрению",
+    "habr_id": 177,
+    "group": "artificial_intelligence"
+  },
+  {
+    "id": "promt_engineer",
+    "name": "Промт-инженер",
+    "habr_id": 175,
+    "group": "artificial_intelligence"
+  },
+  {
+    "id": "technical_support_engineer",
+    "name": "Инженер технической поддержки",
+    "habr_id": 49,
+    "group": "support"
+  },
+  {
+    "id": "technical_support_manager",
+    "name": "Менеджер технической поддержки",
+    "habr_id": 45,
+    "group": "support"
+  },
+  {
+    "id": "technical_support_director",
+    "name": "Директор технической поддержки",
+    "habr_id": 46,
+    "group": "support"
+  },
+  {
+    "id": "technical_support_analyst",
+    "name": "Аналитик технической поддержки",
+    "habr_id": 50,
+    "group": "support"
+  },
+  {
+    "id": "customer_service_manager",
+    "name": "Менеджер по обслуживанию клиентов",
+    "habr_id": 47,
+    "group": "support"
+  },
+  {
+    "id": "customer_service_director",
+    "name": "Директор по обслуживанию клиентов",
+    "habr_id": 48,
+    "group": "support"
+  },
+  {
+    "id": "moderator",
+    "name": "Модератор",
+    "habr_id": 101,
+    "group": "support"
+  },
+  {
+    "id": "marketing_manager",
+    "name": "Менеджер по маркетингу",
+    "habr_id": 51,
+    "group": "marketing"
+  },
+  {
+    "id": "marketing_director",
+    "name": "Директор по маркетингу",
+    "habr_id": 52,
+    "group": "marketing"
+  },
+  {
+    "id": "marketing_analyst",
+    "name": "Маркетинговый аналитик",
+    "habr_id": 53,
+    "group": "marketing"
+  },
+  {
+    "id": "seo_specialist",
+    "name": "SEO-специалист",
+    "habr_id": 102,
+    "group": "marketing"
+  },
+  {
+    "id": "smm_specialist",
+    "name": "SMM-специалист",
+    "habr_id": 103,
+    "group": "marketing"
+  },
+  {
+    "id": "targetologist",
+    "name": "Таргетолог",
+    "habr_id": 104,
+    "group": "marketing"
+  },
+  {
+    "id": "devrel",
+    "name": "Деврел",
+    "habr_id": 120,
+    "group": "marketing"
+  },
+  {
+    "id": "pr_manager",
+    "name": "PR-менеджер",
+    "habr_id": 121,
+    "group": "marketing"
+  },
+  {
+    "id": "ppc_specialist",
+    "name": "Контекстолог",
+    "habr_id": 132,
+    "group": "marketing"
+  },
+  {
+    "id": "directologist",
+    "name": "Директолог",
+    "habr_id": 131,
+    "group": "marketing"
+  },
+  {
+    "id": "dev_ops",
+    "name": "DevOps-инженер",
+    "habr_id": 22,
+    "group": "administration"
+  },
+  {
+    "id": "system_administration",
+    "name": "Системный администратор",
+    "habr_id": 17,
+    "group": "administration"
+  },
+  {
+    "id": "server_administrator",
+    "name": "Администратор серверов",
+    "habr_id": 18,
+    "group": "administration"
+  },
+  {
+    "id": "database_administrator",
+    "name": "Администратор баз данных",
+    "habr_id": 19,
+    "group": "administration"
+  },
+  {
+    "id": "network_engineer",
+    "name": "Сетевой инженер",
+    "habr_id": 20,
+    "group": "administration"
+  },
+  {
+    "id": "site_administrator",
+    "name": "Администратор сайта",
+    "habr_id": 89,
+    "group": "administration"
+  },
+  {
+    "id": "site_reliability_engineer",
+    "name": "Инженер по доступности сервисов",
+    "habr_id": 130,
+    "group": "administration"
+  },
+  {
+    "id": "mlops",
+    "name": "MLOps-инженер",
+    "habr_id": 129,
+    "group": "administration"
+  },
+  {
+    "id": "technical_writer",
+    "name": "Технический писатель",
+    "habr_id": 74,
+    "group": "content"
+  },
+  {
+    "id": "ux_writer",
+    "name": "UX-редактор",
+    "habr_id": 171,
+    "group": "content"
+  },
+  {
+    "id": "content_writer",
+    "name": "Создатель контента",
+    "habr_id": 59,
+    "group": "content"
+  },
+  {
+    "id": "content_manager",
+    "name": "Менеджер по контенту",
+    "habr_id": 60,
+    "group": "content"
+  },
+  {
+    "id": "content_director",
+    "name": "Директор по контенту",
+    "habr_id": 61,
+    "group": "content"
+  },
+  {
+    "id": "copywriter",
+    "name": "Копирайтер",
+    "habr_id": 105,
+    "group": "content"
+  },
+  {
+    "id": "account_manager",
+    "name": "Менеджер по работе с клиентами",
+    "habr_id": 54,
+    "group": "sales"
+  },
+  {
+    "id": "account_director",
+    "name": "Директор по работе с клиентами",
+    "habr_id": 55,
+    "group": "sales"
+  },
+  {
+    "id": "sales_manager",
+    "name": "Менеджер по продажам",
+    "habr_id": 56,
+    "group": "sales"
+  },
+  {
+    "id": "presale_engineer",
+    "name": "Пресейл инженер",
+    "habr_id": 169,
+    "group": "sales"
+  },
+  {
+    "id": "presale_manager",
+    "name": "Пресейл менеджер",
+    "habr_id": 170,
+    "group": "sales"
+  },
+  {
+    "id": "sales_director",
+    "name": "Директор по продажам",
+    "habr_id": 57,
+    "group": "sales"
+  },
+  {
+    "id": "sales_analyst",
+    "name": "Аналитик продаж",
+    "habr_id": 58,
+    "group": "sales"
+  },
+  {
+    "id": "hr_manager",
+    "name": "Менеджер по персоналу",
+    "habr_id": 62,
+    "group": "human_resources"
+  },
+  {
+    "id": "recruitment_manager",
+    "name": "Менеджер по найму",
+    "habr_id": 64,
+    "group": "human_resources"
+  },
+  {
+    "id": "recruitment_director",
+    "name": "Директор по найму",
+    "habr_id": 65,
+    "group": "human_resources"
+  },
+  {
+    "id": "hr_analyst",
+    "name": "Аналитик по персоналу",
+    "habr_id": 66,
+    "group": "human_resources"
+  },
+  {
+    "id": "personnel_training_and_development_manager",
+    "name": "Менеджер по обучению и развитию персонала",
+    "habr_id": 123,
+    "group": "human_resources"
+  },
+  {
+    "id": "hr_brand_development_manager",
+    "name": "Менеджер по развитию HR-бренда",
+    "habr_id": 124,
+    "group": "human_resources"
+  },
+  {
+    "id": "office_manager",
+    "name": "Офис менеджер",
+    "habr_id": 67,
+    "group": "office"
+  },
+  {
+    "id": "accountant",
+    "name": "Бухгалтер",
+    "habr_id": 68,
+    "group": "office"
+  },
+  {
+    "id": "lawyer",
+    "name": "Юрист",
+    "habr_id": 69,
+    "group": "office"
+  },
+  {
+    "id": "zerocoder",
+    "name": "Зерокодер",
+    "habr_id": 127,
+    "group": "no_code"
+  }
+]

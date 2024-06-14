@@ -1,0 +1,17 @@
+[
+  {
+    "id": "active",
+    "name": "В активном поиске",
+    "habr_id": null
+  },
+  {
+    "id": "not_active",
+    "name": "Не ищу работу",
+    "habr_id": null
+  },
+  {
+    "id": "passive",
+    "name": "Рассмотрю предложения",
+    "habr_id": null
+  }
+]

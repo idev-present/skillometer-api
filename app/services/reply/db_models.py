@@ -17,6 +17,7 @@ class ReplyDBModel(BaseDBModel):
     reason = Column(String, nullable=True)
     # Vacancy
     vacancy_id = Column(String, nullable=False)
+    vacancy_name = Column(String, nullable=True)
     # Applicant
     applicant_id = Column(String, nullable=True)
     applicant_avatar = Column(String, nullable=True)

@@ -29,6 +29,7 @@ def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Session):
         id=str(uuid.uuid4()),
         status=REPLY_STATUS.NEW.name,
         vacancy_id=vacancy.id,
+        vacancy_name=vacancy.name,
         applicant_id=applicant.id,
         applicant_avatar=user.avatar,
         applicant_fullname=applicant.title,
@@ -68,3 +69,8 @@ def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db
     if not new_available_status_list:
         return []
     return new_available_status_list
+
+
+def calculate_matching(reply_id: str, db: Session):
+    reply = ReplyDBModel.get(item_id=reply_id, db=db)
+    return reply

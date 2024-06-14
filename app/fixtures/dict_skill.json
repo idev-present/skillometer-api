@@ -1,0 +1,56 @@
+[
+  {
+    "id": "css",
+    "name": "CSS",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 32,
+    "group": null
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 245,
+    "group": null
+  },
+  {
+    "id": "html",
+    "name": "HTML",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 1017,
+    "group": null
+  },
+  {
+    "id": "react",
+    "name": "React",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 1070,
+    "group": null
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 12,
+    "group": null
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "type": "hard",
+    "qualification_id": null,
+    "division_id": "frontend_razrabotchik",
+    "habr_id": 264,
+    "group": null
+  }
+]

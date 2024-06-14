@@ -7,14 +7,15 @@ from typing import Optional
 
 
 class ReplyForm(BaseModel):
-    vacancy_id: str = Field(..., title="Vacancy ID")
-    applicant_id: str = Field(..., title="Applicant ID")
-    owner_id: Optional[str] = Field(None, title="Recruiter User ID")
+    vacancy_id: str = Field(..., description="ID Вакансии")
+    applicant_id: str = Field(..., description="ID Соискателя")
+    owner_id: Optional[str] = Field(None, description="ID Рекрутера")
 
 
 class Reply(ReplyForm):
     id: UUID
     status: str
+    vacancy_name: Optional[str] = Field(None, description="Название вакансии")
     applicant_avatar: Optional[str] = None
     applicant_fullname: Optional[str] = None
     applicant_phone: Optional[str] = None
@@ -28,7 +29,7 @@ class Reply(ReplyForm):
 
 class ReplyUpdateForm(BaseModel):
     status: str
-    reason: Optional[str] = Field(None, title="Причина изменения статуса")
+    reason: Optional[str] = Field(None, description="Причина изменения статуса")
 
 
 class ReplyDBModelFilters(BaseModel):

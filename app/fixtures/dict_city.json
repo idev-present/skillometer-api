@@ -1,1 +1,20 @@
-{}
+[
+  {
+    "id": "kirov",
+    "name": "Киров",
+    "fias_id": "452a2ddf-88a1-4e35-8d8d-8635493768d4",
+    "habr_id": 12,
+    "habr_alias": "kirov",
+    "country_name": "РФ",
+    "region_name": "Кировская область"
+  },
+  {
+    "id": "moskva",
+    "name": "Москва",
+    "fias_id": "0c5b2444-70a0-4932-980c-b4dc0d3f02b5",
+    "habr_id": 10,
+    "habr_alias": "moskva",
+    "country_name": "РФ",
+    "region_name": "Москва"
+  }
+]

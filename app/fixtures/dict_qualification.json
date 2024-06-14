@@ -1,0 +1,27 @@
+[
+  {
+    "id": "middle",
+    "name": "Средний (Middle)",
+    "habr_id": 4
+  },
+  {
+    "id": "intern",
+    "name": "Стажер (Intern)",
+    "habr_id": 1
+  },
+  {
+    "id": "junior",
+    "name": "Младший (Junior)",
+    "habr_id": 3
+  },
+  {
+    "id": "senior",
+    "name": "Старший (Senior)",
+    "habr_id": 5
+  },
+  {
+    "id": "lead",
+    "name": "Ведуший (Lead)",
+    "habr_id": 6
+  }
+]
