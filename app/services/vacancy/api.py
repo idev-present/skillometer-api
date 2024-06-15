@@ -42,7 +42,7 @@ def delete_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
 @router.post("/{vacancy_id}/reply", response_model=Reply)
 def vacancy_reply(
         vacancy_id: str,
-        comment: Annotated[Optional[str], Body()],
+        comment: Optional[Annotated[str, Body()]] = None,
         token_data: TokenData = Depends(get_current_user),
         db_session=Depends(db_service.get_db)
 ):

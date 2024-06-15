@@ -49,3 +49,12 @@ class Skill(BaseModel):
     qualification_id: Optional[str]
     division_id: Optional[str]
     habr_id: Optional[int]
+
+
+class ReplyStatusCount(BaseModel):
+    status: str
+    count: int
+
+    @classmethod
+    def from_row(cls, row) -> 'ReplyStatusCount':
+        return cls(status=row[0], count=row[1])

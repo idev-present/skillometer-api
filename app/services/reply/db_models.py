@@ -6,6 +6,7 @@ from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
 from app.services.dict.const import REPLY_STATUS
+from app.services.dict.schemas import ReplyStatusCount
 from app.services.reply.schemas import Reply, ReplyUpdateForm, ReplyDBModelFilters, ReplyCommentForm
 
 
@@ -64,10 +65,18 @@ class ReplyDBModel(BaseDBModel):
         if filters:
             if filters.applicant_id:
                 query = query.where(cls.applicant_id == filters.applicant_id)
+            if filters.status:
+                query = query.where(cls.status == filters.status)
         res = db.execute(query)
         res = res.scalars().all()
 
         return res
+
+    @classmethod
+    def count_by_vacancy(cls, vacancy_id, db) -> List[ReplyStatusCount]:
+        query = db.query(cls.status, func.count(cls.id)).filter(cls.vacancy_id == vacancy_id).group_by(cls.status)
+        reply_count = query.all()
+        return [ReplyStatusCount.from_row(row) for row in reply_count]
 
 
 class ReplyCommentDBModel(BaseDBModel):

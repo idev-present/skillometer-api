@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, Body, HTTPException
 from starlette import status
 
 from app.core.db import db_service
+from app.services.dict.schemas import ReplyStatusCount
 from app.services.reply.db_models import ReplyDBModel, ReplyCommentDBModel
 from app.services.reply.schemas import Reply, ReplyCommentForm, ReplyCommentInDB, ReplyUpdateForm
 from app.services.processing.main import get_status_info, update_reply_status
@@ -52,3 +53,8 @@ def reply_comment_create(
 def get_reply_comments(reply_id: str, db_session=Depends(db_service.get_db)) -> List[ReplyCommentInDB]:
     res = ReplyCommentDBModel.get_list(reply_id, db=db_session)
     return res
+
+
+@router.get("/{vacancy_id}/count", response_model=List[ReplyStatusCount])
+def reply_count_by_status(vacancy_id: str, db_session=Depends(db_service.get_db)):
+    return ReplyDBModel.count_by_vacancy(vacancy_id=vacancy_id, db=db_session)
