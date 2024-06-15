@@ -41,7 +41,7 @@ spec:
               value: "SBER"
             # Database
             - name: DATABASE_SERVER
-              value: "10.244.0.204"
+              value: "postgres-postgresql.skillometer.svc.cluster.local"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USERNAME
@@ -52,11 +52,11 @@ spec:
               value: "skillometer_db"
             # IAM
             - name: IAM_HOSTNAME
-              value: "http://10.244.0.227:8000"
+              value: "http://casdoor:8000"
             - name: IAM_CLIENT_ID
-              value: "8aa124a89a76caf4e84b"
+              value: "f8caf7c89c7c35c4508e"
             - name: IAM_CLIENT_SECRET
-              value: "fa026ac3608de86085c8fe9cbac8f784ba764fd1"
+              value: "3635eac2c14dc1ec11aac6241fcc8743bf3d067b"
             - name: IAM_REDIRECT_URI
               value: "https://skillometer.idev-present.com/api/v1/user/auth/callback"
             - name: IAM_ORGANIZATION_ID
