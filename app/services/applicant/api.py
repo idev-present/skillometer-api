@@ -19,6 +19,8 @@ router = APIRouter()
 @router.get("/{applicant_id}", response_model=Applicant)
 def get_applicant(applicant_id: str, db: Session = Depends(db_service.get_db)):
     res = ApplicantDBModel.get(db=db, item_id=applicant_id)
+    if not res:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Applicant not found')
     return res
 
 

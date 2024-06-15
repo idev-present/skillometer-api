@@ -10,7 +10,7 @@ from app.services.user.schemas import User
 
 
 class ApplicantForm(BaseModel):
-    salary_from: int = Field(..., gt=0)
+    salary_from: int = Field(0, ge=0)
     currency: Optional[str] = Field(CURRENCY.RUR.name)
     is_relocation: Optional[bool] = Field(False, description="Готовность к переезду")
     is_remote: Optional[bool] = Field(False, description="Готовность к удаленной работе")
@@ -47,7 +47,7 @@ class ApplicantListItem(ApplicantForm):
 
 
 class Applicant(ApplicantListItem):
-    user: Optional[User] = None
+    pass
 
 
 class ApplicantUpdateForm(ApplicantForm):

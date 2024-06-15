@@ -77,13 +77,16 @@ class ApplicantDBModel(BaseDBModel):
 
     @classmethod
     def update(cls, db, item_id: str, form: ApplicantForm) -> "ApplicantDBModel":
-        applicant = cls.get(db, item_id)
-        for field, value in form.dict(exclude_unset=True).items():
-            setattr(applicant, field, value)
-        db.add(applicant)
-        db.commit()
-        db.refresh(applicant)
-        return applicant
+        try:
+            applicant = cls.get(db, item_id)
+            for field, value in form.dict(exclude_unset=True).items():
+                setattr(applicant, field, value)
+            db.add(applicant)
+            db.commit()
+            db.refresh(applicant)
+            return applicant
+        except SQLAlchemyError as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @classmethod
     def delete(cls, db, item_id: str) -> bool:

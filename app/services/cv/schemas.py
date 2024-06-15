@@ -13,6 +13,7 @@ class CV(BaseModel):
     phone: Optional[str]  # Моб
     email: Optional[str]  # email
     bio: Optional[str]  # О себе
+    gender: Optional[str]  # О себе
     salary_from: Optional[int]  # ЗП
     currency: Optional[str]  # валюта
     is_relocation: Optional[bool]  # готов к переезду
