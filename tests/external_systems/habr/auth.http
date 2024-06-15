@@ -1,1 +1,2 @@
-GET https://career.habr.com/integrations/oauth/authorize?client_id=25eb730f2b7a659ee7e70a1f2da5b6aa694c3f8d263d16314cadde2880492d61&redirect_uri=https://skillometer.idev-present.com/api/v1/user/oauth/habr/&response_type=code
+GET https://career.habr.com/api/v1/integrations/skills?access_token={{access_token}}&per_page=100
+Accept: application/json
