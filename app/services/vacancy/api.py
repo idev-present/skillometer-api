@@ -1,5 +1,5 @@
 import json
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, Response, HTTPException
 from starlette import status
@@ -39,8 +39,19 @@ def delete_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
 
 
 @router.post("/{vacancy_id}/reply")
-def vacancy_reply(vacancy_id: str, token_data: TokenData = Depends(get_current_user), db_session=Depends(db_service.get_db)):
-    res = create_reply(user_id=token_data.id, vacancy_id=vacancy_id, applicant_id=token_data.name, db=db_session)
+def vacancy_reply(
+        vacancy_id: str,
+        comment: Optional[str] = None,
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+):
+    res = create_reply(
+        user_id=token_data.id,
+        vacancy_id=vacancy_id,
+        comment=comment,
+        applicant_id=token_data.name,
+        db=db_session
+    )
     return res
 
 

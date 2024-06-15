@@ -15,7 +15,7 @@ from app.services.user.db_models import UserDBModel
 from app.services.vacancy.db_models import VacancyDBModel
 
 
-def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Session):
+def create_reply(user_id: str, vacancy_id: str, applicant_id: str, comment: Optional[str], db: Session):
     user = UserDBModel.get(item_id=user_id, db=db)
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User #{user_id} not found")
@@ -38,7 +38,8 @@ def create_reply(user_id: str, vacancy_id: str, applicant_id: str, db: Session):
         created_at=datetime.now(),
         updated_at=datetime.now(),
         updated_by=str(user.id),
-        updated_by_role=user.role
+        updated_by_role=user.role,
+        user_comment=comment
     )
     reply = ReplyDBModel.create(form=reply_form, db=db)
     return reply

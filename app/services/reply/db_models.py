@@ -15,6 +15,7 @@ class ReplyDBModel(BaseDBModel):
     id = Column(UUID, primary_key=True, server_default=sqlalchemy.text("gen_random_uuid()"))
     status = Column(String, nullable=False, default=REPLY_STATUS.NEW.value)
     reason = Column(String, nullable=True)
+    user_comment = Column(String, nullable=True)
     # Vacancy
     vacancy_id = Column(String, nullable=False)
     vacancy_name = Column(String, nullable=True)
