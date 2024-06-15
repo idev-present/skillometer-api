@@ -16,6 +16,7 @@ class ReplyForm(BaseModel):
 class Reply(ReplyForm):
     id: UUID
     status: str
+    reason: Optional[str] = Field(None, description="Причина изменения статуса")
     vacancy_name: Optional[str] = Field(None, description="Название вакансии")
     applicant_avatar: Optional[str] = None
     applicant_fullname: Optional[str] = None
