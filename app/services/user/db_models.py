@@ -76,6 +76,7 @@ class UserDBModel(BaseDBModel):
             applicant.city_id = user.city
             applicant.age = (datetime.now() - user.birthday).days / 365
         db.add(user)
+        db.add(applicant)
         db.commit()
         db.refresh(user)
         return user
