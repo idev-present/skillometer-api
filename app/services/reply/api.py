@@ -6,7 +6,7 @@ from starlette import status
 from app.core.db import db_service
 from app.services.dict.schemas import ReplyStatusCount
 from app.services.reply.db_models import ReplyDBModel, ReplyCommentDBModel
-from app.services.reply.schemas import Reply, ReplyCommentForm, ReplyCommentInDB, ReplyUpdateForm
+from app.services.reply.schemas import Reply, ReplyCommentForm, ReplyCommentInDB, ReplyUpdateForm, ReplyDBModelFilters
 from app.services.processing.main import get_status_info, update_reply_status
 from app.services.processing.schemas import ReplyStatusFlow
 
@@ -14,8 +14,16 @@ router = APIRouter()
 
 
 @router.get("/", response_model=List[Reply])
-def reply_list(db_session=Depends(db_service.get_db)):
-    res = ReplyDBModel.get_list(db=db_session)
+def reply_list(
+        applicant_id: Optional[str] = None,
+        status: Optional[str] = None,
+        db_session=Depends(db_service.get_db)
+):
+    filters = ReplyDBModelFilters.model_validate({
+        'applicant_id': applicant_id,
+        'status': status,
+    })
+    res = ReplyDBModel.get_list(db=db_session, filters=filters)
     return res
 
 
