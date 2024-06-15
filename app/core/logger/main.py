@@ -49,14 +49,14 @@ def configure_logging():
         wrapper_class=structlog.stdlib.BoundLogger,  # noqa
     )
 
-    if settings.ENVIRONMENT != "LOCAL":
+    if settings.ENVIRONMENT != "local":
         formatter_processor = structlog.processors.JSONRenderer()
     else:
         formatter_processor = structlog.dev.ConsoleRenderer(sort_keys=True, colors=True)
 
     config = {
         "version": 1,
-        "disable_existing_loggers": True,
+        "disable_existing_loggers": False,
         "formatters": {
             "default": {
                 "()": structlog.stdlib.ProcessorFormatter,
