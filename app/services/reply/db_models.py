@@ -65,6 +65,8 @@ class ReplyDBModel(BaseDBModel):
         if filters:
             if filters.applicant_id:
                 query = query.where(cls.applicant_id == filters.applicant_id)
+            if filters.vacancy_id:
+                query = query.where(cls.vacancy_id == filters.vacancy_id)
             if filters.status:
                 query = query.where(cls.status == filters.status)
         res = db.execute(query)

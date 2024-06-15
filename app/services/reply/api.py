@@ -16,11 +16,13 @@ router = APIRouter()
 @router.get("/", response_model=List[Reply])
 def reply_list(
         applicant_id: Optional[str] = None,
+        vacancy_id: Optional[str] = None,
         status: Optional[str] = None,
         db_session=Depends(db_service.get_db)
 ):
     filters = ReplyDBModelFilters(
         applicant_id=applicant_id,
+        vacancy_id=vacancy_id,
         status=status,
     )
     res = ReplyDBModel.get_list(db=db_session, filters=filters)
