@@ -52,7 +52,7 @@ spec:
               value: "skillometer_db"
             # IAM
             - name: IAM_HOSTNAME
-              value: "http://10.244.0.221:8000"
+              value: "http://10.244.0.227:8000"
             - name: IAM_CLIENT_ID
               value: "8aa124a89a76caf4e84b"
             - name: IAM_CLIENT_SECRET

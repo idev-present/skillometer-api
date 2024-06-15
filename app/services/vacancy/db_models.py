@@ -1,4 +1,5 @@
 import datetime
+from fastapi import HTTPException
 from typing import List
 
 from sqlalchemy import Column, String, Integer, Boolean, DateTime
@@ -88,3 +89,32 @@ class VacancyDBModel(BaseDBModel):
         res = res.scalars().all()
 
         return res
+
+    @classmethod
+    def publish(cls, id: str, db) -> "VacancyDBModel":
+        db_model = cls.get(item_id=id, db=db)
+        if not db_model:
+            raise HTTPException(status_code=404, detail="Vacancy not found")
+        if not db_model.published_at:
+            db_model.published_at = datetime.datetime.now()
+        else:
+            raise HTTPException(status_code=400, detail="Vacancy already published")
+        db.commit()
+        db.refresh(db_model)
+        return db_model
+
+    @classmethod
+    def unpublish(cls, id: str, db) -> "VacancyDBModel":
+        db_model = cls.get(item_id=id, db=db)
+        if not db_model:
+            raise HTTPException(status_code=404, detail="Vacancy not found")
+        if db_model.published_at:
+            db_model.published_at = None
+        else:
+            raise HTTPException(status_code=400, detail="Vacancy already unpublished")
+        db.commit()
+        db.refresh(db_model)
+        return db_model
+
+
+

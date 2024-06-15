@@ -48,3 +48,13 @@ def vacancy_reply(vacancy_id: str, token_data: TokenData = Depends(get_current_u
 def vacancy_list(db_session=Depends(db_service.get_db)) -> List[VacancyListItem]:
     res = VacancyDBModel.get_list(db=db_session)
     return res
+
+
+@router.get("/{vacancy_id}/publish", response_model=Vacancy)
+def publish_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
+    return VacancyDBModel.publish(id=vacancy_id, db=db_session)
+
+
+@router.get("/{vacancy_id}/unpublish", response_model=Vacancy)
+def unpublish_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
+    return VacancyDBModel.unpublish(id=vacancy_id, db=db_session)
