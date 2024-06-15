@@ -33,6 +33,7 @@ def load_user_cv(applicant_id: str, db):
         "avatar": applicant.user.avatar,
         "phone": applicant.user.phone,
         "email": applicant.user.email,
+        "gender": applicant.user.gender,
         "bio": applicant.user.bio,
     }
     return user_data
