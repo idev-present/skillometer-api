@@ -19,10 +19,10 @@ def reply_list(
         status: Optional[str] = None,
         db_session=Depends(db_service.get_db)
 ):
-    filters = ReplyDBModelFilters.model_validate({
-        'applicant_id': applicant_id,
-        'status': status,
-    })
+    filters = ReplyDBModelFilters(
+        applicant_id=applicant_id,
+        status=status,
+    )
     res = ReplyDBModel.get_list(db=db_session, filters=filters)
     return res
 

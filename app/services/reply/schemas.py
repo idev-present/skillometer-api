@@ -35,8 +35,8 @@ class ReplyUpdateForm(BaseModel):
 
 
 class ReplyDBModelFilters(BaseModel):
-    applicant_id: Optional[str]
-    status: Optional[str]
+    applicant_id: Optional[str] = None
+    status: Optional[str] = None
 
 
 # Reply comments
