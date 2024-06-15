@@ -69,6 +69,12 @@ class UserDBModel(BaseDBModel):
             setattr(user, field, value)
         if user.birthday:
             user.birthday = datetime.fromtimestamp(user.birthday.timestamp())
+        user.full_name = user.last_name + ' ' + user.first_name
+        applicant: ApplicantDBModel = db.execute(sql.select(ApplicantDBModel).where(ApplicantDBModel.user_id == user.id))
+        if applicant:
+            applicant.title = user.full_name
+            applicant.city_id = user.city
+            applicant.age = (datetime.now() - user.birthday).days / 365
         db.add(user)
         db.commit()
         db.refresh(user)

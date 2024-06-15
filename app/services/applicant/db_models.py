@@ -1,5 +1,8 @@
 from datetime import datetime
 from typing import List
+
+from fastapi import HTTPException
+from sqlalchemy.exc import SQLAlchemyError
 from structlog import get_logger
 
 from sqlalchemy import Column, String, DateTime, Integer, Boolean, ForeignKey
@@ -7,6 +10,7 @@ from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
+from app.core.exceptions import NotFoundError
 from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm, \
     ApplicantEducationForm, ApplicantEducationUpdateForm
 from app.utils.database_utils import generate_uid, get_result_query
@@ -45,6 +49,7 @@ class ApplicantDBModel(BaseDBModel):
     user_id = mapped_column(ForeignKey('users.id'))
     user = relationship(
         "UserDBModel",
+        lazy='joined',
         back_populates="applicant"
     )
     xp = relationship(
@@ -60,10 +65,15 @@ class ApplicantDBModel(BaseDBModel):
 
     @classmethod
     def get(cls, db, item_id: str) -> "ApplicantDBModel":
-        query = sql.select(cls).where(cls.id == item_id)
-        logger.debug(query)
-        result = db.execute(query)
-        return result.scalars().first()
+        try:
+            query = sql.select(cls).where(cls.id == item_id)
+            logger.debug(query)
+            result = db.execute(query)
+            if not result:
+                raise HTTPException(status_code=404, detail="Item not found")
+            return result.scalars().first()
+        except SQLAlchemyError as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @classmethod
     def update(cls, db, item_id: str, form: ApplicantForm) -> "ApplicantDBModel":
