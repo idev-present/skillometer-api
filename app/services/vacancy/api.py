@@ -1,12 +1,13 @@
 import json
-from typing import List, Optional
+from typing import List, Optional, Annotated
 
-from fastapi import APIRouter, Depends, Response, HTTPException
+from fastapi import APIRouter, Depends, Response, HTTPException, Body
 from starlette import status
 
 from app.core.db import db_service
 from app.core.iam.schemas import TokenData
 from app.services.processing.main import create_reply
+from app.services.reply.schemas import Reply
 from app.services.user.middlewares import get_current_user
 from app.services.vacancy.db_models import VacancyDBModel
 from app.services.vacancy.schemas import VacancyListItem, Vacancy, VacancyForm, VacancyUpdateForm
@@ -38,10 +39,10 @@ def delete_vacancy(vacancy_id: str, db_session=Depends(db_service.get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.post("/{vacancy_id}/reply")
+@router.post("/{vacancy_id}/reply", response_model=Reply)
 def vacancy_reply(
         vacancy_id: str,
-        comment: Optional[str] = None,
+        comment: Annotated[Optional[str], Body()],
         token_data: TokenData = Depends(get_current_user),
         db_session=Depends(db_service.get_db)
 ):
