@@ -4,11 +4,15 @@ from fastapi import APIRouter, Depends, Body, HTTPException
 from starlette import status
 
 from app.core.db import db_service
+from app.core.iam.schemas import TokenData
 from app.services.dict.schemas import ReplyStatusCount
 from app.services.reply.db_models import ReplyDBModel, ReplyCommentDBModel
 from app.services.reply.schemas import Reply, ReplyCommentForm, ReplyCommentInDB, ReplyUpdateForm, ReplyDBModelFilters
 from app.services.processing.main import get_status_info, update_reply_status, calculate_matching
 from app.services.processing.schemas import ReplyStatusFlow
+from app.services.reply_activity.db_models import ActivityDBModel
+from app.services.reply_activity.schemas import ReplyActivity
+from app.services.user.middlewares import get_current_user
 from app.services.vacancy.db_models import VacancyDBModel
 
 router = APIRouter()
@@ -51,7 +55,11 @@ def get_reply(reply_id: str, db_session=Depends(db_service.get_db)):
 
 @router.get("/{reply_id}/matching")
 def get_reply_matching(reply_id: str, db_session=Depends(db_service.get_db)):
-    res = calculate_matching(reply_id=reply_id, db=db_session)
+    reply = ReplyDBModel.get(db=db_session, item_id=reply_id)
+    if not reply:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Reply not found")
+    vacancy = VacancyDBModel.get(db=db_session, item_id=reply.vacancy_id)
+    res = calculate_matching(reply=reply, vacancy=vacancy, db=db_session)
     return res
 
 
@@ -62,8 +70,19 @@ def get_reply_next_status_flow(reply_id: str, db_session=Depends(db_service.get_
 
 
 @router.post("/{reply_id}/status")
-def set_reply_status(reply_id: str, form: ReplyUpdateForm, db_session=Depends(db_service.get_db)):
-    res = update_reply_status(reply_id=reply_id, to_status=form.status, reason=form.reason, db=db_session)
+def set_reply_status(
+        reply_id: str, form: ReplyUpdateForm,
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+):
+    set_by = token_data.id
+    res = update_reply_status(
+        reply_id=reply_id,
+        to_status=form.status,
+        reason=form.reason,
+        user_id=set_by,
+        db=db_session
+    )
     return res
 
 
@@ -80,6 +99,12 @@ def reply_comment_create(
 @router.get("/{reply_id}/comments", response_model=List[ReplyCommentInDB])
 def get_reply_comments(reply_id: str, db_session=Depends(db_service.get_db)) -> List[ReplyCommentInDB]:
     res = ReplyCommentDBModel.get_list(reply_id, db=db_session)
+    return res
+
+
+@router.get("/{reply_id}/activity", response_model=List[ReplyActivity])
+def get_reply_activity(reply_id: str, db_session=Depends(db_service.get_db)) -> List[ReplyActivity]:
+    res = ActivityDBModel.get_list(reply_id=reply_id, db=db_session)
     return res
 
 

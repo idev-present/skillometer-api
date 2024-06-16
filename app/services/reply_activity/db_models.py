@@ -1,6 +1,9 @@
-from sqlalchemy import Column, UUID, String, Text, ForeignKey, DateTime, func
+from typing import List
+
+from sqlalchemy import Column, UUID, String, Text, ForeignKey, DateTime, func, sql
 
 from app.core.db import BaseDBModel
+from app.services.reply_activity.schemas import ReplyActivityForm
 
 
 class ActivityDBModel(BaseDBModel):
@@ -13,3 +16,17 @@ class ActivityDBModel(BaseDBModel):
     owner_id = Column(UUID(as_uuid=True), ForeignKey('users.id'), nullable=False)
     owner_type = Column(String(50), nullable=True)  # user.role
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    @classmethod
+    def create(cls, form: ReplyActivityForm, db) -> "ActivityDBModel":
+        new_event = cls(**form.dict())
+        db.add(new_event)
+        db.commit()
+        db.refresh(new_event)
+        return new_event
+
+    @classmethod
+    def get_list(cls, db, reply_id: str) -> List["ActivityDBModel"]:
+        query = sql.select(cls).filter(cls.external_id == reply_id)
+        result = db.execute(query)
+        return result.scalars().all()
