@@ -18,6 +18,7 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
     user_id = token_data.id
     logger.info("try find user in db", user_id=user_id)
     user_db_model = UserDBModel.get(item_id=user_id, db=db)
+    applicant = db.execute(sql.select(ApplicantDBModel).where(ApplicantDBModel.user_id == user_id)).scalars().first()
     if not user_db_model:
         logger.info("user not found, try get profile from api", user_id=user_id)
         # TODO(ilya.zhuravlev): check external_api errors
@@ -25,7 +26,6 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
         if not iam_user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
-        applicant = db.execute(sql.select(ApplicantDBModel).where(ApplicantDBModel.user_id == user_id)).scalars().first()
         user_form = User(
             id=iam_user.id,
             login=iam_user.name,
@@ -51,7 +51,9 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
         except DBAPIError as e:
             raise e
         # TODO(ilya.zhuravlev): check unique constraint
-    return user_db_model
+    result = User.model_validate(user_db_model.__dict__)
+    result.has_applicant = True if applicant else False
+    return result
 
 
 def get_or_create_applicant_from_token(token_data: TokenData, db):
