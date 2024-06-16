@@ -24,6 +24,7 @@ class ActivityDBModel(BaseDBModel):
     @classmethod
     def create(cls, form: ReplyActivityForm, db) -> "ActivityDBModel":
         new_event = cls(**form.dict())
+        new_event.type = form.type.value
         db.add(new_event)
         db.commit()
         db.refresh(new_event)
