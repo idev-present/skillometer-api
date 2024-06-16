@@ -6,6 +6,9 @@ from sqlalchemy.orm import mapped_column
 
 from app.core.db import BaseDBModel
 from app.services.event.schemas import EventInput, EventUpdateForm, EventFilters, EVENT_STATUS
+from app.services.reply_activity.const import ACTIVITY_TYPE
+from app.services.reply_activity.db_models import ActivityDBModel
+from app.services.reply_activity.schemas import ReplyActivityForm
 
 
 class EventDBModel(BaseDBModel):
@@ -37,6 +40,15 @@ class EventDBModel(BaseDBModel):
         db.add(event)
         db.commit()
         db.refresh(event)
+        if event:
+            activity = ReplyActivityForm(
+                type=ACTIVITY_TYPE.EVENT_STATUS,
+                text=f'Создано новое событие: {event.name}',
+                external_id=str(event.id),
+                owner_id=event.owner_id,
+                owner_type='recruiter'
+            )
+            ActivityDBModel.create(form=activity, db=db)
         return event
 
     @classmethod
