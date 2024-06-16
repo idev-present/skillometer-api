@@ -118,8 +118,8 @@ def calculate_matching(reply: ReplyDBModel, db: Session, vacancy: Optional[Vacan
     if not applicant:
         applicant = ApplicantDBModel.get(item_id=reply.applicant_id, db=db)
 
-    vacancy_skillset = set([skill for skill in vacancy.skill_set.split(',')])
-    applicant_skillset = set([skill for skill in applicant.skill_set.split(',')])
+    vacancy_skillset = set([skill if skill else None for skill in vacancy.skill_set.split(',')])
+    applicant_skillset = set([skill if skill else None for skill in applicant.skill_set.split(',')])
 
     missed_skills = vacancy_skillset.difference(applicant_skillset)
     additional_skills = applicant_skillset.difference(vacancy_skillset)
