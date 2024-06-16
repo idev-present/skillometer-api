@@ -1,9 +1,11 @@
 from typing import List
 
 from sqlalchemy import Column, UUID, String, Text, ForeignKey, DateTime, func, sql
+from sqlalchemy.orm import joinedload, relationship
 
 from app.core.db import BaseDBModel
 from app.services.reply_activity.schemas import ReplyActivityForm
+from app.services.user.db_models import UserDBModel
 
 
 class ActivityDBModel(BaseDBModel):
@@ -17,6 +19,8 @@ class ActivityDBModel(BaseDBModel):
     owner_type = Column(String(50), nullable=True)  # user.role
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
+    user = relationship("UserDBModel")
+
     @classmethod
     def create(cls, form: ReplyActivityForm, db) -> "ActivityDBModel":
         new_event = cls(**form.dict())
@@ -27,6 +31,6 @@ class ActivityDBModel(BaseDBModel):
 
     @classmethod
     def get_list(cls, db, reply_id: str) -> List["ActivityDBModel"]:
-        query = sql.select(cls).filter(cls.external_id == reply_id)
+        query = sql.select(cls).options(joinedload(cls.user)).filter(cls.external_id == reply_id)
         result = db.execute(query)
         return result.scalars().all()

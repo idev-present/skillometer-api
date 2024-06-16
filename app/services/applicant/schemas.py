@@ -32,7 +32,7 @@ class ApplicantListItem(ApplicantForm):
     registered_at: Optional[datetime] = Field(None, description="Дата/время регистрации")
     # * Computed fields
     experience: Optional[str] = Field(None, description="Суммарный опыт работы, калькулируется из списка")
-    age: int = Field(..., gt=0)
+    age: Optional[int] = Field(None)
     title: str = Field(...)
 
     @field_validator("currency", mode="before")

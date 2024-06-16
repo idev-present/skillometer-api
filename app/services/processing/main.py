@@ -97,7 +97,7 @@ def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], us
     if updated_reply:
         user: UserDBModel = UserDBModel.get(item_id=user_id, db=db)
         activity = ReplyActivityForm(
-            type=ACTIVITY_TYPE.REPLY_STATUS,
+            type=ACTIVITY_TYPE.REPLY_STATUS.name,
             external_id=str(updated_reply.id),
             owner_id=user_id,
             owner_type=user.role if user.role else None,
