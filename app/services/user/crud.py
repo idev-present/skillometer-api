@@ -41,7 +41,6 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
             country_code=iam_user.countryCode,
             phone=iam_user.phone,
             city=iam_user.location,
-            has_applicant=True if applicant else False,
             created_at=iam_user.created_at,
             updated_at=iam_user.updated_at,
             deleted_at=iam_user.deleted_at,

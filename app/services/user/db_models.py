@@ -42,7 +42,7 @@ class UserDBModel(BaseDBModel):
 
     @classmethod
     def create(cls, db, form: User) -> "UserDBModel":
-        user = cls(**form.dict())
+        user = cls(**form.dict(exclude={'has_applicant'}))
         if user.birthday:
             user.birthday = datetime.fromtimestamp(user.birthday.timestamp())
         if user.created_at:
