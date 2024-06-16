@@ -25,6 +25,8 @@ def create_reply(user_id: str, vacancy_id: str, applicant_id: str, comment: Opti
     user = UserDBModel.get(item_id=user_id, db=db)
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User #{user_id} not found")
+    if user.role != 'applicant':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Create reply can only be done by applicant")
     vacancy = VacancyDBModel.get(item_id=vacancy_id, db=db)
     if not vacancy:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Vacancy #{vacancy_id} not found")
