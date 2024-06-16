@@ -1,0 +1,23 @@
+POST http://localhost:8080/api/v1/reply/ea838dd9-6220-4525-98ae-a18cc0efa6eb/status
+accept: application/json, text/plain, */*
+accept-language: en,en-US;q=0.9,ru-RU;q=0.8,ru;q=0.7
+authorization: Bearer {{access_token}}
+origin: https://admin.skillometer.idev-present.com
+priority: u=1, i
+referer: https://admin.skillometer.idev-present.com/
+sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: same-site
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+Content-Type: application/json
+
+{
+  "status": "CV_REVIEW",
+  "reason": ""
+}
+
+###
+

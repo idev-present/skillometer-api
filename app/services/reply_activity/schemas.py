@@ -12,7 +12,7 @@ class ReplyActivityForm(BaseModel):
     type: Optional[ACTIVITY_TYPE] = Field(None, description='Тип события')
     text: Optional[str] = Field(None)
     external_id: str = Field(description='ID отклика или события')
-    owner_id: Optional[str] = Field(description='ID пользователя')
+    owner_id: Optional[UUID] = Field(description='ID пользователя')
     owner_type: Optional[str] = Field(description='Соискатель/рекрутер')
 
 
