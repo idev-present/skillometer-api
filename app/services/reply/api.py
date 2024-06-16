@@ -7,8 +7,9 @@ from app.core.db import db_service
 from app.services.dict.schemas import ReplyStatusCount
 from app.services.reply.db_models import ReplyDBModel, ReplyCommentDBModel
 from app.services.reply.schemas import Reply, ReplyCommentForm, ReplyCommentInDB, ReplyUpdateForm, ReplyDBModelFilters
-from app.services.processing.main import get_status_info, update_reply_status
+from app.services.processing.main import get_status_info, update_reply_status, calculate_matching
 from app.services.processing.schemas import ReplyStatusFlow
+from app.services.vacancy.db_models import VacancyDBModel
 
 router = APIRouter()
 
@@ -25,7 +26,18 @@ def reply_list(
         vacancy_id=vacancy_id,
         status=status,
     )
-    res = ReplyDBModel.get_list(db=db_session, filters=filters)
+    reply_list_result = ReplyDBModel.get_list(db=db_session, filters=filters)
+    res = []
+    if vacancy_id and status:
+        vacancy = VacancyDBModel.get(db=db_session, item_id=vacancy_id)
+        for reply in reply_list_result:
+            model = Reply.model_validate(reply.__dict__)
+            matching_result = calculate_matching(db=db_session, reply=reply, vacancy=vacancy)
+            if matching_result:
+                model.matching_result = matching_result
+            res.append(model)
+    else:
+        res = reply_list_result
     return res
 
 
@@ -34,6 +46,12 @@ def get_reply(reply_id: str, db_session=Depends(db_service.get_db)):
     res = ReplyDBModel.get(item_id=reply_id, db=db_session)
     if not res:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Reply not found")
+    return res
+
+
+@router.get("/{reply_id}/matching")
+def get_reply_matching(reply_id: str, db_session=Depends(db_service.get_db)):
+    res = calculate_matching(reply_id=reply_id, db=db_session)
     return res
 
 

@@ -1,6 +1,6 @@
-from typing import Optional
+from typing import Optional, List
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, BaseModel
 
 from app.services.dict.const import REPLY_STATUS
 from app.services.dict.schemas import KeyValueDict
@@ -18,3 +18,9 @@ class ReplyStatusFlow(FlowConfig):
             if key.name == v:
                 return KeyValueDict(key=key.name, value=key.value)
         return v
+
+
+class MatchingResult(BaseModel):
+    missed_skills: Optional[List[str]] = Field([], description="Недостающие скиллы")
+    additional_skills: Optional[List[str]] = Field([], description="Лишние скиллы")
+    coverage: Optional[float] = Field(0, description="Процент")

@@ -5,6 +5,8 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 from typing import Optional
 
+from app.services.processing.schemas import MatchingResult
+
 
 class ReplyForm(BaseModel):
     vacancy_id: str = Field(..., description="ID Вакансии")
@@ -28,6 +30,7 @@ class Reply(ReplyForm):
     updated_at: Optional[datetime]
     updated_by: Optional[str]
     updated_by_role: Optional[str]
+    matching_result: Optional[MatchingResult] = Field(None, description="Результат сравнения по скиллам")
 
 
 class ReplyUpdateForm(BaseModel):
