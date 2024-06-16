@@ -10,10 +10,9 @@ from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.sql import expression as sql
 
 from app.core.db import BaseDBModel
-from app.core.exceptions import NotFoundError
 from app.services.applicant.schemas import ApplicantForm, ApplicantXPForm, ApplicantXPUpdateForm, \
     ApplicantEducationForm, ApplicantEducationUpdateForm
-from app.utils.database_utils import generate_uid, get_result_query
+from app.utils.database_utils import generate_uid
 
 logger = get_logger(__name__)
 

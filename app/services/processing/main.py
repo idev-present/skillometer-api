@@ -7,14 +7,16 @@ from sqlalchemy.orm import Session
 from starlette import status
 
 from app.services.applicant.db_models import ApplicantDBModel
-from app.services.chat.api import send_message
 from app.services.chat.const import CHAT_ROOM_TYPE, MESSAGE_TYPE, MESSAGE_STATUS
 from app.services.chat.db_models import ChatRoomDBModel, MessageDBModel
 from app.services.chat.schemas import ChatRoomForm, MessageForm
 from app.services.dict.const import REPLY_STATUS
+from app.services.reply_activity.const import ACTIVITY_TYPE
 from app.services.processing.status_mapper import available_status_flow
 from app.services.reply.db_models import ReplyDBModel
 from app.services.reply.schemas import Reply, ReplyUpdateForm
+from app.services.reply_activity.db_models import ActivityDBModel
+from app.services.reply_activity.schemas import ReplyActivityForm
 from app.services.user.db_models import UserDBModel
 from app.services.vacancy.db_models import VacancyDBModel
 
@@ -82,7 +84,7 @@ def get_status_info(reply_id: str, db: Session):
     return available_flows
 
 
-def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db: Session):
+def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], user_id: str, db: Session):
     available_flow = get_status_info(reply_id=reply_id, db=db)
     available_status_list = [item.status for item in available_flow]
     if to_status not in available_status_list:
@@ -92,6 +94,15 @@ def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Reason for status #{to_status} is required")
     update_form = ReplyUpdateForm(status=to_status, reason=reason)
     updated_reply = ReplyDBModel.update(item_id=reply_id, form=update_form, db=db)
+    if updated_reply:
+        user: UserDBModel = UserDBModel.get(item_id=user_id, db=db)
+        activity = ReplyActivityForm(
+            type=ACTIVITY_TYPE.REPLY_STATUS,
+            external_id=updated_reply.id,
+            owner_id=user_id,
+            owner_type=user.role if user.role else None,
+        )
+        ActivityDBModel.create(activity, db=db)
     new_available_flow = available_status_flow.get(updated_reply.status)
     if not new_available_flow:
         return []
