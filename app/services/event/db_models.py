@@ -66,11 +66,15 @@ class EventDBModel(BaseDBModel):
     def get_list(cls, filters: EventFilters, db) -> List["EventDBModel"]:
         query = sql.select(cls)
         if filters.recruiter_id:
-            query = query.where(cls.owner_id == filters.applicant_id)
+            query = query.where(cls.owner_id == filters.recruiter_id)
         if filters.applicant_id:
-            query = query.where(cls.to_id == filters.to_id)
+            query = query.where(cls.to_id == filters.applicant_id)
         if filters.status:
-            query = query.where(cls.status == str(filters.status))
+            query = query.where(cls.status == filters.status.name)
+        if filters.start_date:
+            query = query.where(cls.start_at >= filters.start_date)
+        if filters.end_date:
+            query = query.where(cls.end_at <= filters.end_date)
         else:
             query = query.where(not_(cls.status == EVENT_STATUS.DONE.value))
         res = db.execute(query)
