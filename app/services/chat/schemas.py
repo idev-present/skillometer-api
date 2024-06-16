@@ -21,6 +21,11 @@ class MessageUpdateForm(MessageForm):
     content: Optional[str] = Field(None, description="Текст сообщения")
 
 
+class SendMessage(BaseModel):
+    type: Optional[MESSAGE_TYPE] = Field(None, description="Тип сообщения")
+    content: Optional[str] = Field(None, description="Текст сообщения")
+
+
 class Message(MessageForm):
     id: UUID = Field(..., description="UUID сообщения")
     created_at: datetime = Field(..., description="Время создания сообщения")

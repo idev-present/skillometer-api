@@ -5,22 +5,23 @@ from sqlalchemy import update, and_
 
 from app.core.db import db_service
 from app.core.exceptions import NotFoundError
+from app.core.iam.schemas import TokenData
 from app.services.applicant.db_models import ApplicantDBModel
 from app.services.chat.const import CHAT_ROOM_TYPE, MESSAGE_STATUS
 from app.services.chat.db_models import ChatRoomDBModel, MessageDBModel
 from app.services.chat.schemas import ChatRoomForm, ChatRoom, Message, MessageForm, MessageUpdateForm, \
-    ChatRoomUpdateForm
+    ChatRoomUpdateForm, SendMessage
 from app.services.reply.db_models import ReplyDBModel
+from app.services.user.middlewares import get_current_user
 
 router = APIRouter()
 
 
-@router.post("/room", response_model=ChatRoom)
+@router.post("/room", response_model=ChatRoom, deprecated=True)
 def create_room(db_session=Depends(db_service.get_db)):
-    # TODO: При создании отклика по дефолту нужно создавать новую комнату на основе данных отклика
     # TODO: Сразу после создания комнаты в базе, нужно создавать папку в бакете
     # FIXME: hardcode
-    reply_id = 'a5c6a2d2-d98d-4948-a2d5-d2e664d8556a'
+    reply_id = '5ed0c583-5e76-4915-9b8d-1055bc04a76e'
     reply = ReplyDBModel.get(item_id=reply_id, db=db_session)
     applicant = ApplicantDBModel.get(item_id=reply.applicant_id, db=db_session)
     chat_room = ChatRoomForm(
@@ -34,16 +35,24 @@ def create_room(db_session=Depends(db_service.get_db)):
 
 
 @router.post("/room/{room_id}/message", response_model=Message)
-def send_message(room_id: str, form: MessageForm, db_session=Depends(db_service.get_db)):
+def send_message(
+        room_id: str, form: SendMessage,
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+):
+    sender = token_data.id
     chat_room = ChatRoomDBModel.get(item_id=room_id, db=db_session)
     if not chat_room:
         raise NotFoundError(message=f"Room {room_id} not found")
-    # FIXME: hardcode
-    form.from_id = '43a49b3f-e1ba-4a0e-9229-fb640aee4f00'
-    form.to_id = '178fc180-93e9-4446-8fce-8b16ddbb6d50'
-    form.room_id = chat_room.id
-    form.status = MESSAGE_STATUS.SENT
-    message = MessageDBModel.create(form=form, db=db_session)
+    save_form = MessageForm(
+        room_id=chat_room.id,
+        status=MESSAGE_STATUS.SENT,
+        from_id=sender,
+        to_id=chat_room.recruiter_id,
+        content=form.content,
+        type=form.type
+    )
+    message = MessageDBModel.create(form=save_form, db=db_session)
     update_form = ChatRoomUpdateForm(unread_count=(chat_room.unread_count + 1))
     ChatRoomDBModel.update(item_id=chat_room.id, form=update_form, db=db_session)
     return message

@@ -10,6 +10,7 @@ class ReplyForm(BaseModel):
     vacancy_id: str = Field(..., description="ID Вакансии")
     applicant_id: str = Field(..., description="ID Соискателя")
     owner_id: Optional[str] = Field(None, description="ID Рекрутера")
+    chat_id: Optional[str] = Field(None, description='ID чата')
     user_comment: Optional[str] = Field(None, description='Комментарий соискателя')
 
 

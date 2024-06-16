@@ -7,6 +7,10 @@ from sqlalchemy.orm import Session
 from starlette import status
 
 from app.services.applicant.db_models import ApplicantDBModel
+from app.services.chat.api import send_message
+from app.services.chat.const import CHAT_ROOM_TYPE, MESSAGE_TYPE, MESSAGE_STATUS
+from app.services.chat.db_models import ChatRoomDBModel, MessageDBModel
+from app.services.chat.schemas import ChatRoomForm, MessageForm
 from app.services.dict.const import REPLY_STATUS
 from app.services.processing.status_mapper import available_status_flow
 from app.services.reply.db_models import ReplyDBModel
@@ -42,6 +46,31 @@ def create_reply(user_id: str, vacancy_id: str, applicant_id: str, comment: Opti
         user_comment=comment
     )
     reply = ReplyDBModel.create(form=reply_form, db=db)
+    if reply:
+        # Создание чата
+        chat_form = ChatRoomForm(
+            name=reply.vacancy_name,
+            type=CHAT_ROOM_TYPE.REPLY,
+            reply_id=reply.id,
+            applicant_id=applicant.user_id,
+            recruiter_id=vacancy.owner_id,
+            unread_count=1
+        )
+        created_chat = ChatRoomDBModel.create(form=chat_form, db=db)
+        if created_chat:
+            # Отправка первого сообщения в чат
+            reply.chat_id = created_chat.id
+            chat_message_form = MessageForm(
+                type=MESSAGE_TYPE.TEXT.name,
+                content=reply.user_comment,
+                status=MESSAGE_STATUS.SENT.name,
+                from_id=created_chat.applicant_id,
+                to_id=created_chat.recruiter_id,
+                room_id=created_chat.id,
+            )
+            MessageDBModel.create(form=chat_message_form, db=db)
+        db.commit()
+        db.refresh(reply)
     return reply
 
 
