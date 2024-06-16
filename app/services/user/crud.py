@@ -1,4 +1,5 @@
 import arrow
+from sqlalchemy import sql
 from sqlalchemy.exc import DBAPIError
 from structlog import get_logger
 from fastapi import HTTPException
@@ -24,6 +25,7 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
         if not iam_user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User from api not found")
         logger.info("mapping user and iam_user fields", iam_user=iam_user.id)
+        applicant = db.execute(sql.select(ApplicantDBModel).where(ApplicantDBModel.user_id == user_id)).scalars().first()
         user_form = User(
             id=iam_user.id,
             login=iam_user.name,
@@ -39,6 +41,7 @@ async def get_or_create_user_from_token(token_data: TokenData, db):
             country_code=iam_user.countryCode,
             phone=iam_user.phone,
             city=iam_user.location,
+            has_applicant=True if applicant else False,
             created_at=iam_user.created_at,
             updated_at=iam_user.updated_at,
             deleted_at=iam_user.deleted_at,

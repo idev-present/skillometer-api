@@ -25,6 +25,7 @@ class User(UserForm):
     email: str = Field(..., description="The user's email address")
     country_code: str = Field("RU", description="The user's country code")
     phone: Optional[str] = Field(None, description="The user's phone number")
+    has_applicant: Optional[bool] = Field(False)
     created_at: Optional[datetime] = Field(None)
     updated_at: Optional[datetime] = Field(None)
     deleted_at: Optional[datetime] = Field(None)

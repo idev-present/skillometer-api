@@ -6,7 +6,6 @@ from typing import Optional
 
 from app.services.dict.const import CURRENCY
 from app.services.dict.schemas import KeyValueDict
-from app.services.user.schemas import User
 
 
 class ApplicantForm(BaseModel):
