@@ -10,6 +10,7 @@ from app.services.applicant.api import router as applicant_router
 from app.services.reply.api import router as reply_router
 from app.services.user.api import router as user_router
 from app.services.cv.api import router as cv_router
+from app.services.chat.api import router as chat_router
 
 api = APIRouter()
 api.include_router(user_router, prefix="/user", tags=["user"])
@@ -19,6 +20,7 @@ api.include_router(company_router, prefix="/company", tags=["company"])
 api.include_router(applicant_router, prefix="/applicant", tags=["applicant"])
 api.include_router(reply_router, prefix="/reply", tags=["reply"])
 api.include_router(cv_router, prefix="/cv", tags=["cv"])
+api.include_router(chat_router, prefix="/chat", tags=["chat"])
 
 
 @api.get("/config")

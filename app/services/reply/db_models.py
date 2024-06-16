@@ -34,6 +34,8 @@ class ReplyDBModel(BaseDBModel):
     # Timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    # Chat
+    chat_id = Column(String, nullable=True)
 
     @classmethod
     def create(cls, form: Reply, db) -> "ReplyDBModel":
