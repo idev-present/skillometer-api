@@ -101,6 +101,19 @@ def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], db
     return new_available_status_list
 
 
-def calculate_matching(reply_id: str, db: Session):
-    reply = ReplyDBModel.get(item_id=reply_id, db=db)
-    return reply
+def calculate_matching(reply: ReplyDBModel, db: Session, vacancy: Optional[VacancyDBModel] = None, applicant: Optional[ApplicantDBModel] = None):
+    if not vacancy:
+        vacancy = VacancyDBModel.get(item_id=reply.vacancy_id, db=db)
+    if not applicant:
+        applicant = ApplicantDBModel.get(item_id=reply.applicant_id, db=db)
+
+    vacancy_skillset = set([skill for skill in vacancy.skill_set.split(',')])
+    applicant_skillset = set([skill for skill in applicant.skill_set.split(',')])
+
+    missed_skills = vacancy_skillset.difference(applicant_skillset)
+    additional_skills = applicant_skillset.difference(vacancy_skillset)
+    return {
+        "missed_skills": missed_skills,
+        "additional_skills": additional_skills,
+        "coverage": (len(vacancy_skillset) - len(missed_skills)) / len(vacancy_skillset)
+    }
