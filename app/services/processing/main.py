@@ -37,6 +37,7 @@ def create_reply(user_id: str, vacancy_id: str, applicant_id: str, comment: Opti
         id=str(uuid.uuid4()),
         status=REPLY_STATUS.NEW.name,
         vacancy_id=vacancy.id,
+        owner_id=vacancy.owner_id if vacancy.owner_id else None,
         vacancy_name=vacancy.name,
         applicant_id=applicant.id,
         applicant_avatar=user.avatar,
