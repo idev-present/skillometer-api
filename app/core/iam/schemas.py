@@ -89,8 +89,10 @@ class IAMUser(BaseModel):
 
     @staticmethod
     def prepare_user_role(data: Dict):
-        if data.get('tag'):
+        if 'tag' in data and data.get('tag'):
             data['role'] = 'recruiter' if data.get('tag') == 'recruiter_tag' else 'applicant'
+        else:
+            data['role'] = 'applicant'
 
     @staticmethod
     def prepare_gender(data: Dict):
