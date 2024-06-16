@@ -54,3 +54,5 @@ class EventFilters(BaseModel):
     applicant_id: Optional[UUID] = None
     recruiter_id: Optional[UUID] = None
     status: Optional[EVENT_STATUS] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
