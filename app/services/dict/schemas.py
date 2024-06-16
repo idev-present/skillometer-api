@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 
@@ -8,20 +8,22 @@ class KeyValueDict(BaseModel):
 
 
 class City(BaseModel):
-    id: str
-    fias_id: Optional[str]
-    habr_id: Optional[int]
-    habr_alias: Optional[str]
-    name: Optional[str]
-    country_name: Optional[str]
-    region_name: Optional[str]
+    """ Словарь городов"""
+    id: str = Field(description='ID')
+    fias_id: Optional[str] = Field(description='Фиас ID населенного пункта')
+    habr_id: Optional[int] = Field(description='ID населенного пункта на habr.ru')
+    habr_alias: Optional[str] = Field(description='Название населенного пункта на habr.ru')
+    name: Optional[str] = Field(description='Название населенного пункта')
+    country_name: Optional[str] = Field(description='Название страны')
+    region_name: Optional[str] = Field(description='Название региона')
 
 
 class EmploymentType(BaseModel):
-    id: str
-    name: Optional[str]
-    habr_id: Optional[str]
-    hh_id: Optional[str]
+    """Словарь типов занятостей"""
+    id: str = Field(description='ID')
+    name: Optional[str] = Field(description='Название')
+    habr_id: Optional[str] = Field(description='ID на habr.ru')
+    hh_id: Optional[str] = Field(description='ID на hh.ru')
 
 
 class Division(BaseModel):
@@ -43,6 +45,7 @@ class SearchStatus(BaseModel):
 
 
 class Skill(BaseModel):
+    """Словарь навыков"""
     id: Optional[str]
     name: Optional[str]
     type: Optional[str]

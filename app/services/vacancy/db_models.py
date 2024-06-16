@@ -51,9 +51,10 @@ class VacancyDBModel(BaseDBModel):
     company_id = Column(String, nullable=True)
 
     @classmethod
-    def create(cls, db, form: VacancyForm) -> "VacancyDBModel":
+    def create(cls, db, form: VacancyForm, owner_id: str) -> "VacancyDBModel":
         vacancy = cls(**form.dict())
         vacancy.id = generate_uid('v')
+        vacancy.owner_id = owner_id
         db.add(vacancy)
         db.commit()
         db.refresh(vacancy)

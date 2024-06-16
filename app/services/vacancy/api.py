@@ -16,8 +16,13 @@ router = APIRouter()
 
 
 @router.post("/", response_model=Vacancy)
-def create_vacancy(form: VacancyForm, db_session=Depends(db_service.get_db)) -> Vacancy:
-    res = VacancyDBModel.create(db=db_session, form=form)
+def create_vacancy(
+        form: VacancyForm,
+        token_data: TokenData = Depends(get_current_user),
+        db_session=Depends(db_service.get_db)
+) -> Vacancy:
+    owner_id = token_data.id
+    res = VacancyDBModel.create(db=db_session, form=form, owner_id=owner_id)
     return res
 
 
