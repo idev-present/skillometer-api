@@ -1,5 +1,6 @@
 from typing import List
 
+from shortuuid import uuid
 from sqlalchemy import Column, UUID, String, Text, ForeignKey, DateTime, func, sql
 from sqlalchemy.orm import joinedload, relationship
 
@@ -24,6 +25,7 @@ class ActivityDBModel(BaseDBModel):
     @classmethod
     def create(cls, form: ReplyActivityForm, db) -> "ActivityDBModel":
         new_event = cls(**form.dict())
+        new_event.id = uuid.uuid4()
         new_event.type = form.type.value
         db.add(new_event)
         db.commit()
