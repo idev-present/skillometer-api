@@ -13,10 +13,10 @@ class ReplyActivityForm(BaseModel):
     text: Optional[str] = Field(None)
     external_id: str = Field(description='ID отклика или события')
     owner_id: Optional[str] = Field(description='ID пользователя')
-    owner: Optional[User]
     owner_type: Optional[str] = Field(description='Соискатель/рекрутер')
 
 
 class ReplyActivity(ReplyActivityForm):
     id: UUID
+    owner: Optional[User] = None
     created_at: Optional[datetime]
