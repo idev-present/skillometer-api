@@ -1,12 +1,11 @@
 from typing import List
 
-from shortuuid import uuid
+import uuid
 from sqlalchemy import Column, UUID, String, Text, ForeignKey, DateTime, func, sql
 from sqlalchemy.orm import joinedload, relationship
 
 from app.core.db import BaseDBModel
 from app.services.reply_activity.schemas import ReplyActivityForm
-from app.services.user.db_models import UserDBModel
 
 
 class ActivityDBModel(BaseDBModel):
