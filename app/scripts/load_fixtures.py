@@ -126,7 +126,7 @@ def load_dict_search_status(session):
             return None
         try:
             session.execute(
-                insert(DivisionDBModel),
+                insert(SearchStatusDBModel),
                 fixtures_data,
             )
         except IntegrityError as e:
