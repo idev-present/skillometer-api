@@ -62,6 +62,10 @@ class EventDBModel(BaseDBModel):
         event = cls.get(db, item_id)
         for field, value in form.dict(exclude_unset=True).items():
             setattr(event, field, value)
+        if form.type:
+            event.type = form.type.value
+        if form.status:
+            event.status = form.status.value
         db.add(event)
         db.commit()
         db.refresh(event)

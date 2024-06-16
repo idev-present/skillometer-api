@@ -1,23 +1,20 @@
-POST http://localhost:8080/api/v1/reply/ea838dd9-6220-4525-98ae-a18cc0efa6eb/status
-accept: application/json, text/plain, */*
-accept-language: en,en-US;q=0.9,ru-RU;q=0.8,ru;q=0.7
-authorization: Bearer {{access_token}}
-origin: https://admin.skillometer.idev-present.com
-priority: u=1, i
-referer: https://admin.skillometer.idev-present.com/
-sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "macOS"
-sec-fetch-dest: empty
-sec-fetch-mode: cors
-sec-fetch-site: same-site
-user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
+PUT http://localhost:8000/api/v1/events/0600343b-ac0c-49e1-a5b6-6f76afe6f3e4
 Content-Type: application/json
+authorization: Bearer {{access_token}}
 
 {
-  "status": "CV_REVIEW",
-  "reason": ""
+  "name": "zoom-123322f6-0284-49be-9add-1cdb2d7479d2",
+  "type": "ZOOM",
+  "payload": "payload-123322f6-0284-49be-9add-1cdb2d7479d2",
+  "description": "description-123322f6-0284-49be-9add-1cdb2d7479d2",
+  "start_at": "2024-06-19T10:00:00Z",
+  "end_at": "2024-06-19T10:59:59Z",
+  "id": "0600343b-ac0c-49e1-a5b6-6f76afe6f3e4",
+  "status": "PLANNING",
+  "is_deleted": false,
+  "created_at": "2024-06-16T17:51:53.252760Z",
+  "updated_at": "2024-06-16T18:33:59.042276Z",
+  "updated_by": null
 }
-
 ###
 
