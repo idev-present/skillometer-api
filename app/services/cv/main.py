@@ -1,4 +1,6 @@
 from operator import and_
+
+from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 from structlog import get_logger
@@ -27,6 +29,8 @@ def load_user_cv(applicant_id: str, db):
 
     result = db.execute(stmt)
     applicant = result.scalars().first()
+    if not applicant:
+        raise HTTPException(status_code=404, detail="Applicant not found")
     user_data = {
         **applicant.__dict__,
         "login": applicant.user.login,

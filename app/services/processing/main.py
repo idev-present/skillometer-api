@@ -97,7 +97,7 @@ def update_reply_status(reply_id: str, to_status: str, reason: Optional[str], us
     if updated_reply:
         user: UserDBModel = UserDBModel.get(item_id=user_id, db=db)
         activity = ReplyActivityForm(
-            type=ACTIVITY_TYPE.REPLY_STATUS.name,
+            type=ACTIVITY_TYPE.REPLY_STATUS.value,
             external_id=str(updated_reply.id),
             owner_id=user_id,
             owner_type=user.role if user.role else None,
@@ -117,14 +117,23 @@ def calculate_matching(reply: ReplyDBModel, db: Session, vacancy: Optional[Vacan
         vacancy = VacancyDBModel.get(item_id=reply.vacancy_id, db=db)
     if not applicant:
         applicant = ApplicantDBModel.get(item_id=reply.applicant_id, db=db)
-
-    vacancy_skillset = set([skill if skill else None for skill in vacancy.skill_set.split(',')])
-    applicant_skillset = set([skill if skill else None for skill in applicant.skill_set.split(',')])
-
-    missed_skills = vacancy_skillset.difference(applicant_skillset)
-    additional_skills = applicant_skillset.difference(vacancy_skillset)
-    return {
-        "missed_skills": missed_skills,
-        "additional_skills": additional_skills,
-        "coverage": (len(vacancy_skillset) - len(missed_skills)) / len(vacancy_skillset)
-    }
+    if vacancy.skill_set:
+        if ',' in vacancy.skill_set:
+            vacancy_skillset = set([skill if skill else None for skill in vacancy.skill_set.split(',')])
+        else:
+            vacancy_skillset = set(vacancy.skill_set[0])
+    if applicant.skill_set:
+        if ',' in applicant.skill_set:
+            applicant_skillset = set([skill if skill else None for skill in applicant.skill_set.split(',')])
+        else:
+            applicant_skillset = set(applicant.skill_set[0]) if applicant.skill_set else set()
+    if applicant.skill_set and vacancy.skill_set:
+        missed_skills = vacancy_skillset.difference(applicant_skillset)
+        additional_skills = applicant_skillset.difference(vacancy_skillset)
+        return {
+            "missed_skills": missed_skills,
+            "additional_skills": additional_skills,
+            "coverage": (len(vacancy_skillset) - len(missed_skills)) / len(vacancy_skillset)
+        }
+    else:
+        return None
