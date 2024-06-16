@@ -83,9 +83,9 @@ class IAMUser(BaseModel):
                 data['firstName'] = name_parts[0]
             else:
                 if not data.get('firstName'):
-                    data['firstName'] = name_parts[0]
+                    data['firstName'] = name_parts[1]
                 if not data.get('lastName'):
-                    data['lastName'] = name_parts[1]
+                    data['lastName'] = name_parts[0]
 
     @staticmethod
     def prepare_user_role(data: Dict):

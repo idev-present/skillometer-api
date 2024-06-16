@@ -39,7 +39,7 @@ class ReplyDBModel(BaseDBModel):
 
     @classmethod
     def create(cls, form: Reply, db) -> "ReplyDBModel":
-        new_reply = cls(**form.dict())
+        new_reply = cls(**form.dict(exclude={'matching_result'}))
         db.add(new_reply)
         db.commit()
         db.refresh(new_reply)
