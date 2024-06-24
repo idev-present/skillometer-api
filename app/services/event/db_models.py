@@ -44,7 +44,7 @@ class EventDBModel(BaseDBModel):
             activity = ReplyActivityForm(
                 type=ACTIVITY_TYPE.EVENT_STATUS,
                 text=f'Создано новое событие: {event.name}',
-                external_id=str(event.id),
+                external_id=str(event.reply_id),
                 owner_id=event.owner_id,
                 owner_type='recruiter'
             )
